@@ -83,7 +83,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 let distance = locationManager.location!.distance(from:location2) //in meters
                 print("distance: ", distance)
                
-            
+        //handling when an AR object is tapped
+            let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
+
+        
 //                if distance > 700 {
 //                    print("no objects")  // outside the range
 //                }
@@ -94,6 +97,31 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 //                }
         
     } //end viewDidLoad
+    
+    //Method called when tap on AR object
+    @objc func handleTap(rec: UITapGestureRecognizer){
+        
+           if rec.state == .ended {
+                let location: CGPoint = rec.location(in: sceneLocationView)
+                let hits = self.sceneLocationView.hitTest(location, options: nil)
+                if !hits.isEmpty{
+                    let tappedNode = hits.first?.node
+                    print("yes")
+                    
+                    //try
+                    let r = CGRect(x: 67, y: 606, width: 240, height: 128)
+                    let view = UIView(frame: r)
+                    
+                    let coordinate = CLLocationCoordinate2D(latitude: 24.775496, longitude: 46.773772) //noura
+                    let location = CLLocation(coordinate: coordinate, altitude: 590)
+                    let image = UIImage(named: "image")!
+
+                    let annotationNode = LocationAnnotationNode(location: location, image: image)
+                    sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+
+                }
+           }
+    }
     
     override func viewDidLayoutSubviews() {
       super.viewDidLayoutSubviews()
