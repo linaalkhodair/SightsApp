@@ -11,16 +11,20 @@ import Firebase
 import MapKit
 import ARCL
 import CoreLocation
-import Kingfisher
+
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
 
     var sceneLocationView = SceneLocationView()
-     var db: Firestore!
+    var db: Firestore!
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 10000
-    
     @IBOutlet weak var logoutButton: UIButton!
+    var userLoc = CLLocation()
+    var timer = Timer()
+ 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,73 +32,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         //start the AR view
         sceneLocationView.run()
         view.addSubview(sceneLocationView)
-        
         db = Firestore.firestore()
         
         //--------------------------------CREATING AR OBJECTS----------------------------------
         
+        timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { (_) in
+            print("timer works")
+            // we will use it to get user updated loc and call the func again
+        })
         
-                //first
-                let coordinate = CLLocationCoordinate2D(latitude: 24.775496, longitude: 46.773772) //noura
-                let location = CLLocation(coordinate: coordinate, altitude: 620)
-                let image = UIImage(named: "drop")!
-                let annotationNode = LocationAnnotationNode(location: location, image: image)
-                sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
-
-        
-                //try loading images from firebase and maybe using Kingfisher
-//               let docRef = self.db.collection("POIs").document("y7VpeKHTHY6fDbmcYTUj")
-//                docRef.getDocument { (document, error) in
-//                     if let document = document, document.exists {
-//                           let property = document.get("image")
-//                        print("Document data:", property)
-//        //                let img = UIImage(data: property as! Data)
-//
-//                        let url = URL(string: property as! String)
-//                        let data = try? Data(contentsOf: url!)
-//                        let img = UIImage(data: data!)
-//
-//
-//                        let annotationNode = LocationAnnotationNode(location: location, image: img!)
-//                        self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
-//
-//                       } else {
-//                           print("Document does not exist")
-//                       }
-//                }
-        
-                
-                
-                //second
-                let coordinate2 = CLLocationCoordinate2D(latitude: 24.777697, longitude: 46.767996) //drees
-                let location2 = CLLocation(coordinate: coordinate2, altitude: 620)
-                let image2 = UIImage(named: "drop")!
-                      
-                let annotationNode2 = LocationAnnotationNode(location: location2, image: image2)
-                sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode2)
-            
-                //user's location
-                let userLoc = locationManager.location
-                let locValue:CLLocationCoordinate2D = locationManager.location!.coordinate
-                
-                let coor = CLLocationCoordinate2D(latitude: locValue.latitude, longitude: locValue.longitude)
-                let loc = CLLocation(coordinate: coor, altitude: 620)
-               
-                let distance = locationManager.location!.distance(from:location2) //in meters
-                print("distance: ", distance)
+        //iterate through all poi's in DB
+        self.getPOI()
                
         //handling when an AR object is tapped
-            let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
-
-        
-//                if distance > 700 {
-//                    print("no objects")  // outside the range
-//                }
-//                else {
-//                    //display objects
-//                    sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode2)
-//                    sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
-//                }
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
+        sceneLocationView.addGestureRecognizer(tap)
         
     } //end viewDidLoad
     
@@ -107,21 +59,65 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 if !hits.isEmpty{
                     let tappedNode = hits.first?.node
                     print("yes")
-                    
                     //try
-                    let r = CGRect(x: 67, y: 606, width: 240, height: 128)
-                    let view = UIView(frame: r)
-                    
-                    let coordinate = CLLocationCoordinate2D(latitude: 24.775496, longitude: 46.773772) //noura
-                    let location = CLLocation(coordinate: coordinate, altitude: 590)
-                    let image = UIImage(named: "image")!
-
-                    let annotationNode = LocationAnnotationNode(location: location, image: image)
-                    sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+              
+                    let poiView = POIView()
+                    sceneLocationView.addSubview(poiView)
 
                 }
            }
     }
+    
+
+    func getPOI(){
+        
+        //iterate through POIs
+        db.collection("POIs").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                for document in querySnapshot!.documents {
+                    let latitude = document.get("latitude")
+                    let longitude = document.get("longitude")
+                    let imageData = document.get("image")
+                    //any additional data... maybe the get the describtion then pass it on to a method to display the additional info
+                    
+                    let coordinate = CLLocationCoordinate2D(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees)
+                    let location = CLLocation(coordinate: coordinate, altitude: 620)
+                    self.userLoc = self.locationManager.location!
+                    let distance = self.userLoc.distance(from:location) //in meters
+                    print("distance: ", distance)
+                    
+                    if distance <= 150 { //sample distance
+                    self.displayPOIobjects(latitude: latitude as! Double, longitude: longitude as! Double, image: imageData as! String)
+                    }
+                    else {
+                        print("POI is too far away!")
+                    }
+                } //end for loop
+            }
+        }
+        
+    } //end func getPOI
+    
+    
+    func displayPOIobjects(latitude: Double, longitude: Double, image: String){
+        
+        //set up for the image
+        let url = URL(string: image)
+        let data = try? Data(contentsOf: url!)
+        let img = UIImage(data: data!)
+        
+        //create the object
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) //noura
+        let location = CLLocation(coordinate: coordinate, altitude: 620)
+        
+        let annotationNode = LocationAnnotationNode(location: location, image: img!)
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+
+    }
+    
     
     override func viewDidLayoutSubviews() {
       super.viewDidLayoutSubviews()
@@ -129,7 +125,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
       sceneLocationView.frame = view.bounds
     }
     
-        //-------------------------------------------------------------------------------------
+        //------------------------------------END AR--------------------------------------------
 
     
         //-------------------------------TRACK USER LOCATION------------------------------------
