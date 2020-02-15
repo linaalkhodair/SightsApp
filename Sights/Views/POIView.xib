@@ -10,7 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="POIView" customModule="Sights" customModuleProvider="target">
             <connections>
                 <outlet property="POIName" destination="ZpV-5H-WwH" id="j1V-YJ-bcP"/>
-                <outlet property="closeBtn" destination="oaM-pt-QQI" id="dM1-4u-woi"/>
+                <outlet property="closeBtn" destination="e89-D1-i9l" id="5R1-iP-1wk"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="59K-tN-fvA"/>
                 <outlet property="describtion" destination="NAj-7t-Dqs" id="w6J-ca-yWx"/>
                 <outlet property="location" destination="XLF-eZ-TyH" id="oy1-sq-VFj"/>
@@ -102,14 +102,12 @@ qcourtyard and a well.
                     <rect key="frame" x="36" y="44" width="15" height="13"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaM-pt-QQI">
-                    <rect key="frame" x="261" y="10" width="35" height="37"/>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e89-D1-i9l">
+                    <rect key="frame" x="249" y="13" width="46" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal">
-                        <color key="titleColor" red="0.96930998560000003" green="0.68895420839999999" blue="0.74759239109999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </state>
+                    <state key="normal" title="Button"/>
                     <connections>
-                        <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="9u4-7y-DRe"/>
+                        <action selector="closeBtnTapped:" destination="-1" eventType="touchUpInside" id="wiV-ue-qzW"/>
                     </connections>
                 </button>
             </subviews>

@@ -28,6 +28,7 @@
 		E9A8448223F4167F00E3124B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9A8448123F4167F00E3124B /* GoogleService-Info.plist */; };
 		E9A8448423F695FD00E3124B /* POIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9A8448323F695FD00E3124B /* POIView.xib */; };
 		E9A8448823F69AB700E3124B /* POIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448723F69AB700E3124B /* POIView.swift */; };
+		E9A8448A23F7182100E3124B /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448923F7181F00E3124B /* POI.swift */; };
 		EA5BA7D4E8043F7ECC654AA7 /* libPods-SightsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A9A13EC8730EE350EEE936 /* libPods-SightsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		E9A8448123F4167F00E3124B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E9A8448323F695FD00E3124B /* POIView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = POIView.xib; sourceTree = "<group>"; };
 		E9A8448723F69AB700E3124B /* POIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIView.swift; sourceTree = "<group>"; };
+		E9A8448923F7181F00E3124B /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 		E9A8446F23F40BBC00E3124B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E9A8448923F7181F00E3124B /* POI.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */,
 				E9A8447A23F4146B00E3124B /* RegisterViewController.swift in Sources */,
 				E9A8444023F4061500E3124B /* SceneDelegate.swift in Sources */,
+				E9A8448A23F7182100E3124B /* POI.swift in Sources */,
 				E9A8447C23F4148A00E3124B /* LoginViewController.swift in Sources */,
 				E9A8448023F414CA00E3124B /* GifViewController.swift in Sources */,
 				E9A8447E23F414B500E3124B /* HomeViewController.swift in Sources */,

@@ -45,11 +45,16 @@ class POIView: UIView {
         
     }
 
-    @IBAction func closeTapped(_ sender: Any) {
+    func testing(){
+        print("inside poi view haha")
+    }
+    
+
+    @IBAction func closeBtnTapped(_ sender: Any) {
         contentView.removeFromSuperview()
         self.removeFromSuperview()
-       //not working...
-        print("tappedd")
+        
     }
+    
     
 }
