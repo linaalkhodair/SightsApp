@@ -14,7 +14,7 @@ import CoreLocation
 import SceneKit
 
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate, LNTouchDelegate {
+class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     var sceneLocationView = SceneLocationView()
     var db: Firestore!
@@ -23,10 +23,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, LNTouchDe
     @IBOutlet weak var logoutButton: UIButton!
     var userLoc = CLLocation()
     var timer = Timer()
-    
-    @IBOutlet weak var closeBtn: UIButton!
-    
-    
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +32,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, LNTouchDe
         //start the AR view
         sceneLocationView.run()
         view.addSubview(sceneLocationView)
-        self.sceneLocationView.locationNodeTouchDelegate = self
         db = Firestore.firestore()
         
         //--------------------------------CREATING AR OBJECTS----------------------------------
@@ -186,18 +182,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, LNTouchDe
       
     }
     
-    
-    func annotationNodeTouched(node: AnnotationNode) {
-        print(node.name)
-    }
-    
-    func locationNodeTouched(node: LocationNode) {
-        guard let name = node.tag else { return }
-        guard let selectedNode = node.childNodes.first(where: { $0.geometry is SCNBox }) else { return }
-        
-        print("location:",node.location!)
-    }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
