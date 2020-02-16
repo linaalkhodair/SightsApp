@@ -344,6 +344,21 @@ Explore Riyadh in the     		most enjoyable way</string>
                                     <action selector="logoutTapped:" destination="d0g-18-sbK" eventType="touchUpInside" id="0bw-Ud-eDA"/>
                                 </connections>
                             </button>
+                            <navigationBar alpha="0.25" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5rU-ZM-NVu">
+                                <rect key="frame" x="0.0" y="716" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="xFI-ce-m68">
+                                        <barButtonItem key="leftBarButtonItem" image="list.dash" catalog="system" id="w9q-ou-eb5">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <segue destination="8GA-dt-D8p" kind="show" id="i6m-if-Asd"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="profile" id="x9e-Ay-wuN"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1Di-gC-XLY"/>
@@ -351,11 +366,28 @@ Explore Riyadh in the     		most enjoyable way</string>
                     <navigationItem key="navigationItem" id="RhV-NL-eg2"/>
                     <connections>
                         <outlet property="logoutButton" destination="9d1-lW-oNW" id="XNH-0Q-5g2"/>
+                        <outlet property="navBar" destination="5rU-ZM-NVu" id="cWY-fL-mhK"/>
+                        <outlet property="navItem" destination="w9q-ou-eb5" id="hvt-oY-02e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PK0-tR-68a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2020" y="1103.9408866995075"/>
+            <point key="canvasLocation" x="1356" y="1040"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="6wL-55-EGv">
+            <objects>
+                <viewController id="1Qe-5q-6Cm" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LWD-IW-iHY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="EHh-xM-obh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hAw-ro-uuy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2772" y="1095"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mzc-Ko-EqJ">
@@ -382,6 +414,10 @@ Explore Riyadh in the     		most enjoyable way</string>
         <image name="background" width="802" height="1070"/>
         <image name="emptyfield" width="320" height="67"/>
         <image name="gradient" width="750" height="1624"/>
+        <image name="list.dash" catalog="system" width="64" height="42"/>
         <image name="signupbutton" width="179" height="71"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="i6m-if-Asd"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -24,6 +24,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var userLoc = CLLocation()
     var timer = Timer()
     var poiview = POIView()
+    @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var navItem: UIBarButtonItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +47,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         db = Firestore.firestore()
         
         view.addSubview(poiview.contentView)
+        view.addSubview(navBar)
+
+        //adding navigation bar
+            
         poiview.contentView.alpha = 0
         //--------------------------------CREATING AR OBJECTS----------------------------------
         
