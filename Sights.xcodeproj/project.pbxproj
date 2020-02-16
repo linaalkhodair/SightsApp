@@ -29,6 +29,7 @@
 		E9A8448423F695FD00E3124B /* POIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9A8448323F695FD00E3124B /* POIView.xib */; };
 		E9A8448823F69AB700E3124B /* POIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448723F69AB700E3124B /* POIView.swift */; };
 		E9A8448A23F7182100E3124B /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448923F7181F00E3124B /* POI.swift */; };
+		E9A8448C23F98A7000E3124B /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448B23F98A6F00E3124B /* CheckInternet.swift */; };
 		EA5BA7D4E8043F7ECC654AA7 /* libPods-SightsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A9A13EC8730EE350EEE936 /* libPods-SightsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		E9A8448323F695FD00E3124B /* POIView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = POIView.xib; sourceTree = "<group>"; };
 		E9A8448723F69AB700E3124B /* POIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIView.swift; sourceTree = "<group>"; };
 		E9A8448923F7181F00E3124B /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
+		E9A8448B23F98A6F00E3124B /* CheckInternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 				E9A8447123F40C2E00E3124B /* Constants.swift */,
 				E9A8447323F40C4500E3124B /* Alert.swift */,
 				E9A8447523F40C7300E3124B /* swift+gif.swift */,
+				E9A8448B23F98A6F00E3124B /* CheckInternet.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				E9A8447423F40C4500E3124B /* Alert.swift in Sources */,
 				E9A8447623F40C7300E3124B /* swift+gif.swift in Sources */,
 				E9A8448823F69AB700E3124B /* POIView.swift in Sources */,
+				E9A8448C23F98A7000E3124B /* CheckInternet.swift in Sources */,
 				E9A8447223F40C2E00E3124B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

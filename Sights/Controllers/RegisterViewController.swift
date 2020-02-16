@@ -52,6 +52,11 @@ class RegisterViewController: UIViewController {
                         self.present(alert, animated: true, completion: nil)
                         
                     }
+                    
+                    if !CheckInternet.Connection(){
+                        Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use Wi-Fi to access data.")
+                    }
+                   
                     print(error)
                 }
                 else {

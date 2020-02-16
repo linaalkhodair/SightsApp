@@ -17,9 +17,8 @@ class POIView: UIView {
     @IBOutlet weak var describtion: UILabel!
     @IBOutlet weak var closeBtn: UIButton!
     
-    
     @IBOutlet var contentView: UIView!
-    
+    var poiID = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,14 +44,16 @@ class POIView: UIView {
         
     }
 
-    func testing(){
-        print("inside poi view haha")
+    func setPoiId(ID: String) {
+        poiID = ID
     }
-    
 
     @IBAction func closeBtnTapped(_ sender: Any) {
         contentView.removeFromSuperview()
-        self.removeFromSuperview()
+        
+        //self.removeFromSuperview()
+//        contentView.alpha = 0
+        print("Inside custom view")
         
     }
     

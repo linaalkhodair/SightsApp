@@ -103,9 +103,11 @@ qcourtyard and a well.
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e89-D1-i9l">
-                    <rect key="frame" x="249" y="13" width="46" height="30"/>
+                    <rect key="frame" x="256" y="7" width="39" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
+                    <state key="normal">
+                        <color key="titleColor" red="0.96930998560000003" green="0.68895420839999999" blue="0.74759239109999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
                     <connections>
                         <action selector="closeBtnTapped:" destination="-1" eventType="touchUpInside" id="wiV-ue-qzW"/>
                     </connections>

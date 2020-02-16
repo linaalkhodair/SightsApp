@@ -37,6 +37,10 @@ class LoginViewController: UIViewController {
                         
                         Alert.showBasicAlert(on: self!, with: "Something went wrong!", message: "There is no user record coressponding to this email. Please use a registered email and try again.")
                     }
+                    
+                    if !CheckInternet.Connection(){
+                        Alert.showBasicAlert(on: self!, with: "WiFi is Turned Off", message: "Please turn on cellular data or use Wi-Fi to access data.")
+                    }
                 }
                 else {
                     if Auth.auth().currentUser!.isEmailVerified {

@@ -23,10 +23,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var logoutButton: UIButton!
     var userLoc = CLLocation()
     var timer = Timer()
-        
+    var poiview = POIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+          if !CheckInternet.Connection(){
+            
+            sceneLocationView.run()
+            view.addSubview(sceneLocationView)
+            Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
+
+          }
+          else {
         
         checkLocationServices() // checks if location is authorized
         //start the AR view
@@ -34,6 +43,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         view.addSubview(sceneLocationView)
         db = Firestore.firestore()
         
+        view.addSubview(poiview.contentView)
+        poiview.contentView.alpha = 0
         //--------------------------------CREATING AR OBJECTS----------------------------------
         
         timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { (_) in
@@ -48,6 +59,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
         sceneLocationView.addGestureRecognizer(tap)
         
+        }// end of else
     } //end viewDidLoad
     
     //Method called when tap on AR object
@@ -72,10 +84,22 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
 
+//    override func viewDidAppear(_ animated: Bool) {
+//          
+//          if !CheckInternet.Connection(){
+//        Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
+//          }
+//      }
+    
     
     func setPOIView(ID: String) -> POIView {
-        let poiView = POIView()
+//        let poiView = POIView()
+        self.view.addSubview(self.poiview.contentView)
+        poiview.contentView.alpha = 0
+        
         print("id inside:",ID)
+        
+        poiview.setPoiId(ID: ID)
         
 //        let docRef = db.collection("POIs").document(id)
 //        db.collection("POIs").document(ID).getDocument { (DocumentSnapshot, error) in
@@ -105,20 +129,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 } else {
                     for document in querySnapshot!.documents {
                         
-                        poiView.POIName.text = document.get("name") as! String
-                        poiView.describtion.text = document.get("briefInfo") as! String
-                        poiView.openingHours.text = document.get("openingHours") as! String
+                        self.poiview.POIName.text = document.get("name") as! String
+                        self.poiview.describtion.text = document.get("briefInfo") as! String
+                        self.poiview.openingHours.text = document.get("openingHours") as! String
                         var rating = document.get("rating") as! Double
-                        poiView.rating.text = "rating \(rating)"
-                        poiView.location.text = document.get("location") as! String
+                        self.poiview.rating.text = "rating \(rating)"
+                        self.poiview.location.text = document.get("location") as! String
                         print("here insiddee")
-                        self.sceneLocationView.addSubview(poiView)
-                        
+                        //self.sceneLocationView.addSubview(poiView)
+                        self.poiview.contentView.alpha = 0.85
+
                     }
                 }
         }
                
-        return poiView
+        return poiview
     }
     
     func getLocationNode(node: SCNNode) -> LocationAnnotationNode? {
@@ -147,7 +172,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     
                     let coordinate = CLLocationCoordinate2D(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees)
                     let location = CLLocation(coordinate: coordinate, altitude: 620)
+                    if self.locationManager.location == nil {
+                        Alert.showBasicAlert(on: self, with: "Cannot access location!", message: "To get better experience, please allow location access.")
+                        break
+                    } else {
                     self.userLoc = self.locationManager.location!
+                      }
                     let distance = self.userLoc.distance(from:location) //in meters
                     print("distance: ", distance)
                     
@@ -216,11 +246,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             break
         case .denied:
             // Show alert instructing them how to turn on permissions
+            Alert.showBasicAlert(on: self, with: "Cannot access location!", message: "To get better experience, please allow location access.")
             break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .restricted:
-            // Show an alert letting them know what's up
+            Alert.showBasicAlert(on: self, with: "Cannot access location!", message: "To get better experience, please allow location access.")
             break
         case .authorizedAlways:
             break
