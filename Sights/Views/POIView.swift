@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class POIView: UIView {
 
@@ -38,7 +39,7 @@ class POIView: UIView {
         contentView.frame = r
         contentView.layer.cornerRadius = 23.0
         contentView.clipsToBounds = true
-       
+        //print("uid:",Auth.auth().currentUser?.uid)
       //  contentView.frame = self.bounds
      //   contentView.autoresizingMask = [.flexibleHeight , .flexibleWidth]
         
@@ -57,5 +58,7 @@ class POIView: UIView {
         
     }
     
-    
+    //handle when a guest user tries to tap on of the marking options -> telling them to register for more features etc.
+    //  guard let user = authResult?.user else { return }
+    // let isAnonymous = user.isAnonymous  // true
 }

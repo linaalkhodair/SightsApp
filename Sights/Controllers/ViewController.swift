@@ -55,7 +55,7 @@ class ViewController: UIViewController {
           }
 
       }
-//
+
     @IBAction func signUpTapped(_ sender: Any) {
         
         let registerViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.registerViewController) as? RegisterViewController

@@ -17,40 +17,52 @@ import SceneKit
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     var sceneLocationView = SceneLocationView()
+    var poiview = POIView()
+
     var db: Firestore!
+    
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 10000
-    @IBOutlet weak var logoutButton: UIButton!
     var userLoc = CLLocation()
-    var timer = Timer()
-    var poiview = POIView()
+
+     var timer = Timer()
+    
+    @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UIBarButtonItem!
+    @IBOutlet weak var listImg: UIImageView!
+    @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var cameraImg: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-          if !CheckInternet.Connection(){
+        if !CheckInternet.Connection(){
             
             sceneLocationView.run()
             view.addSubview(sceneLocationView)
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
 
-          }
-          else {
+        }
+        else {
         
         checkLocationServices() // checks if location is authorized
         //start the AR view
         sceneLocationView.run()
         view.addSubview(sceneLocationView)
+            
         db = Firestore.firestore()
         
         view.addSubview(poiview.contentView)
-        view.addSubview(navBar)
-
-        //adding navigation bar
+        //view.addSubview(logoutButton)
             
+        //adding navigation bar
+        view.addSubview(navBar)
+        view.addSubview(listImg)
+        view.addSubview(profileImg)
+        view.addSubview(cameraImg)
+
         poiview.contentView.alpha = 0
         //--------------------------------CREATING AR OBJECTS----------------------------------
         
@@ -67,6 +79,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         sceneLocationView.addGestureRecognizer(tap)
         
         }// end of else
+        //set nav bar to transparent
+        self.navBar.setBackgroundImage(UIImage(), for: .default)
+        self.navBar.shadowImage=UIImage()
+        
     } //end viewDidLoad
     
     //Method called when tap on AR object
@@ -89,15 +105,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
     }
-    
-
-//    override func viewDidAppear(_ animated: Bool) {
-//          
-//          if !CheckInternet.Connection(){
-//        Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
-//          }
-//      }
-    
+     
     
     func setPOIView(ID: String) -> POIView {
 //        let poiView = POIView()
