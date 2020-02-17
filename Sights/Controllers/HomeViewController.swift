@@ -15,6 +15,7 @@ import SceneKit
 
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
+    //test test test........
     
     var sceneLocationView = SceneLocationView()
     var poiview = POIView()
