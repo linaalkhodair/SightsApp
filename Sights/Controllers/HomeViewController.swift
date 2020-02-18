@@ -51,6 +51,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         checkLocationServices() // checks if location is authorized
         //start the AR view
         sceneLocationView.run()
+        
         view.addSubview(sceneLocationView)
             
         db = Firestore.firestore()
