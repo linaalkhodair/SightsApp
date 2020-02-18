@@ -199,7 +199,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     print("distance: ", distance)
                     
                     if distance <= 150 { //sample distance
-                        self.displayPOIobjects(latitude: latitude as! Double, longitude: longitude as! Double, image: imageData as! String, ID: ID as! String)
+                        self.displayPOIobjects(latitude: latitude as! Double, longitude: longitude as! Double, img: imageData as! String, ID: ID as! String)
                     }
                     else {
                         print("POI is too far away!")
@@ -211,18 +211,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     } //end func getPOI
     
     
-    func displayPOIobjects(latitude: Double, longitude: Double, image: String, ID: String){
+    func displayPOIobjects(latitude: Double, longitude: Double, img: String, ID: String){
         
         //set up for the image
-        let url = URL(string: image)
+        let url = URL(string: img)
         let data = try? Data(contentsOf: url!)
-        let img = UIImage(data: data!)
+        let image = UIImage(data: data!)
         
         //create the object
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) //noura
         let location = CLLocation(coordinate: coordinate, altitude: 620)
         
-        let annotationNode = LocationAnnotationNode(location: location, image: img!)
+        let annotationNode = LocationAnnotationNode(location: location, image: image!)
         annotationNode.name = ID
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
         
