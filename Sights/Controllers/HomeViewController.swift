@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var userLoc = CLLocation()
     
     //Foursquare API
-    let client = FoursquareAPIClient(clientId: "5JXLTFY5VRDO0C1NJQMU3NCHRXX5FFQ30C5LHEYFWR5AHBZN", clientSecret: "STAJCV5RIE4DPXLFXQQII0E3GXI3CIDO3TW1I5XLSZ1MPYHN")
+    let client = FoursquareAPIClient(clientId: "NKLOCTRG5PNGL0B1IIYCGUXDXWI0H5CXMGENAW5YBSSXHQY5", clientSecret: "0RLD5QX0DGCJUMDFYRZMMXO3SK3YUBMXOTYZ5YOE0G531BTX")
     
      var timer = Timer()
     
@@ -341,13 +341,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         func searchVenues(lat: Double, lng: Double) {
             let parameter: [String: String] = [
-                "ll": "\(lat),\(lng)",
+                "ll": "24.711636,46.674942",
                 "radius": "600",
                 "limit": "10",
                 "intent": "browse",
-                "categoryId": "4d4b7104d754a06370d81259,4fceea171983d5d06c3e9823,4bf58dd8d48988d1e2931735,4bf58dd8d48988d1e4931735,4bf58dd8d48988d1f1931735,4deefb944765f83613cdba6e,4bf58dd8d48988d17f941735,52e81612bcbc57f1066b79eb,4bf58dd8d48988d181941735,4bf58dd8d48988d1f4931735,4bf58dd8d48988d189941735,4bf58dd8d48988d182941735,4bf58dd8d48988d17b941735,4d4b7105d754a06373d81259,56aa371be4b08b9a8d573511,4bf58dd8d48988d163941735,4bf58dd8d48988d164941735,4bf58dd8d48988d165941735,4bf58dd8d48988d171941735,56aa371be4b08b9a8d57356a,4bf58dd8d48988d12f941735"
+                "categoryId": "4bf58dd8d48988d1e4931735,4bf58dd8d48988d1f1931735,4deefb944765f83613cdba6e,4bf58dd8d48988d17f941735,52e81612bcbc57f1066b79eb,4bf58dd8d48988d181941735,4bf58dd8d48988d1f4931735,4bf58dd8d48988d189941735,4bf58dd8d48988d182941735,4bf58dd8d48988d17b941735,4bf58dd8d48988d163941735,4bf58dd8d48988d164941735,4bf58dd8d48988d165941735,56aa371be4b08b9a8d57356a,4bf58dd8d48988d12f941735"
             ];
 
+            //"ll": "\(lat),\(lng)",
             client.request(path: "venues/search", parameter: parameter) { result in
                 switch result {
                 case let .success(data):
@@ -396,7 +397,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
 
         ];
 
-        client.request(path: "venues/VENUE_ID", parameter: parameter) { result in
+        client.request(path: "venues/\(id)", parameter: parameter) { result in
             switch result {
             case let .success(data):
                 // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
