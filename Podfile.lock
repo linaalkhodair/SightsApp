@@ -226,6 +226,7 @@ PODS:
     - FirebaseInstallations (~> 1.0)
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/UserDefaults (~> 6.5)
+  - FoursquareAPIClient (5.0.1)
   - GoogleAppMeasurement (6.2.2):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
     - GoogleUtilities/MethodSwizzler (~> 6.0)
@@ -282,14 +283,17 @@ PODS:
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
   - SwiftGifOrigin (1.7.0)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - ARCL
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - FoursquareAPIClient
   - Kingfisher
   - SwiftGifOrigin (~> 1.7.0)
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
@@ -306,6 +310,7 @@ SPEC REPOS:
     - FirebaseFirestore
     - FirebaseInstallations
     - FirebaseInstanceID
+    - FoursquareAPIClient
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
@@ -318,6 +323,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SwiftGifOrigin
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -333,6 +339,7 @@ SPEC CHECKSUMS:
   FirebaseFirestore: ff429edd15d5acdd2b8da02ea69483313e4ae0a7
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
   FirebaseInstanceID: 6668efc1655a4052c083f287a7141f1ead12f9c2
+  FoursquareAPIClient: 83c932298e905634e0c0cce90e3f1d6897c7a7a9
   GoogleAppMeasurement: d0560d915abf15e692e8538ba1d58442217b6aff
   GoogleDataTransport: 0048df6388dab1c254799f2a30365b1dffe20422
   GoogleDataTransportCCTSupport: f880d70972efa2ed1be4e9173a0f4c5f3dc2d176
@@ -345,7 +352,8 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 4f0510806ee585e88f029e834ef7d6c99ef14e6c
+PODFILE CHECKSUM: 845a6c618ac8d096c1d034dfe1fb24df01aa9edb
 
 COCOAPODS: 1.8.4

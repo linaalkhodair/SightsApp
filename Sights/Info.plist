@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -20,8 +18,16 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED</key>
+	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Sights needs access to your camera to show you the awesome landmarks of Riyadh!</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Sights needs your location to notify you of Riyadh's awesome attractions!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Sights needs your location to notify you of Riyadh's awesome attractions!</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -41,6 +47,12 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>processing</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
@@ -49,12 +61,6 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Sights needs access to your camera to show you the awesome landmarks of Riyadh!</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Sights needs your location to notify you of Riyadh&apos;s awesome attractions!</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Sights needs your location to notify you of Riyadh&apos;s awesome attractions!</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

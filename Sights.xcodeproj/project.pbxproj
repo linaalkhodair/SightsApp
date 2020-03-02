@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F0E8ACA4455BBB81E1DC85F /* libPods-Sights-SightsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 103AB779FABE434063123406 /* libPods-Sights-SightsUITests.a */; };
 		946F127019FF6C42FD2C40AD /* libPods-Sights.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70428F546E17A01506121EF6 /* libPods-Sights.a */; };
+		E960222B240D11C400B8B18C /* LBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960222A240D11C400B8B18C /* LBNotification.swift */; };
 		E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8443D23F4061500E3124B /* AppDelegate.swift */; };
 		E9A8444023F4061500E3124B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8443F23F4061500E3124B /* SceneDelegate.swift */; };
 		E9A8444223F4061500E3124B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8444123F4061500E3124B /* ViewController.swift */; };
@@ -62,6 +63,7 @@
 		8AAC6B5AAFC391BDE7F270CB /* Pods-Sights-SightsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sights-SightsUITests.debug.xcconfig"; path = "Target Support Files/Pods-Sights-SightsUITests/Pods-Sights-SightsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB903413DAF400D9B9C0A7D6 /* Pods-Sights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sights.release.xcconfig"; path = "Target Support Files/Pods-Sights/Pods-Sights.release.xcconfig"; sourceTree = "<group>"; };
 		E52A5DEC87F31DF609B32AEF /* Pods-SightsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SightsTests.release.xcconfig"; path = "Target Support Files/Pods-SightsTests/Pods-SightsTests.release.xcconfig"; sourceTree = "<group>"; };
+		E960222A240D11C400B8B18C /* LBNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBNotification.swift; sourceTree = "<group>"; };
 		E9A8443A23F4061500E3124B /* Sights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sights.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A8443D23F4061500E3124B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9A8443F23F4061500E3124B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				E9A8448923F7181F00E3124B /* POI.swift */,
+				E960222A240D11C400B8B18C /* LBNotification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */,
 				E9A8447A23F4146B00E3124B /* RegisterViewController.swift in Sources */,
 				E9A8444023F4061500E3124B /* SceneDelegate.swift in Sources */,
+				E960222B240D11C400B8B18C /* LBNotification.swift in Sources */,
 				E9A8448A23F7182100E3124B /* POI.swift in Sources */,
 				E9A8447C23F4148A00E3124B /* LoginViewController.swift in Sources */,
 				E9A8448E23F9EF8A00E3124B /* ListViewController.swift in Sources */,
@@ -678,6 +682,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3PL8CD7C53;
 				INFOPLIST_FILE = Sights/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -697,6 +702,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3PL8CD7C53;
 				INFOPLIST_FILE = Sights/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

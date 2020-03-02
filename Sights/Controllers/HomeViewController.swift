@@ -12,10 +12,12 @@ import MapKit
 import ARCL
 import CoreLocation
 import SceneKit
+import UserNotifications
+import FoursquareAPIClient
+import SwiftyJSON
 
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate {
-    //test test test........
+class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     
     var sceneLocationView = SceneLocationView()
     var poiview = POIView()
@@ -23,9 +25,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var db: Firestore!
     
     let locationManager = CLLocationManager()
+   
+    
     let regionInMeters: Double = 10000
     var userLoc = CLLocation()
-
+    
+    //Foursquare API
+    let client = FoursquareAPIClient(clientId: "5JXLTFY5VRDO0C1NJQMU3NCHRXX5FFQ30C5LHEYFWR5AHBZN", clientSecret: "STAJCV5RIE4DPXLFXQQII0E3GXI3CIDO3TW1I5XLSZ1MPYHN")
+    
      var timer = Timer()
     
     @IBOutlet weak var logoutButton: UIButton!
@@ -45,6 +52,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             view.addSubview(sceneLocationView)
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
 
+            //****** we should add the buttons to make it the same appearance as if there's wifi *******
         }
         else {
         
@@ -56,6 +64,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             
         db = Firestore.firestore()
         
+        //Adding the popup view for additional info
         view.addSubview(poiview.contentView)
         //view.addSubview(logoutButton)
             
@@ -66,6 +75,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         view.addSubview(cameraImg)
 
         poiview.contentView.alpha = 0
+                        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
+                
+        })
         //--------------------------------CREATING AR OBJECTS----------------------------------
         
         timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { (_) in
@@ -108,6 +121,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
      
+    //---------------------------------------------------------------------------------------------------------------
     
     func setPOIView(ID: String) -> POIView {
 //        let poiView = POIView()
@@ -163,6 +177,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         return poiview
     }
     
+    //---------------------------------------------------------------------------------------------------------------
+
+    
     func getLocationNode(node: SCNNode) -> LocationAnnotationNode? {
         if node.isKind(of: LocationNode.self) {
             return node as? LocationAnnotationNode
@@ -210,9 +227,22 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
     } //end func getPOI
     
+    //---------------------------------------------------------------------------------------------------------------
+
     
     func displayPOIobjects(latitude: Double, longitude: Double, img: String, ID: String){
         
+//        locationManager.activityType = .fitness
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//
+//        // Until we come up with a heuristic to unpause it
+//        locationManager.pausesLocationUpdatesAutomatically = false
+//
+//        // only give us updates when we have 10 meters of change (otherwise we get way too much data)
+//        locationManager.distanceFilter = 10
+//        locationManager.allowsBackgroundLocationUpdates = true
+//        locationManager.delegate = self
+
         //set up for the image
         let url = URL(string: img)
         let data = try? Data(contentsOf: url!)
@@ -225,8 +255,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         let annotationNode = LocationAnnotationNode(location: location, image: image!)
         annotationNode.name = ID
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
-        
-      
+              
     }
     
 
@@ -242,8 +271,17 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     //-------------------------------TRACK USER LOCATION------------------------------------
     
     func setupLocationManager() {
+        
+        locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.distanceFilter = 10 //?? idk 100 maybe
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startUpdatingLocation() //MAYBE NO NEED HERE???????
+        
+        userLoc = locationManager.location! //IDK WHY HEHE
+
     }
     
     func checkLocationServices() {
@@ -280,8 +318,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
         print("locations = \(locValue.latitude) \(locValue.longitude)")
-        let userLocation = locations.last
         
+          let userLocation = locations.last //new location
+          
+        
+          let distance = self.userLoc.distance(from: userLocation!)
+          if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
+              
+              searchVenues(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
+              
+              userLoc = locations.last! //previous location
+              print("inside")
+          }
     }
     
     
@@ -290,6 +338,121 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //----------------------------------------------------------------------------------------------
+        
+        func searchVenues(lat: Double, lng: Double) {
+            let parameter: [String: String] = [
+                "ll": "\(lat),\(lng)",
+                "radius": "600",
+                "limit": "10",
+                "intent": "browse",
+                "categoryId": "4bf58dd8d48988d16d941735,4d4b7105d754a06374d81259"
+            ];
+
+            client.request(path: "venues/search", parameter: parameter) { result in
+                switch result {
+                case let .success(data):
+                    // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
+                    // e.g. {"meta":{"code":200},"notifications":[{"...
+                    let jsonResponse = try! JSONSerialization.jsonObject(with: data, options: [])
+                    let json = JSON(jsonResponse)
+
+                    if let name = json["response"]["venues"][0]["name"].string {
+                      print("NAME FROM JSON: ", name)
+                        self.foursquareNotification(name: name)
+                        let id = json["response"]["venues"][0]["id"].string
+                        print("id of foursquare", id)
+                        self.getVenueDetails(id: id!)
+                    }
+                    
+                    for (key,subJson):(String, JSON) in json["response"]["venues"] {
+                        let placeName = subJson["name"].string
+                        print("place name:",placeName.unsafelyUnwrapped)
+                    }
+                    
+                    
+                  //  print("json == ", jsonResponse)
+                case let .failure(error):
+                    // Error handling
+                    switch error {
+                    case let .connectionError(connectionError):
+                        print(connectionError)
+                    case let .responseParseError(responseParseError):
+                        print(responseParseError)   // e.g. JSON text did not start with array or object and option to allow fragments not set.
+                    case let .apiError(apiError):
+                        print(apiError.errorType)   // e.g. endpoint_error
+                        print(apiError.errorDetail) // e.g. The requested path does not exist.
+                    }
+                }
+            }
+            
+        }
+        
+        //-------------------------------------------------------------------------------------------------------------
+    
+        func getVenueDetails(id: String) {
+        
+        let parameter: [String: String] = [
+            "VENUE_ID": "\(id)",
+
+        ];
+
+        client.request(path: "venues/VENUE_ID", parameter: parameter) { result in
+            switch result {
+            case let .success(data):
+                // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
+                // e.g. {"meta":{"code":200},"notifications":[{"...
+                let jsonResponse = try! JSONSerialization.jsonObject(with: data, options: [])
+               
+                let json = JSON(jsonResponse)
+                print("json == ", jsonResponse)
+
+            case let .failure(error):
+                // Error handling
+                switch error {
+                case let .connectionError(connectionError):
+                    print(connectionError)
+                case let .responseParseError(responseParseError):
+                    print(responseParseError)   // e.g. JSON text did not start with array or object and option to allow fragments not set.
+                case let .apiError(apiError):
+                    print(apiError.errorType)   // e.g. endpoint_error
+                    print(apiError.errorDetail) // e.g. The requested path does not exist.
+                        }
+                    }
+                }
+        
+        }
+    
+    //-------------------------------------------------------------------------------------------------------------
+
+    
+        func foursquareNotification(name: String) {
+            
+            //creating the notification content
+            let content = UNMutableNotificationContent()
+            
+            //adding title, subtitle, body and badge
+            content.title = "FQ, Hey you've just passed \(name) !"
+            //content.subtitle = "\(place.name.unsafelyUnwrapped) is near you!"
+            content.body = "Come check it out and explore Riyadh!"
+            content.badge = 1
+            content.sound = .default
+            
+            
+            //getting the notification trigger
+            //it will be called after 5 seconds
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            
+            //getting the notification request
+            let request = UNNotificationRequest(identifier: "SimplifiedIOSNotification", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().delegate = self
+            
+            //adding the notification to notification center
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
+        }
+
+    //-------------------------------------------------------------------------------------------------------------
     
     @IBAction func logoutTapped(_ sender: Any) {
         
