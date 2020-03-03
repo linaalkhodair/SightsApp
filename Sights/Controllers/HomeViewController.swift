@@ -341,14 +341,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         func searchVenues(lat: Double, lng: Double) {
             let parameter: [String: String] = [
-                "ll": "24.711636,46.674942",
+                "ll": "\(lat),\(lng)",
                 "radius": "600",
                 "limit": "10",
                 "intent": "browse",
                 "categoryId": "4bf58dd8d48988d1e4931735,4bf58dd8d48988d1f1931735,4deefb944765f83613cdba6e,4bf58dd8d48988d17f941735,52e81612bcbc57f1066b79eb,4bf58dd8d48988d181941735,4bf58dd8d48988d1f4931735,4bf58dd8d48988d189941735,4bf58dd8d48988d182941735,4bf58dd8d48988d17b941735,4bf58dd8d48988d163941735,4bf58dd8d48988d164941735,4bf58dd8d48988d165941735,56aa371be4b08b9a8d57356a,4bf58dd8d48988d12f941735"
             ];
 
-            //"ll": "\(lat),\(lng)",
+            
             client.request(path: "venues/search", parameter: parameter) { result in
                 switch result {
                 case let .success(data):
@@ -360,7 +360,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     if let name = json["response"]["venues"][0]["name"].string {
                       print("NAME FROM JSON: ", name)
                         self.foursquareNotification(name: name)
-                        let id = json["response"]["venues"][0]["id"].string
+                        let id = json["response"]["venues"][6]["id"].string
                         print("id of foursquare", id)
                         self.getVenueDetails(id: id!)
                     }
