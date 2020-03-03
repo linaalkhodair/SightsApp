@@ -367,17 +367,17 @@ Explore Riyadh in the     		most enjoyable way</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="50B-aS-Brd">
-                                <rect key="frame" x="161" y="714" width="52" height="44"/>
+                                <rect key="frame" x="172" y="722" width="30" height="33.666666666666664"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="list" translatesAutoresizingMaskIntoConstraints="NO" id="6L5-ES-Yob">
-                                <rect key="frame" x="9" y="716" width="52" height="44"/>
+                                <rect key="frame" x="15" y="720" width="26" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="p81-B8-lRr">
-                                <rect key="frame" x="313" y="719" width="46" height="39"/>
+                                <rect key="frame" x="328" y="719" width="26" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Np0-J4-DTz">
@@ -413,17 +413,6 @@ Explore Riyadh in the     		most enjoyable way</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9d1-lW-oNW">
-                                <rect key="frame" x="282" y="67" width="63" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Logout">
-                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="logoutTapped:" destination="d0g-18-sbK" eventType="touchUpInside" id="0bw-Ud-eDA"/>
-                                </connections>
-                            </button>
                             <navigationBar alpha="0.050000000000000003" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5rU-ZM-NVu">
                                 <rect key="frame" x="0.0" y="716" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -447,28 +436,27 @@ Explore Riyadh in the     		most enjoyable way</string>
                                 </items>
                             </navigationBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="list" translatesAutoresizingMaskIntoConstraints="NO" id="98o-GL-a61">
-                                <rect key="frame" x="9" y="716" width="52" height="44"/>
+                                <rect key="frame" x="15" y="720" width="26" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="34l-WX-LyI">
-                                <rect key="frame" x="313" y="719" width="46" height="39"/>
+                                <rect key="frame" x="328" y="719" width="26" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Tr2-kd-75r">
-                                <rect key="frame" x="161" y="714" width="52" height="44"/>
+                                <rect key="frame" x="172" y="722" width="30" height="33.666666666666664"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1Di-gC-XLY"/>
                     </view>
                     <navigationItem key="navigationItem" id="RhV-NL-eg2"/>
                     <connections>
                         <outlet property="cameraImg" destination="Tr2-kd-75r" id="4la-un-I0d"/>
                         <outlet property="listImg" destination="98o-GL-a61" id="Dzi-at-Oqh"/>
-                        <outlet property="logoutButton" destination="9d1-lW-oNW" id="XNH-0Q-5g2"/>
                         <outlet property="navBar" destination="5rU-ZM-NVu" id="rNH-Qr-ero"/>
                         <outlet property="navItem" destination="w9q-ou-eb5" id="hvt-oY-02e"/>
                         <outlet property="profileImg" destination="34l-WX-LyI" id="1Vf-8d-sfS"/>
@@ -501,15 +489,15 @@ Explore Riyadh in the     		most enjoyable way</string>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="list" translatesAutoresizingMaskIntoConstraints="NO" id="XHL-ch-111">
-                                <rect key="frame" x="9" y="716" width="52" height="44"/>
+                                <rect key="frame" x="15" y="720" width="26" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="hBx-Tj-C8Q">
-                                <rect key="frame" x="313" y="719" width="46" height="39"/>
+                                <rect key="frame" x="328" y="719" width="26" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ahn-J7-UMo">
-                                <rect key="frame" x="161" y="714" width="52" height="44"/>
+                                <rect key="frame" x="172" y="722" width="30" height="33.666666666666664"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -521,6 +509,18 @@ Explore Riyadh in the     		most enjoyable way</string>
                                     <segue destination="geb-ni-Tal" kind="show" id="5si-td-zZd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9d1-lW-oNW">
+                                <rect key="frame" x="268" y="76" width="86" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.96930998560000003" green="0.68895420839999999" blue="0.74759239109999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutTapped:" destination="1Qe-5q-6Cm" eventType="touchUpInside" id="NR9-Ol-VNs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.78492495449999999" green="0.86850103270000001" blue="0.96930998560000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="EHh-xM-obh"/>
@@ -529,7 +529,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAw-ro-uuy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4292" y="1394"/>
+            <point key="canvasLocation" x="4292" y="1393.5960591133005"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mzc-Ko-EqJ">
@@ -560,8 +560,9 @@ Explore Riyadh in the     		most enjoyable way</string>
         <image name="user" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="4ne-Qq-uoz"/>
         <segue reference="iie-gU-lXR"/>
-        <segue reference="vcc-r7-WV5"/>
+        <segue reference="DkL-Bz-IVQ"/>
         <segue reference="5si-td-zZd"/>
         <segue reference="BbP-VX-j6w"/>
     </inferredMetricsTieBreakers>

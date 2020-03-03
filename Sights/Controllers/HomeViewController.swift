@@ -50,6 +50,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             sceneLocationView.run()
             view.addSubview(sceneLocationView)
+            
+            //adding navigation bar
+            view.addSubview(navBar)
+            view.addSubview(listImg)
+            view.addSubview(profileImg)
+            view.addSubview(cameraImg)
+            
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
 
             //****** we should add the buttons to make it the same appearance as if there's wifi *******
@@ -278,8 +285,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         locationManager.distanceFilter = 10 //?? idk 100 maybe
         locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.startUpdatingLocation() //MAYBE NO NEED HERE???????
+        //locationManager.startUpdatingLocation() //MAYBE NO NEED HERE???????
         
+        //locationManager.stopMonitoringSignificantLocationChanges()
         userLoc = locationManager.location! //IDK WHY HEHE
 
     }
@@ -309,6 +317,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             Alert.showBasicAlert(on: self, with: "Cannot access location!", message: "To get better experience, please allow location access.")
             break
         case .authorizedAlways:
+            locationManager.startUpdatingLocation() //??????/mdry
             break
         }
     }
@@ -352,15 +361,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             client.request(path: "venues/search", parameter: parameter) { result in
                 switch result {
                 case let .success(data):
-                    // parse the JSON data with NSJSONSerialization or Lib like SwiftyJson
-                    // e.g. {"meta":{"code":200},"notifications":[{"...
+                   
                     let jsonResponse = try! JSONSerialization.jsonObject(with: data, options: [])
                     let json = JSON(jsonResponse)
 
                     if let name = json["response"]["venues"][0]["name"].string {
                       print("NAME FROM JSON: ", name)
                         self.foursquareNotification(name: name)
-                        let id = json["response"]["venues"][6]["id"].string
+                        let id = json["response"]["venues"][0]["id"].string
                         print("id of foursquare", id)
                         self.getVenueDetails(id: id!)
                     }
@@ -455,23 +463,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
 
     //-------------------------------------------------------------------------------------------------------------
     
-    @IBAction func logoutTapped(_ sender: Any) {
-        
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-        
-        //Direct to sign up and login page...
-        
-        let mainViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.mainViewController) as? ViewController
-        
-        
-        self.view.window?.rootViewController = mainViewController
-        self.view.window?.makeKeyAndVisible()
-    }
+ 
     
     
 }
