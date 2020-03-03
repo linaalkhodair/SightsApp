@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var userLoc = CLLocation()
     
     //Foursquare API
-    let client = FoursquareAPIClient(clientId: "NKLOCTRG5PNGL0B1IIYCGUXDXWI0H5CXMGENAW5YBSSXHQY5", clientSecret: "0RLD5QX0DGCJUMDFYRZMMXO3SK3YUBMXOTYZ5YOE0G531BTX")
+    let client = FoursquareAPIClient(clientId: "UJA1OIHBNG3GRXFBQBLJVJ1W1UJAENXIZUZA0IJ5PNI5CMTN", clientSecret: "D4GTDQD2PZ0QEV0AFNXORMD3IVW4XNX4V2NZY1BEZWKUSICO")
     
      var timer = Timer()
     
