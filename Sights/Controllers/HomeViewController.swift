@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var userLoc = CLLocation()
     
     //Foursquare API
-    let client = FoursquareAPIClient(clientId: "UJA1OIHBNG3GRXFBQBLJVJ1W1UJAENXIZUZA0IJ5PNI5CMTN", clientSecret: "D4GTDQD2PZ0QEV0AFNXORMD3IVW4XNX4V2NZY1BEZWKUSICO")
+    let client = FoursquareAPIClient(clientId: "HKDOVXAY2F54P505WTDL4AQZHXQIGKSFVAYJ3OLL0FYTXIAK", clientSecret: "F5U1CR4QU4OF4IYB4GWJHGSOHDQZKFS43WAR22J1N1MAOGKV")
     
      var timer = Timer()
     
@@ -350,7 +350,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         func searchVenues(lat: Double, lng: Double) {
             let parameter: [String: String] = [
-                "ll": "\(lat),\(lng)",
+                "ll": "\(24.631424),\(46.713370)",
                 "radius": "600",
                 "limit": "10",
                 "intent": "browse",
@@ -365,12 +365,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     let jsonResponse = try! JSONSerialization.jsonObject(with: data, options: [])
                     let json = JSON(jsonResponse)
 
-                    if let name = json["response"]["venues"][0]["name"].string {
+                    if let name = json["response"]["venues"][1]["name"].string {
                       print("NAME FROM JSON: ", name)
-                        self.foursquareNotification(name: name)
-                        let id = json["response"]["venues"][0]["id"].string
+                        
+                        let id = json["response"]["venues"][1]["id"].string
                         print("id of foursquare", id)
-                        self.getVenueDetails(id: id!)
+                        
+                        var rating:Double = self.getVenueDetails(id: id!)
+                        
+//                        if (rating != 0 )  {
+//                            self.foursquareNotification(name: name)
+//                            print("here inside lol")
+//                        }
                     }
                     
                     for (key,subJson):(String, JSON) in json["response"]["venues"] {
@@ -398,8 +404,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         //-------------------------------------------------------------------------------------------------------------
     
-        func getVenueDetails(id: String) {
+        func getVenueDetails(id: String) -> Double {
         
+        var rat:Double = 0
+        
+            
         let parameter: [String: String] = [
             "VENUE_ID": "\(id)",
 
@@ -413,7 +422,28 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 let jsonResponse = try! JSONSerialization.jsonObject(with: data, options: [])
                
                 let json = JSON(jsonResponse)
-                print("json == ", jsonResponse)
+               // print("json == ", jsonResponse)
+                
+                let name = json["response"]["venue"]["name"].string
+
+                if let rating:Double = json["response"]["venue"]["rating"].double {
+                    print("rating from: ", rating)
+                    //rat = rating
+                    
+                    if (rating > 2  )  {
+                        self.foursquareNotification(name: name!)
+                        print("here inside lol")
+                    }
+                  
+                }
+                
+                
+                 
+                
+//                rat = json["response"]["venue"]["rating"].double!
+//                print("rating from: ", rat)
+//                //rat = rating.unsafelyUnwrapped
+                 
 
             case let .failure(error):
                 // Error handling
@@ -428,7 +458,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                         }
                     }
                 }
-        
+            return rat
         }
     
     //-------------------------------------------------------------------------------------------------------------
