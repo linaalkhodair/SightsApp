@@ -19,12 +19,6 @@
                                 <rect key="frame" x="-260" y="0.0" width="850" height="916"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="gAF-Q6-rSE">
-                                <rect key="frame" x="0.0" y="388" width="375" height="551"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="551" id="ZfF-Qm-lgc"/>
-                                </constraints>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="U7C-4c-amy">
                                 <rect key="frame" x="117" y="238" width="141" height="142"/>
                                 <subviews>
@@ -73,6 +67,12 @@ Explore Riyadh in the     		most enjoyable way</string>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="gAF-Q6-rSE">
+                                <rect key="frame" x="0.0" y="445" width="375" height="551"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="551" id="ZfF-Qm-lgc"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -140,12 +140,6 @@ Explore Riyadh in the     		most enjoyable way</string>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="jSQ-a9-aJW">
                                 <rect key="frame" x="-73" y="-13" width="521" height="838"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="YxG-cl-IjO">
-                                <rect key="frame" x="0.0" y="359" width="375" height="551"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="551" id="TdE-HS-u9D"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2y1-OF-TBj">
                                 <rect key="frame" x="32.000000000000007" y="113" width="70.666666666666686" height="37"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="27"/>
@@ -191,6 +185,12 @@ Explore Riyadh in the     		most enjoyable way</string>
                                     <segue destination="YOT-eI-Qwq" kind="show" id="BbP-VX-j6w"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="YxG-cl-IjO">
+                                <rect key="frame" x="0.0" y="436" width="375" height="551"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="551" id="TdE-HS-u9D"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -237,13 +237,6 @@ Explore Riyadh in the     		most enjoyable way</string>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="lHv-XK-Lij">
                                 <rect key="frame" x="-73" y="-13" width="521" height="838"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="TGA-uH-zYW">
-                                <rect key="frame" x="-213.66666666666666" y="351" width="802.33333333333337" height="551"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="802.33333333333337" id="qdv-pf-T28"/>
-                                    <constraint firstAttribute="height" constant="551" id="xjC-He-WGo"/>
-                                </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="uCZ-wu-h4C">
                                 <rect key="frame" x="20" y="167" width="335" height="253.66666666666663"/>
@@ -319,6 +312,13 @@ Explore Riyadh in the     		most enjoyable way</string>
                                     <segue destination="YOT-eI-Qwq" kind="show" id="qqg-TT-hRU"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="TGA-uH-zYW">
+                                <rect key="frame" x="-214" y="428" width="802.33333333333337" height="551"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="802.33333333333337" id="qdv-pf-T28"/>
+                                    <constraint firstAttribute="height" constant="551" id="xjC-He-WGo"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -560,7 +560,6 @@ Explore Riyadh in the     		most enjoyable way</string>
         <image name="user" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4ne-Qq-uoz"/>
         <segue reference="iie-gU-lXR"/>
         <segue reference="DkL-Bz-IVQ"/>
         <segue reference="5si-td-zZd"/>

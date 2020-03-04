@@ -436,7 +436,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     print("rating from: ", rating)
                     //rat = rating
                     
-                    if (rating > 2  )  {
+                    if (rating > 2)  {
                         self.foursquareNotification(name: name!)
                         print("here inside lol")
                        guard true else {
@@ -474,7 +474,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         }//end getVenueDetails
 
     
-    //-------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------NOTIFICATIONS-----------------------------------------------------
 
     
         func foursquareNotification(name: String) {
@@ -504,7 +504,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
         }
 
-    //-------------------------------------------------------------------------------------------------------------
+        
+        func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
+            //displaying the ios local notification when app is in foreground
+            completionHandler([.alert, .badge, .sound])
+        }
+    
+    //------------------------------------------------END NOTIFICATIONS----------------------------------------------------
     
  
     
