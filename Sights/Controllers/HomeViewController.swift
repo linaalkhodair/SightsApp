@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var userLoc = CLLocation()
     
     //Foursquare API
-    let client = FoursquareAPIClient(clientId: "HKDOVXAY2F54P505WTDL4AQZHXQIGKSFVAYJ3OLL0FYTXIAK", clientSecret: "F5U1CR4QU4OF4IYB4GWJHGSOHDQZKFS43WAR22J1N1MAOGKV")
+    let client = FoursquareAPIClient(clientId: "F4ENAOBAROXSRTPYAXAIQPYPUHARPHUZ3HYKKOGEDQ5J1D53", clientSecret: "FREY1YV3KMGT13UQ2QLTOCZOWZVGBDKWWK5ESG0GZOGVALFA")
     
      var timer = Timer()
     
@@ -350,7 +350,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         func searchVenues(lat: Double, lng: Double) {
             let parameter: [String: String] = [
-                "ll": "\(24.631424),\(46.713370)",
+                "ll": "\(24.709770),\(46.776135)",
                 "radius": "600",
                 "limit": "10",
                 "intent": "browse",
@@ -365,13 +365,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     let jsonResponse = try! JSONSerialization.jsonObject(with: data, options: [])
                     let json = JSON(jsonResponse)
 
-                    if let name = json["response"]["venues"][1]["name"].string {
+                    if let name = json["response"]["venues"][0]["name"].string {
                       print("NAME FROM JSON: ", name)
                         
-                        let id = json["response"]["venues"][1]["id"].string
+                        let id = json["response"]["venues"][0]["id"].string
                         print("id of foursquare", id)
                         
-                        var rating:Double = self.getVenueDetails(id: id!)
+                    //    var rating:Double = self.getVenueDetails(id: id!)
                         
 //                        if (rating != 0 )  {
 //                            self.foursquareNotification(name: name)
@@ -382,7 +382,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     for (key,subJson):(String, JSON) in json["response"]["venues"] {
                         let placeName = subJson["name"].string
                         print("place name:",placeName.unsafelyUnwrapped)
-                    }
+                        let placeId = subJson["id"].string
+                        print("place id:",placeId.unsafelyUnwrapped)
+                        var isSent2 = self.getVenueDetails(id: placeId!)
+                        print("isSent", isSent2)
+                       
+                        if(isSent2){
+                            break
+        
+                        }
+                    }//end of for loop
                     
                     
                   //  print("json == ", jsonResponse)
@@ -404,11 +413,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         //-------------------------------------------------------------------------------------------------------------
     
-        func getVenueDetails(id: String) -> Double {
+        func getVenueDetails(id: String) -> Bool {
         
-        var rat:Double = 0
-        
-            
         let parameter: [String: String] = [
             "VENUE_ID": "\(id)",
 
@@ -433,12 +439,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     if (rating > 2  )  {
                         self.foursquareNotification(name: name!)
                         print("here inside lol")
-                    }
-                  
+                       guard true else {
+                        print("return trueeeee")
+                        return
+                        }
+                    } //end if
+                    else{
+                       guard false else {
+                        print("return falsssseeeee")
+                       return
+                       }
+                    }//end else
                 }
-                
-                
-                 
                 
 //                rat = json["response"]["venue"]["rating"].double!
 //                print("rating from: ", rat)
@@ -458,8 +470,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                         }
                     }
                 }
-            return rat
-        }
+            return false
+        }//end getVenueDetails
+
     
     //-------------------------------------------------------------------------------------------------------------
 
