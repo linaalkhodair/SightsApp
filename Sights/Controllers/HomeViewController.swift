@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var userLoc = CLLocation()
     
     //Foursquare API
-    let client = FoursquareAPIClient(clientId: "4VTW1GWO5N1WJOYSKSMRBN3GJTK1UY3YP5REJOL352RQKWKJ", clientSecret: "J1PRHYRL4IYXT5IWAUFXFRMRFLQQ0HVFCI0RUBARRAOAKEIT")
+    let client = FoursquareAPIClient(clientId: "2QXSGPNZYLN0KLXAAHKK4KSEGEYNHHSLSLCYH2OS1NEDQJDU", clientSecret: "0MLYNN5PRZLYE1RH0F1QRP4D3UHVMOEJSAMCCYHUO1Q4OD0Z")
     
     var timer = Timer()
     
@@ -350,14 +350,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     func searchVenues(lat: Double, lng: Double) {
         let parameter: [String: String] = [
-            "ll": "24.710249,46.776249",
+            "ll": "24.707237, 46.774830",
             "radius": "600",
             "limit": "10",
             "intent": "browse",
             "categoryId": "4bf58dd8d48988d1e4931735,4bf58dd8d48988d1f1931735,4deefb944765f83613cdba6e,4bf58dd8d48988d17f941735,52e81612bcbc57f1066b79eb,4bf58dd8d48988d181941735,4bf58dd8d48988d1f4931735,4bf58dd8d48988d189941735,4bf58dd8d48988d182941735,4bf58dd8d48988d17b941735,4bf58dd8d48988d163941735,4bf58dd8d48988d164941735,4bf58dd8d48988d165941735,56aa371be4b08b9a8d57356a,4bf58dd8d48988d12f941735"
         ];
         
-        var isSent2: Bool = false
+       // var isSent2: Bool = false
         
         client.request(path: "venues/search", parameter: parameter) { result in
             switch result {
@@ -443,6 +443,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     func start(json: JSON, key: Int) {
         var isSent2 = false
         let placeId = json["response"]["venues"][key]["id"].string
+        let name = json["response"]["venues"][key]["name"].string
+        print("name:",name)
+        print("placeId:",placeId)
+
         if placeId != nil {
             self.getVenueDetails(id: placeId!) { (isSent) in
             isSent2 = isSent
@@ -456,7 +460,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     }
     //-------------------------------------------------------------------------------------------------------------
     func getVenueDetails(id: String, completionHandler: @escaping (Bool)->Void)  {
-        
+
         var isSent: Bool = false
      //   let group = DispatchGroup()
 
@@ -476,9 +480,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 
                 let json = JSON(jsonResponse)
                 // print("json == ", jsonResponse)
-                
                 let name = json["response"]["venue"]["name"].string
-                
+                print("aaaaaaa")
                 if let rating:Double = json["response"]["venue"]["rating"].double {
                     print("rating from: ", rating)
                     //rat = rating
@@ -497,7 +500,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     } //end if
                     else {
                         isSent = false
-                        
                         //group.leave()
                       //  group.notify(queue: .main){
                             completionHandler(isSent)
@@ -505,7 +507,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                        //    }
                         
                     }//end else
-                } //end if rating
+                }//end if rating
+                else{
+                    isSent = false
+                    completionHandler(isSent)
+
+                }
                 
                 //                rat = json["response"]["venue"]["rating"].double!
                 //                print("rating from: ", rat)
