@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var userLoc = CLLocation()
     
     //Foursquare API
-    let client = FoursquareAPIClient(clientId: "15MJQMMUGUIZS0RE2VAUMALJAZVBF3RUFY0IJWTXBHUYK2WX", clientSecret: "ISTBC2GM4QCRP1HV2M04I34NWI3GRZHMWHDGEBH252HOT3LQ")
+    let client = FoursquareAPIClient(clientId: "4VTW1GWO5N1WJOYSKSMRBN3GJTK1UY3YP5REJOL352RQKWKJ", clientSecret: "J1PRHYRL4IYXT5IWAUFXFRMRFLQQ0HVFCI0RUBARRAOAKEIT")
     
     var timer = Timer()
     
@@ -350,7 +350,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     func searchVenues(lat: Double, lng: Double) {
         let parameter: [String: String] = [
-            "ll": "\(lat),\(lng)",
+            "ll": "24.710249,46.776249",
             "radius": "600",
             "limit": "10",
             "intent": "browse",
@@ -358,7 +358,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         ];
         
         var isSent2: Bool = false
-        
         
         client.request(path: "venues/search", parameter: parameter) { result in
             switch result {
@@ -379,9 +378,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     //                            self.foursquareNotification(name: name)
                     //                            print("here inside lol")
                     //                        }
-             
                
-                let group = DispatchGroup()
                 
 //                var listID: Array<String> = []
 //
@@ -395,34 +392,35 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
 //                getVenueDetails(id: id!, list: listID) { (isSent) in
 //
 //                }
-                
-                for (key,subJson):(String, JSON) in json["response"]["venues"] {
-                   group.enter()
-                    let placeName = subJson["name"].string
-                    print("place name:",placeName.unsafelyUnwrapped)
-
-                    let placeId = subJson["id"].string
-                    print("place id:",placeId.unsafelyUnwrapped)
-
-                      //  group.enter()
-
-                        self.getVenueDetails(id: placeId!) { (isSent) in
-
-                            print("isSent", isSent)
-                            isSent2 = isSent
-
-                          //  group.leave()
-
-                        }
-
-                   if (isSent2){
-                          print("linaaa")
-                    //group.leave()
-                    break
-
-                    }
-
-                }//end of for loop
+//                group.enter()
+               self.start(json: json, key: 0)
+//                for (key,subJson):(String, JSON) in json["response"]["venues"] {
+//                    let placeName = subJson["name"].string
+//                    print("place name:",placeName.unsafelyUnwrapped)
+//
+//                    let placeId = subJson["id"].string
+//                    print("place id:",placeId.unsafelyUnwrapped)
+//
+//                      //  group.enter()
+//
+//                        self.getVenueDetails(id: placeId!) { (isSent) in
+//
+//                            print("isSent", isSent)
+//                            isSent2 = isSent
+//
+//                        }
+////                    group.notify(queue: .main) {
+////
+////
+////                   if (isSent2){
+////                          print("linaaa")
+////                    //group.leave()
+////
+////
+////                    }
+////                break
+////                    }
+//                }//end of for loop
 
             //  print("json == ", jsonResponse)
             case let .failure(error):
@@ -442,22 +440,26 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     }
     
     
-//    func start(json: JSON, key: Int) {
-//        let placeId = json["response"]["venues"][key]["id"].string
-//        if placeId != nil {
-//            self.getVenueDetails(id: placeId!) { (isSent) in
-//            if !isSent {
-//               // counter += 1
-//                start(json: json, key: key+1)
-//         }
-//        }
-//    }
-//    }
+    func start(json: JSON, key: Int) {
+        var isSent2 = false
+        let placeId = json["response"]["venues"][key]["id"].string
+        if placeId != nil {
+            self.getVenueDetails(id: placeId!) { (isSent) in
+            isSent2 = isSent
+            if isSent2 == false {
+               // counter += 1
+                print("works",isSent)
+                self.start(json: json, key: key+1)
+         }
+        }
+    }
+    }
     //-------------------------------------------------------------------------------------------------------------
     func getVenueDetails(id: String, completionHandler: @escaping (Bool)->Void)  {
         
         var isSent: Bool = false
-        
+     //   let group = DispatchGroup()
+
         
         let parameter: [String: String] = [
             "VENUE_ID": "\(id)",
@@ -466,6 +468,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         client.request(path: "venues/\(id)", parameter: parameter) { result in
             
+            //group.enter()
             switch result {
             case let .success(data):
                 
@@ -484,16 +487,22 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                         self.foursquareNotification(name: name!)
                         print("here inside lol")
                         isSent = true
-                        
-                        completionHandler(isSent)
+                       // group.leave()
                         print("isSent hereee", isSent)
-                        
+                       // group.notify(queue: .main){
+                                completionHandler(isSent)
+
+                        //  }
                         
                     } //end if
                     else {
                         isSent = false
                         
-                        completionHandler(isSent)
+                        //group.leave()
+                      //  group.notify(queue: .main){
+                            completionHandler(isSent)
+
+                       //    }
                         
                     }//end else
                 } //end if rating
