@@ -17,15 +17,17 @@ import FoursquareAPIClient
 import SwiftyJSON
 
 
+
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     
     var sceneLocationView = SceneLocationView()
     var poiview = POIView()
-
+    
     var db: Firestore!
     
     let locationManager = CLLocationManager()
-   
+    
+    let coreMotion = CoreMotionManager() //for the activity of user (walking or driving)
     
     let regionInMeters: Double = 10000
     var userLoc = CLLocation()
@@ -82,6 +84,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             view.addSubview(cameraImg)
             
             poiview.contentView.alpha = 0
+            
+            
             
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
                 
@@ -329,15 +333,24 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         
         let userLocation = locations.last //new location
-        
+        let activity = coreMotion.startActivityUpdates()
         
         let distance = self.userLoc.distance(from: userLocation!)
         if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
             
+            //we need to also check every a certain distance to check for other POI objects
             searchVenues(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
-            
             userLoc = locations.last! //previous location
             print("inside")
+            
+            if (activity == "driving") {
+                //AND ALSO WE WILL CHANGE DISTANCE BASED ON USER ACTIVITY.
+                Alert.showBasicAlert(on: self, with: "You're currently driving..", message: "For a better experience start walking to enjoy AR!")
+            }
+            //just for testing purposes
+            if (activity == "walking"){
+                Alert.showBasicAlert(on: self, with: "You're currently walking..", message: "For a better experience continue walking and explore Riyadh!")
+            }
         }
     }
     
@@ -357,8 +370,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             "categoryId": "4bf58dd8d48988d1e4931735,4bf58dd8d48988d1f1931735,4deefb944765f83613cdba6e,4bf58dd8d48988d17f941735,52e81612bcbc57f1066b79eb,4bf58dd8d48988d181941735,4bf58dd8d48988d1f4931735,4bf58dd8d48988d189941735,4bf58dd8d48988d182941735,4bf58dd8d48988d17b941735,4bf58dd8d48988d163941735,4bf58dd8d48988d164941735,4bf58dd8d48988d165941735,56aa371be4b08b9a8d57356a,4bf58dd8d48988d12f941735"
         ];
         
-       // var isSent2: Bool = false
-        
         client.request(path: "venues/search", parameter: parameter) { result in
             switch result {
             case let .success(data):
@@ -366,63 +377,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 let jsonResponse = try! JSONSerialization.jsonObject(with: data, options: [])
                 let json = JSON(jsonResponse)
                 
-                 let name = json["response"]["venues"][0]["name"].string
-                    print("NAME FROM JSON: ", name)
-                    
-                    let id = json["response"]["venues"][0]["id"].string
-                    print("id of foursquare", id)
-                    
-                    //    var rating:Double = self.getVenueDetails(id: id!)
-                    
-                    //                        if (rating != 0 )  {
-                    //                            self.foursquareNotification(name: name)
-                    //                            print("here inside lol")
-                    //                        }
-               
+                let name = json["response"]["venues"][0]["name"].string //first venue
+                print("NAME FROM JSON: ", name)
                 
-//                var listID: Array<String> = []
-//
-//                for (key,subJson):(String, JSON) in json["response"]["venues"]{
-//                    let placeId = subJson["id"].string
-//                    listID.append(placeId!)
-//
-//                }
-//
-//                print(listID)
-//                getVenueDetails(id: id!, list: listID) { (isSent) in
-//
-//                }
-//                group.enter()
-               self.start(json: json, key: 0)
-//                for (key,subJson):(String, JSON) in json["response"]["venues"] {
-//                    let placeName = subJson["name"].string
-//                    print("place name:",placeName.unsafelyUnwrapped)
-//
-//                    let placeId = subJson["id"].string
-//                    print("place id:",placeId.unsafelyUnwrapped)
-//
-//                      //  group.enter()
-//
-//                        self.getVenueDetails(id: placeId!) { (isSent) in
-//
-//                            print("isSent", isSent)
-//                            isSent2 = isSent
-//
-//                        }
-////                    group.notify(queue: .main) {
-////
-////
-////                   if (isSent2){
-////                          print("linaaa")
-////                    //group.leave()
-////
-////
-////                    }
-////                break
-////                    }
-//                }//end of for loop
-
-            //  print("json == ", jsonResponse)
+                let id = json["response"]["venues"][0]["id"].string
+                print("id of foursquare", id)
+                
+                self.start(json: json, key: 0)
+                
             case let .failure(error):
                 // Error handling
                 switch error {
@@ -437,33 +399,35 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             }
         }
         
-    }
+
+    } // end searchVenues
     
     
+    // recursive func to iterate through all venues and find a venue with a high rating to notify user
     func start(json: JSON, key: Int) {
         var isSent2 = false
         let placeId = json["response"]["venues"][key]["id"].string
         let name = json["response"]["venues"][key]["name"].string
         print("name:",name)
         print("placeId:",placeId)
-
+        
         if placeId != nil {
             self.getVenueDetails(id: placeId!) { (isSent) in
-            isSent2 = isSent
-            if isSent2 == false {
-               // counter += 1
-                print("works",isSent)
-                self.start(json: json, key: key+1)
-         }
+                isSent2 = isSent
+                if isSent2 == false {
+                    print("works",isSent)
+                    self.start(json: json, key: key+1)
+                }
+            }
         }
-    }
-    }
+    } // end start
+    
+    
     //-------------------------------------------------------------------------------------------------------------
+    
     func getVenueDetails(id: String, completionHandler: @escaping (Bool)->Void)  {
-
+        
         var isSent: Bool = false
-     //   let group = DispatchGroup()
-
         
         let parameter: [String: String] = [
             "VENUE_ID": "\(id)",
@@ -472,52 +436,34 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         client.request(path: "venues/\(id)", parameter: parameter) { result in
             
-            //group.enter()
             switch result {
             case let .success(data):
                 
                 let jsonResponse = try! JSONSerialization.jsonObject(with: data, options: [])
                 
                 let json = JSON(jsonResponse)
-                // print("json == ", jsonResponse)
                 let name = json["response"]["venue"]["name"].string
-                print("aaaaaaa")
+
                 if let rating:Double = json["response"]["venue"]["rating"].double {
                     print("rating from: ", rating)
-                    //rat = rating
                     
                     if (rating > 2)  {
                         self.foursquareNotification(name: name!)
+                        // here we need to create a POI object with all info needed then add POI to user's notification list
+                        // also later on check to not send notification that exists in the notification list
                         print("here inside lol")
                         isSent = true
-                       // group.leave()
                         print("isSent hereee", isSent)
-                       // group.notify(queue: .main){
-                                completionHandler(isSent)
-
-                        //  }
-                        
-                    } //end if
-                    else {
-                        isSent = false
-                        //group.leave()
-                      //  group.notify(queue: .main){
-                            completionHandler(isSent)
-
-                       //    }
-                        
-                    }//end else
-                }//end if rating
-                else{
+                        completionHandler(isSent)
+                    }
+                    
+                } //end if rating
+                    
+                else {
                     isSent = false
                     completionHandler(isSent)
-
                 }
                 
-                //                rat = json["response"]["venue"]["rating"].double!
-                //                print("rating from: ", rat)
-                //                //rat = rating.unsafelyUnwrapped
-               
             case let .failure(error):
                 // Error handling
                 switch error {
@@ -531,7 +477,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 }
             }
         }
-      //  return isSent
+        
     }//end getVenueDetails
     
     
@@ -575,6 +521,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     //------------------------------------------------END NOTIFICATIONS----------------------------------------------------
     
     
+    //  LOCK ORIENTATION TO PORTRAIT
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
+    }
+
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return UIInterfaceOrientation.portrait
+    }
+
     
     
 }
