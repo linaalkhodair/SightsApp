@@ -31,16 +31,15 @@ class RegisterViewController: UIViewController {
         
     }
     
-    
     @IBAction func signUpTapped(_ sender: Any) {
         
         //Validate fields
         let isValid = validateFields()
-        
+        let passowrd = "123456"
         //Create User (Auth)
         if (isValid == nil ) {
             
-            Auth.auth().createUser(withEmail: email.text ?? "", password: "123456") { authResult, error in
+            Auth.auth().createUser(withEmail: email.text ?? "", password: passowrd) { authResult, error in
                 
                 if error != nil {
                     if error?.localizedDescription == "The email address is already in use by another account." {
@@ -56,7 +55,7 @@ class RegisterViewController: UIViewController {
                     if !CheckInternet.Connection(){
                         Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use Wi-Fi to access data.")
                     }
-                   
+                    
                     print(error)
                 }
                 else {
@@ -106,7 +105,7 @@ class RegisterViewController: UIViewController {
     // Check the fields and validate that the data is correct. If everything is correct, this method returns nil. Otherwise, it returns the error message
     func validateFields() -> String? {
         
-       
+        
         // Check that all fields are filled in
         if name.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             email.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""  {
@@ -158,11 +157,11 @@ class RegisterViewController: UIViewController {
     override var shouldAutorotate: Bool {
         return false
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
     }
-
+    
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return UIInterfaceOrientation.portrait
     }
