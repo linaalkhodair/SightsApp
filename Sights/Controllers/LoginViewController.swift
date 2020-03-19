@@ -37,9 +37,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func signInTapped(_ sender: Any) {
         
+        let password = "123456"
         var isValid = validateFields()
         if ( isValid == nil ) {
-            Auth.auth().signIn(withEmail: email.text ?? "", password: "123456") { [weak self] authResult, error in
+            Auth.auth().signIn(withEmail: email.text ?? "", password: password) { [weak self] authResult, error in
                 guard let strongSelf = self else { return }
                 if error != nil {
                     print(error)
@@ -61,7 +62,7 @@ class LoginViewController: UIViewController {
                         self?.view.window?.rootViewController = homeViewController
                         self?.view.window?.makeKeyAndVisible()
                         
-                        //                    performSegue(withIdentifier: "HomeVC", sender: self)
+                        //performSegue(withIdentifier: "HomeVC", sender: self)
                         
                         print("success")
                     }
@@ -109,7 +110,7 @@ class LoginViewController: UIViewController {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
-    
+
     //  LOCK ORIENTATION TO PORTRAIT
     override var shouldAutorotate: Bool {
         return false

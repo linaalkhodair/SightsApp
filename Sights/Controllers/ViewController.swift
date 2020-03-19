@@ -28,7 +28,7 @@ class ViewController: UIViewController {
                 //direct to home..
                 let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
                                     
-                // let homeViewController = self?.storyboard?.instantiateViewController(withIdentifier:  "HomeVC")
+                //let homeViewController = self?.storyboard?.instantiateViewController(withIdentifier:  "HomeVC")
                                     
                 self.view.window?.rootViewController = homeViewController
                 self.view.window?.makeKeyAndVisible()            }

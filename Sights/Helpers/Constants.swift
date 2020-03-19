@@ -18,5 +18,10 @@ struct Constants {
         
     }
     
+    struct FoursquareClient {
+        
+        static let clientId = "KA3N1SQBGVP53YTGBSDLUBXQCQDISPZBB2VJYVTXUASB3RMV"
+        static let clientSecret = "2YQCM1RNHVEPKMLGFR5QEM0S5JIAXOMNXLLSCXAGA00MOPA4"
+    }
     
 }

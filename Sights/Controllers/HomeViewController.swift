@@ -24,7 +24,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var poiview = POIView()
     
     var db: Firestore!
-    
+
     let locationManager = CLLocationManager()
     
     let coreMotion = CoreMotionManager() //for the activity of user (walking or driving)
@@ -33,11 +33,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var userLoc = CLLocation()
     
     //Foursquare API
-    let client = FoursquareAPIClient(clientId: "2QXSGPNZYLN0KLXAAHKK4KSEGEYNHHSLSLCYH2OS1NEDQJDU", clientSecret: "0MLYNN5PRZLYE1RH0F1QRP4D3UHVMOEJSAMCCYHUO1Q4OD0Z")
+    let client = FoursquareAPIClient(clientId: Constants.FoursquareClient.clientId, clientSecret: Constants.FoursquareClient.clientSecret)
     
     var timer = Timer()
     
-    @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navItem: UIBarButtonItem!
     @IBOutlet weak var listImg: UIImageView!
@@ -85,7 +84,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             poiview.contentView.alpha = 0
             
-            
+
             
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
                 
@@ -363,7 +362,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     func searchVenues(lat: Double, lng: Double) {
         let parameter: [String: String] = [
-            "ll": "24.707237, 46.774830",
+            "ll": "24.753579, 46.738136",
             "radius": "600",
             "limit": "10",
             "intent": "browse",
@@ -443,14 +442,34 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 
                 let json = JSON(jsonResponse)
                 let name = json["response"]["venue"]["name"].string
+                
+                var loc = json["response"]["venue"]["location"]["address"].string
+                if loc == nil {
+                    loc = "Riyadh, Saudi Arabia."
+                }
+               var desc = json["response"]["venue"]["location"]["description"].string
+                if desc == nil {
+                    desc = "" //? idk
+                }
+                var hours = json["response"]["venue"]["hours"]["status"].string //?
+                if hours == nil {
+                    hours = "8:00 AM - 10:00 PM"
+                }
+                
+                let lat = json["response"]["venue"]["location"]["lat"].double
+                let lng = json["response"]["venue"]["location"]["lng"].double
 
                 if let rating:Double = json["response"]["venue"]["rating"].double {
                     print("rating from: ", rating)
                     
                     if (rating > 2)  {
                         self.foursquareNotification(name: name!)
+                        
                         // here we need to create a POI object with all info needed then add POI to user's notification list
                         // also later on check to not send notification that exists in the notification list
+                        let poi = POI(ID: id, name: name!, location: loc!, latitude: lat!, longitude: lng!, rating: rating, briefInfo: desc!, openingHours: hours!, image: "", markState: false)
+                        
+                        //then add POIObject to notification list
                         print("here inside lol")
                         isSent = true
                         print("isSent hereee", isSent)
