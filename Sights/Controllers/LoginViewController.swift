@@ -9,16 +9,27 @@
 import UIKit
 import Firebase
 
+//to dismiss keyboard when tapping anywhere
+extension UIViewController{
+func hideKeyboard (){
+    let Tap:UITapGestureRecognizer = UITapGestureRecognizer (target: self, action: #selector(dismissKeyboard))
+    view.addGestureRecognizer(Tap)
+                    }
+@objc func dismissKeyboard () {
+    view.endEditing(true)
+                              }
+                        }
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
         email.layer.cornerRadius = 15.0 //make the fields rounded
         email.clipsToBounds = true
+        self.hideKeyboard()
         // Do any additional setup after loading the view.
     }
     
