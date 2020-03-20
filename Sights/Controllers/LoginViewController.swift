@@ -11,14 +11,14 @@ import Firebase
 
 //to dismiss keyboard when tapping anywhere
 extension UIViewController{
-func hideKeyboard (){
-    let Tap:UITapGestureRecognizer = UITapGestureRecognizer (target: self, action: #selector(dismissKeyboard))
-    view.addGestureRecognizer(Tap)
-                    }
-@objc func dismissKeyboard () {
-    view.endEditing(true)
-                              }
-                        }
+    func hideKeyboard (){
+        let Tap:UITapGestureRecognizer = UITapGestureRecognizer (target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(Tap)
+    }
+    @objc func dismissKeyboard () {
+        view.endEditing(true)
+    }
+}
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var email: UITextField!
@@ -110,16 +110,16 @@ class LoginViewController: UIViewController {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
     }
-
+    
     //  LOCK ORIENTATION TO PORTRAIT
     override var shouldAutorotate: Bool {
         return false
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
     }
-
+    
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return UIInterfaceOrientation.portrait
     }

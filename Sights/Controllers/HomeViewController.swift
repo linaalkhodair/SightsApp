@@ -344,7 +344,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             if (activity == "driving") {
                 //AND ALSO WE WILL CHANGE DISTANCE BASED ON USER ACTIVITY.
-                Alert.showBasicAlert(on: self, with: "You're currently driving..", message: "For a better experience start walking to enjoy AR!")
+                Alert.showBasicAlert(on: self, with: "Seems like you're currently driving 🚗", message: "For a better experience start walking to enjoy AR!")
             }
             //just for testing purposes
             if (activity == "walking"){
@@ -509,9 +509,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         let content = UNMutableNotificationContent()
         
         //adding title, subtitle, body and badge
-        content.title = "Hey you've just passed \(name) !"
+        content.title = "Hey there, Riyadh is waiting for you 🌏"
         //content.subtitle = "\(place.name.unsafelyUnwrapped) is near you!"
-        content.body = "Come check it out and explore Riyadh!"
+        content.body = "You've just passed \(name), come check it out and explore Riyadh."
         content.badge = 1
         content.sound = .default
         
@@ -535,6 +535,39 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         //displaying the ios local notification when app is in foreground
         completionHandler([.alert, .badge, .sound])
+    }
+    
+    //update notification badge when entered
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+        //UI updates are done in the main thread
+        DispatchQueue.main.async {
+            UIApplication.shared.applicationIconBadgeNumber -= 1
+        }
+
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests(completionHandler: {requests in
+            //Update only the notifications that have userInfo["timeInterval"] set
+            let newRequests: [UNNotificationRequest] =
+                requests
+                    .filter{ rq in
+                        return rq.content.userInfo["timeInterval"] is Double?
+                    }
+                    .map { request in
+                        let newContent: UNMutableNotificationContent = request.content.mutableCopy() as! UNMutableNotificationContent
+                        newContent.badge = (Int(truncating: request.content.badge ?? 0) - 1) as NSNumber
+                        let newRequest: UNNotificationRequest =
+                            UNNotificationRequest(identifier: request.identifier,
+                                                  content: newContent,
+                                                  trigger: request.trigger)
+                        return newRequest
+            }
+            newRequests.forEach { center.add($0, withCompletionHandler: { (error) in
+                // Handle error
+            })
+            }
+        })
+        completionHandler()
     }
     
     //------------------------------------------------END NOTIFICATIONS----------------------------------------------------
