@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     let regionInMeters: Double = 10000
     var userLoc = CLLocation()
+    let activity: String = " "
     
     //Foursquare API
     let client = FoursquareAPIClient(clientId: Constants.FoursquareClient.clientId, clientSecret: Constants.FoursquareClient.clientSecret)
@@ -60,6 +61,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
             
+            let activity = coreMotion.startActivityUpdates()
             //****** we should add the buttons to make it the same appearance as if there's wifi *******
         }
         else {
@@ -332,26 +334,38 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         
         let userLocation = locations.last //new location
-        let activity = coreMotion.startActivityUpdates()
+//        let activity = coreMotion.startActivityUpdates()
         
-        let distance = self.userLoc.distance(from: userLocation!)
-        if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
+      
             
-            //we need to also check every a certain distance to check for other POI objects
-            searchVenues(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
-            userLoc = locations.last! //previous location
-            print("inside")
+            //we need to also check every a certain distance to check for other POI object
             
             if (activity == "driving") {
-                //AND ALSO WE WILL CHANGE DISTANCE BASED ON USER ACTIVITY.
                 Alert.showBasicAlert(on: self, with: "Seems like you're currently driving 🚗", message: "For a better experience start walking to enjoy AR!")
-            }
+                let distance = self.userLoc.distance(from: userLocation!)
+                if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
+                //AND ALSO WE WILL CHANGE DISTANCE BASED ON USER ACTIVITY.
+                searchVenues(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
+                userLoc = locations.last! //previous location
+                print("inside")  }//end if distance
+                let activity = coreMotion.startActivityUpdates() }//end if driving
+
+              
             //just for testing purposes
             if (activity == "walking"){
                 Alert.showBasicAlert(on: self, with: "You're currently walking..", message: "For a better experience continue walking and explore Riyadh!")
+                let distance = self.userLoc.distance(from: userLocation!)
+                if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
+                //AND ALSO WE WILL CHANGE DISTANCE BASED ON USER ACTIVITY.
+                searchVenues(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
+                userLoc = locations.last! //previous location
+                print("inside")  }//end if distance
+                let activity = coreMotion.startActivityUpdates() }//end if walking
+
+    
             }
-        }
-    }
+        
+    
     
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
