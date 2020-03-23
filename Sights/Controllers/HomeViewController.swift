@@ -266,6 +266,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         let annotationNode = LocationAnnotationNode(location: location, image: image!)
         annotationNode.name = ID
+        annotationNode.scaleRelativeToDistance = false
+        annotationNode.ignoreAltitude = false
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
         
     }
