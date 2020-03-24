@@ -16,22 +16,28 @@ class CoreMotionManager {
         self.motionActivityManager = CMMotionActivityManager()
     }
     
-    func startActivityUpdates() -> String
+    func startUpdates(completionHandler: @escaping (String)->Void)
     {
         var activityType: String = ""
         motionActivityManager.startActivityUpdates(to: OperationQueue.main) { (activity) in
                if (activity?.automotive)! {
                    print("User using car")
-                    activityType = "driving"
+                    completionHandler("driving")
+                
                }
 
-               if (activity?.walking)! {
+            if (activity!.walking || activity!.running) {
                    print("User is walking")
-                    activityType = "walking"
+                    completionHandler("walking")
                }
+            
+            if (activity?.stationary)! {
+                print("User is standing still")
+                completionHandler("stationary")
+            }
 
            }
-        return activityType
+        //return activityType
     }
     
 }

@@ -45,9 +45,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctx-QY-W6L">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctx-QY-W6L">
                                 <rect key="frame" x="97" y="388" width="207" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Or Continue as a Guest &gt;">
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -57,9 +56,11 @@
                                     <segue destination="d0g-18-sbK" kind="show" id="DkL-Bz-IVQ"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PlR-S4-pzS">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PlR-S4-pzS">
                                 <rect key="frame" x="8" y="53" width="359" height="190"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="190" id="WPe-bX-X4F"/>
+                                </constraints>
                                 <string key="text">Start Exploring!
  
 Explore Riyadh in the     		most enjoyable way</string>
@@ -67,21 +68,28 @@ Explore Riyadh in the     		most enjoyable way</string>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="gAF-Q6-rSE">
-                                <rect key="frame" x="0.0" y="445" width="375" height="551"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="boZ-5B-9Gt">
+                                <rect key="frame" x="0.0" y="449" width="375" height="551"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="551" id="ZfF-Qm-lgc"/>
+                                    <constraint firstAttribute="height" constant="551" id="4VG-ZE-nQG"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="U7C-4c-amy" secondAttribute="bottom" constant="432" id="0WP-EC-frN"/>
+                            <constraint firstItem="boZ-5B-9Gt" firstAttribute="centerX" secondItem="U7C-4c-amy" secondAttribute="centerX" id="1le-39-jsS"/>
+                            <constraint firstItem="ctx-QY-W6L" firstAttribute="top" secondItem="U7C-4c-amy" secondAttribute="bottom" constant="8" id="3gU-1M-WmU"/>
                             <constraint firstItem="U7C-4c-amy" firstAttribute="leading" secondItem="8Ty-SP-bYO" secondAttribute="leading" constant="117" id="EIX-SM-dIz"/>
-                            <constraint firstItem="gAF-Q6-rSE" firstAttribute="top" secondItem="vyC-fM-7ed" secondAttribute="top" constant="388" id="JaU-Lh-Sx9"/>
-                            <constraint firstItem="gAF-Q6-rSE" firstAttribute="leading" secondItem="8Ty-SP-bYO" secondAttribute="leading" id="a92-rf-qxS"/>
-                            <constraint firstItem="gAF-Q6-rSE" firstAttribute="top" secondItem="U7C-4c-amy" secondAttribute="bottom" constant="8" id="i1F-Og-xsy"/>
-                            <constraint firstItem="gAF-Q6-rSE" firstAttribute="centerX" secondItem="U7C-4c-amy" secondAttribute="centerX" id="wIL-Gb-6mG"/>
+                            <constraint firstItem="PlR-S4-pzS" firstAttribute="top" secondItem="8Ty-SP-bYO" secondAttribute="top" constant="9" id="Ftn-kK-Lvx"/>
+                            <constraint firstItem="boZ-5B-9Gt" firstAttribute="leading" secondItem="8Ty-SP-bYO" secondAttribute="leading" id="J0M-16-PyD"/>
+                            <constraint firstItem="boZ-5B-9Gt" firstAttribute="top" secondItem="vyC-fM-7ed" secondAttribute="top" constant="429" id="KN8-yC-vvY"/>
+                            <constraint firstItem="8Ty-SP-bYO" firstAttribute="trailing" secondItem="ctx-QY-W6L" secondAttribute="trailing" constant="71" id="NfO-1E-aMn"/>
+                            <constraint firstItem="boZ-5B-9Gt" firstAttribute="centerX" secondItem="PlR-S4-pzS" secondAttribute="centerX" id="WS5-61-5Cf"/>
+                            <constraint firstItem="boZ-5B-9Gt" firstAttribute="top" secondItem="ctx-QY-W6L" secondAttribute="bottom" constant="8" id="eJF-uj-jT5"/>
+                            <constraint firstItem="ctx-QY-W6L" firstAttribute="leading" secondItem="8Ty-SP-bYO" secondAttribute="leading" constant="97" id="gfB-uv-Zg8"/>
                             <constraint firstItem="8Ty-SP-bYO" firstAttribute="trailing" secondItem="U7C-4c-amy" secondAttribute="trailing" constant="117" id="wWb-JQ-mT9"/>
+                            <constraint firstItem="PlR-S4-pzS" firstAttribute="leading" secondItem="8Ty-SP-bYO" secondAttribute="leading" constant="8" id="yyv-fn-IzW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Ty-SP-bYO"/>
                     </view>
@@ -186,7 +194,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="YxG-cl-IjO">
-                                <rect key="frame" x="0.0" y="436" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="445" width="375" height="551"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="551" id="TdE-HS-u9D"/>
                                 </constraints>
@@ -225,7 +233,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AYw-hQ-mt6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2788" y="386"/>
+            <point key="canvasLocation" x="2745" y="370"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="0tE-9V-jm5">
@@ -312,20 +320,21 @@ Explore Riyadh in the     		most enjoyable way</string>
                                     <segue destination="YOT-eI-Qwq" kind="show" id="qqg-TT-hRU"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="TGA-uH-zYW">
-                                <rect key="frame" x="-214" y="428" width="802.33333333333337" height="551"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Ve4-pu-Rb0">
+                                <rect key="frame" x="0.0" y="439" width="375" height="551"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="802.33333333333337" id="qdv-pf-T28"/>
-                                    <constraint firstAttribute="height" constant="551" id="xjC-He-WGo"/>
+                                    <constraint firstAttribute="height" constant="551" id="Gf6-Td-UA6"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="uCZ-wu-h4C" firstAttribute="top" secondItem="Ycq-yy-iba" secondAttribute="top" constant="167.00000000000006" id="3e6-TQ-SHc"/>
-                            <constraint firstItem="TGA-uH-zYW" firstAttribute="centerX" secondItem="uCZ-wu-h4C" secondAttribute="centerX" id="BL1-Vu-g9N"/>
+                            <constraint firstItem="Ve4-pu-Rb0" firstAttribute="centerX" secondItem="uCZ-wu-h4C" secondAttribute="centerX" id="5aB-Ba-GZl"/>
+                            <constraint firstItem="Ve4-pu-Rb0" firstAttribute="leading" secondItem="E7H-Un-Bvi" secondAttribute="leading" id="ECo-m6-yNr"/>
+                            <constraint firstItem="Ve4-pu-Rb0" firstAttribute="centerX" secondItem="ygw-4M-9dL" secondAttribute="centerX" id="GVu-Pw-h6t"/>
+                            <constraint firstItem="Ve4-pu-Rb0" firstAttribute="top" secondItem="ygw-4M-9dL" secondAttribute="bottom" constant="7.3333333333333144" id="H6L-R2-VFY"/>
                             <constraint firstItem="lHv-XK-Lij" firstAttribute="top" secondItem="Ycq-yy-iba" secondAttribute="topMargin" constant="-57" id="I7Q-OK-yp4"/>
-                            <constraint firstItem="TGA-uH-zYW" firstAttribute="top" secondItem="Ycq-yy-iba" secondAttribute="top" constant="351" id="JrL-uZ-4CB"/>
                             <constraint firstItem="lHv-XK-Lij" firstAttribute="leading" secondItem="Ycq-yy-iba" secondAttribute="leadingMargin" constant="-89" id="NIv-tq-J3h"/>
                             <constraint firstItem="E7H-Un-Bvi" firstAttribute="bottom" secondItem="ygw-4M-9dL" secondAttribute="bottom" constant="336.33333333333331" id="SYp-2x-fkz"/>
                             <constraint firstItem="uCZ-wu-h4C" firstAttribute="centerX" secondItem="Ycq-yy-iba" secondAttribute="centerX" id="U2D-d8-sNM"/>
@@ -335,7 +344,6 @@ Explore Riyadh in the     		most enjoyable way</string>
                             <constraint firstItem="lHv-XK-Lij" firstAttribute="centerY" secondItem="Ycq-yy-iba" secondAttribute="centerY" id="pwd-SJ-WRR"/>
                             <constraint firstItem="uCZ-wu-h4C" firstAttribute="centerX" secondItem="lHv-XK-Lij" secondAttribute="centerX" id="px7-CY-kHW"/>
                             <constraint firstItem="ygw-4M-9dL" firstAttribute="centerY" secondItem="lHv-XK-Lij" secondAttribute="centerY" id="uB9-1x-xmw"/>
-                            <constraint firstItem="TGA-uH-zYW" firstAttribute="centerX" secondItem="ygw-4M-9dL" secondAttribute="centerX" id="yq2-It-MMg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="E7H-Un-Bvi"/>
                     </view>
@@ -349,7 +357,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ClA-kA-8xk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2617" y="-382"/>
+            <point key="canvasLocation" x="2616.8000000000002" y="-382.01970443349757"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="RwY-fP-1FN">

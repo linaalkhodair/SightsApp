@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     let regionInMeters: Double = 10000
     var userLoc = CLLocation()
-    let activity: String = " "
+    static var activity: String = " "
     
     //Foursquare API
     let client = FoursquareAPIClient(clientId: Constants.FoursquareClient.clientId, clientSecret: Constants.FoursquareClient.clientSecret)
@@ -61,8 +61,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
             
-            let activity = coreMotion.startActivityUpdates()
-            //****** we should add the buttons to make it the same appearance as if there's wifi *******
         }
         else {
             
@@ -86,8 +84,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             poiview.contentView.alpha = 0
             
-
-            
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
                 
             })
@@ -109,6 +105,14 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         //set nav bar to transparent
         self.navBar.setBackgroundImage(UIImage(), for: .default)
         self.navBar.shadowImage=UIImage()
+        
+        coreMotion.startUpdates { (activityType) in
+            HomeViewController.activity = activityType
+//            if (activityType == "walking"){
+//                print("$$$inside walking$$$")
+//                 Alert.showBasicAlert(on: self, with: "You're currently walking..", message: "For a better experience continue walking and explore Riyadh!")
+//            }
+        } //To get the user's motion when first started
         
     } //end viewDidLoad
     
@@ -336,39 +340,40 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         
         let userLocation = locations.last //new location
-//        let activity = coreMotion.startActivityUpdates()
-        
-      
             
-            //we need to also check every a certain distance to check for other POI object
+        // ********* we need to also check every a certain distance to check for other POI object *********
             
-            if (activity == "driving") {
+        if (HomeViewController.activity == "driving") {
                 Alert.showBasicAlert(on: self, with: "Seems like you're currently driving 🚗", message: "For a better experience start walking to enjoy AR!")
                 let distance = self.userLoc.distance(from: userLocation!)
-                if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
-                //AND ALSO WE WILL CHANGE DISTANCE BASED ON USER ACTIVITY.
+                if distance >= 10 { // if diff more than 100 fire the notification search and look for AR....? I suggest distance to be 50?
                 searchVenues(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
                 userLoc = locations.last! //previous location
                 print("inside")  }//end if distance
-                let activity = coreMotion.startActivityUpdates() }//end if driving
+            coreMotion.startUpdates { (activityType) in
+                HomeViewController.activity = activityType
+            }
 
-              
+        }//end if driving
+
+
             //just for testing purposes
-            if (activity == "walking"){
-                Alert.showBasicAlert(on: self, with: "You're currently walking..", message: "For a better experience continue walking and explore Riyadh!")
+        if (HomeViewController.activity == "walking" || HomeViewController.activity == "stationary"){
+                Alert.showBasicAlert(on: self, with: "I bet you're currently walking huh?🚶🏻", message: "For a better experience continue walking and explore Riyadh!") //THIS WILL BE DELETED LATER *FOR TESTING PURPOSES*
                 let distance = self.userLoc.distance(from: userLocation!)
                 if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
-                //AND ALSO WE WILL CHANGE DISTANCE BASED ON USER ACTIVITY.
                 searchVenues(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
                 userLoc = locations.last! //previous location
-                print("inside")  }//end if distance
-                let activity = coreMotion.startActivityUpdates() }//end if walking
+                print("inside")
+                    
+            }//end if distance
+            coreMotion.startUpdates { (activityType) in
+                HomeViewController.activity = activityType
+            }
+        }//end if walking
 
     
-            }
-        
-    
-    
+        }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
