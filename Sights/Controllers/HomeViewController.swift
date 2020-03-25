@@ -8,14 +8,12 @@
 
 import UIKit
 import Firebase
-import MapKit
 import ARCL
 import CoreLocation
 import SceneKit
 import UserNotifications
 import FoursquareAPIClient
 import SwiftyJSON
-
 
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
