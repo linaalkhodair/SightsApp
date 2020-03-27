@@ -34,6 +34,8 @@
 		E9A8448C23F98A7000E3124B /* CheckInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448B23F98A6F00E3124B /* CheckInternet.swift */; };
 		E9A8448E23F9EF8A00E3124B /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448D23F9EF8900E3124B /* ListViewController.swift */; };
 		E9A8449023F9EFA700E3124B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448F23F9EFA700E3124B /* ProfileViewController.swift */; };
+		E9DA061C242E6E5B002CCE7A /* DrivingPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */; };
+		E9DA061E242E7057002CCE7A /* DrivingPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA061D242E7057002CCE7A /* DrivingPopUp.swift */; };
 		EA5BA7D4E8043F7ECC654AA7 /* libPods-SightsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53A9A13EC8730EE350EEE936 /* libPods-SightsTests.a */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 		E9A8448B23F98A6F00E3124B /* CheckInternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInternet.swift; sourceTree = "<group>"; };
 		E9A8448D23F9EF8900E3124B /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		E9A8448F23F9EFA700E3124B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrivingPopUp.xib; sourceTree = "<group>"; };
+		E9DA061D242E7057002CCE7A /* DrivingPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPopUp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +230,8 @@
 			children = (
 				E9A8448323F695FD00E3124B /* POIView.xib */,
 				E9A8448723F69AB700E3124B /* POIView.swift */,
+				E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */,
+				E9DA061D242E7057002CCE7A /* DrivingPopUp.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -363,6 +369,7 @@
 				E9A8444A23F4061900E3124B /* LaunchScreen.storyboard in Resources */,
 				E9A8448423F695FD00E3124B /* POIView.xib in Resources */,
 				E9A8447823F40CBC00E3124B /* sightsGif.gif in Resources */,
+				E9DA061C242E6E5B002CCE7A /* DrivingPopUp.xib in Resources */,
 				E9A8448223F4167F00E3124B /* GoogleService-Info.plist in Resources */,
 				E9A8444723F4061900E3124B /* Assets.xcassets in Resources */,
 				E9A8444523F4061500E3124B /* Main.storyboard in Resources */,
@@ -497,6 +504,7 @@
 				E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */,
 				E9A8447A23F4146B00E3124B /* RegisterViewController.swift in Sources */,
 				E9A8444023F4061500E3124B /* SceneDelegate.swift in Sources */,
+				E9DA061E242E7057002CCE7A /* DrivingPopUp.swift in Sources */,
 				E960222B240D11C400B8B18C /* LBNotification.swift in Sources */,
 				E9A8448A23F7182100E3124B /* POI.swift in Sources */,
 				E9A8447C23F4148A00E3124B /* LoginViewController.swift in Sources */,

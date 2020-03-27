@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController {
     @IBAction func logoutTapped(_ sender: Any) {
         
             let firebaseAuth = Auth.auth()
+            UserDefaults.standard.removeObject(forKey: "uid")
             do {
                 try firebaseAuth.signOut()
             } catch let signOutError as NSError {

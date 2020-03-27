@@ -12,7 +12,6 @@ pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'SwiftGifOrigin', '~> 1.7.0'
 pod 'ARCL'
-pod 'Kingfisher'
 pod 'FoursquareAPIClient'
 pod 'SwiftyJSON', '~> 4.0'
 

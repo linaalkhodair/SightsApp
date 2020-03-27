@@ -57,6 +57,9 @@ class LoginViewController: UIViewController {
                 else {
                     if Auth.auth().currentUser!.isEmailVerified {
                         //direct to home..
+                        let uid = authResult?.user.uid
+                        UserDefaults.standard.set(uid, forKey: "uid")
+                        
                         let homeViewController = self?.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
                         
                         self?.view.window?.rootViewController = homeViewController
