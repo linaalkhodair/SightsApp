@@ -2,37 +2,62 @@
 //  POI.swift
 //  Sights
 //
-//  Created by Lina Alkhodair on 14/02/2020.
-//  Copyright © 2020 Lina Alkhodair. All rights reserved.
+//  Created by Shahad Nasser on 04/03/2020.
+//  Copyright © 2020 HARSHIT. All rights reserved.
 //
+
+import Foundation
 
 class POI {
     
+//    var label : String
+//    var desc : String
+    
     var ID: String
     var name: String
-    var location: String
-    var latitude: Double
-    var longitude: Double
-    var rating: Double
-    var briefInfo: String
+    var rate: Double
+    var long: Double
+    var lat: Double
+    var visited: Bool
+    var notinterested: Bool
+    var wanttovisit: Bool
+    var description: String
     var openingHours: String
-    var image: String
-    var markState: Bool
+    var locationName: String
+    var imgUrl: String
+    var categorey: String
     
-    init(ID: String, name: String, location: String, latitude: Double, longitude: Double, rating: Double, briefInfo: String, openingHours: String, image: String, markState: Bool) {
-       
+    
+    internal init(ID: String, name: String, rate: Double, long: Double, lat: Double, visited: Bool, notinterested: Bool, wanttovisit: Bool, description: String, openingHours: String, locationName: String, imgUrl: String, category: String) {
         self.ID = ID
         self.name = name
-        self.location = location
-        self.latitude = latitude
-        self.longitude = longitude
-        self.rating = rating
-        self.briefInfo = briefInfo
+        self.rate = rate
+        self.long = long
+        self.lat = lat
+        self.visited = visited
+        self.notinterested = notinterested
+        self.wanttovisit = wanttovisit
+        self.description = description
         self.openingHours = openingHours
-        self.image = image
-        self.markState = markState
+        self.locationName = locationName
+        self.imgUrl = imgUrl
+        self.categorey = category
     }
+}//end POI
+
+class category{
     
+    var name: String
+    var count: Int
     
+    internal init(name: String, count: Int) {
+        self.name = name
+        self.count = count
+    }
+}// end category
+
+
     
-}
+
+
+    

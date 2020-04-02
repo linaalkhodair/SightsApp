@@ -1,46 +1,129 @@
-//
-//  AppDelegate.swift
-//  Sights
-//
-//  Created by Lina Alkhodair on 12/02/2020.
-//  Copyright © 2020 Lina Alkhodair. All rights reserved.
-//
 
 import UIKit
+import ESTabBarController_swift
 import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate
+{
+    
+    var window: UIWindow?
+    var db: Firestore!
+    let storyboard = UIStoryboard(name: "SecondMain", bundle: nil)
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         FirebaseApp.configure()
-        
+        //self.loadUserData()
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
 
         application.beginBackgroundTask(withName: "showNotification", expirationHandler: nil)
         
         UIApplication.backgroundFetchIntervalMinimum
-
         return true
     }
+    
+    func loadUserData(){
+           db = Firestore.firestore()
+           //let userID = Auth.auth().currentUser!.uid
+           let userID = "5x141iiWqQT5Wk5GEjMTO6CXrDw2"
+           print("@#@#@#@#@#@#@#@#@#@#@#@# I'm before db first call")
+           db.collection("users").document(userID).collection("markedList").getDocuments(){ (querySnapshot, err) in
+                   if let err = err {
+                       print("@#@#@#@#@#@#@#@#@#@#@#@# I'm in error1")
+                       print("Error getting documents: \(err)")
+                   } else {
+                       print("@#@#@#@#@#@#@#@#@#@#@#@# yay no error1")
 
-    // MARK: UISceneSession Lifecycle
+                       for userdocument in querySnapshot!.documents {
+                           self.db.collection("POIs").document(userdocument.documentID+"").getDocument(){ (document, error) in
+                               if let document = document, document.exists {
+                                   print("@#@#@#@#@#@#@#@#@#@#@#@# yay no error2")
+                                   print("@#@#@#@#@#@#@#@#@#@#@#@# " + document.documentID + "  " + userdocument.documentID)
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+                                   //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                                   //print("Document data: \(dataDescription)")
+                                   let poi = POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, visited: userdocument.get("visited") as! Bool, notinterested: userdocument.get("notInterested") as! Bool, wanttovisit: userdocument.get("wantToVisit") as! Bool, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String)
+                                   
+                                   print("@#@#@#@#@#@#@#@#@#@#@#@# " + poi.ID + "  " + poi.name)
+
+                                self.getUser().markedList.append(poi)
+                                for p in self.getUser().markedList{
+                                       print("&&&&&&&&&&&&&&&&&&&&& && && && : " + p.name)
+                                   }
+                               } else {
+                                   print("@#@#@#@#@#@#@#@#@#@#@#@# error2")
+
+                                   print("Document does not exist")
+                               }
+                           }
+
+                       }//end for
+               }//end else
+           }//
+       }//end func
+    
+    func getUser()->user{
+        var u = user(ID: "5x141iiWqQT5Wk5GEjMTO6CXrDw2", name: "helpme", email: "email", rewardList: [POI](), markedList: [POI](), recommendationcategories: [category]())
+        return u
     }
+    
+    func AddTabBar()
+    {
+        let tabBarController = ESTabBarController()
+        tabBarController.delegate = self
+      //  tabBarController.tabBar.backgroundImage = UIImage(named: "Transparent")
+        
+        tabBarController.shouldHijackHandler = { tabbarController, viewController, index in
+            if index == 3 {
+                return true
+            }
+            return false
+        }
+        
+        let v1 = storyboard.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+        let v2 = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        let v3 = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+        
+        v1.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_list"), selectedImage: UIImage(named: "ic_list"))
+        v2.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_round"), selectedImage: UIImage(named: "ic_round"))
+        v3.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_user"), selectedImage: UIImage(named: "ic_user"))
+        tabBarController.viewControllers = [v1, v2, v3]
 
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+        self.window?.rootViewController = tabBarController
+        self.window?.makeKeyAndVisible()
     }
+    
+    
+    func AddGuestTabBar()
+    {
+        let tabBarController = ESTabBarController()
+        tabBarController.delegate = self
+        //tabBarController.tabBar.backgroundImage = UIImage(named: "Transparent")
+        
+        tabBarController.shouldHijackHandler = { tabbarController, viewController, index in
+            if index == 3 {
+                return true
+            }
+            return false
+        }
+        let storyboard2 = UIStoryboard(name: "Guest", bundle: nil)
+        
+        let v1 = storyboard2.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+        let v2 = storyboard2.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        let v3 = storyboard2.instantiateViewController(withIdentifier: "GuestViewController") as! GuestViewController
+        
+        v1.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_list"), selectedImage: UIImage(named: "ic_list"))
+        v2.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_round"), selectedImage: UIImage(named: "ic_round"))
+        v3.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_user"), selectedImage: UIImage(named: "ic_user"))
+        tabBarController.viewControllers = [v1, v2, v3]
 
-
+        self.window?.rootViewController = tabBarController
+        self.window?.makeKeyAndVisible()
+    }
+    
 }
 
+extension AppDelegate:UITabBarControllerDelegate
+{
+    
+}

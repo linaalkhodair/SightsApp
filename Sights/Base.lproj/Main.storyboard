@@ -52,8 +52,8 @@
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="guestTapped:" destination="YOT-eI-Qwq" eventType="touchUpInside" id="Yhv-S2-OGB"/>
-                                    <segue destination="d0g-18-sbK" kind="show" id="DkL-Bz-IVQ"/>
+                                    <action selector="guestTapped:" destination="YOT-eI-Qwq" eventType="touchUpInside" id="F33-iQ-LQg"/>
+                                    <segue destination="xkL-Vu-GPH" kind="show" id="ZnC-Bl-4Eu"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PlR-S4-pzS">
@@ -103,7 +103,17 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKt-3K-FjO" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="262"/>
+            <point key="canvasLocation" x="934" y="259"/>
+        </scene>
+        <!--SecondMain-->
+        <scene sceneID="fIH-IM-xfb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SecondMain" id="xkL-Vu-GPH" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ypx-3r-C9i"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mMK-6S-PRF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="934" y="742"/>
         </scene>
         <!--Gif View Controller-->
         <scene sceneID="q9h-B6-yad">
@@ -130,12 +140,12 @@ Explore Riyadh in the     		most enjoyable way</string>
                     <navigationItem key="navigationItem" id="Gek-c3-RJU"/>
                     <connections>
                         <outlet property="gifView" destination="Ejg-oM-D9w" id="ghu-Z7-L51"/>
-                        <segue destination="YOT-eI-Qwq" kind="show" id="eUq-tZ-cjs"/>
+                        <segue destination="YOT-eI-Qwq" kind="show" id="c5F-m5-AQG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1su-t4-9JX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="615"/>
+            <point key="canvasLocation" x="137" y="628"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="dsQ-It-zWZ">
@@ -233,7 +243,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AYw-hQ-mt6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2745" y="370"/>
+            <point key="canvasLocation" x="2617" y="402"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="0tE-9V-jm5">
@@ -350,6 +360,8 @@ Explore Riyadh in the     		most enjoyable way</string>
                     <navigationItem key="navigationItem" id="vIH-ej-baz"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="backBtn" destination="Uen-91-tgC" id="OXV-HY-b28"/>
+                        <outlet property="backImg" destination="nuC-sb-pAH" id="Wbx-Ci-nd6"/>
                         <outlet property="email" destination="Zev-sm-rhu" id="n2u-Hp-qRk"/>
                         <outlet property="name" destination="xg8-md-r5S" id="Uv7-ZV-3qi"/>
                         <outlet property="signUpButton" destination="ygw-4M-9dL" id="fwE-AQ-rY4"/>
@@ -357,7 +369,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ClA-kA-8xk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2616.8000000000002" y="-382.01970443349757"/>
+            <point key="canvasLocation" x="2617" y="-347"/>
         </scene>
         <!--List View Controller-->
         <scene sceneID="RwY-fP-1FN">
@@ -472,7 +484,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PK0-tR-68a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1322" y="1083"/>
+            <point key="canvasLocation" x="1258" y="1314"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="6wL-55-EGv">
@@ -525,9 +537,6 @@ Explore Riyadh in the     		most enjoyable way</string>
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </state>
-                                <connections>
-                                    <action selector="logoutTapped:" destination="1Qe-5q-6Cm" eventType="touchUpInside" id="NR9-Ol-VNs"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.78492495449999999" green="0.86850103270000001" blue="0.96930998560000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -537,7 +546,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAw-ro-uuy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4292" y="1393.5960591133005"/>
+            <point key="canvasLocation" x="3658" y="1521"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mzc-Ko-EqJ">
@@ -569,8 +578,8 @@ Explore Riyadh in the     		most enjoyable way</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iie-gU-lXR"/>
-        <segue reference="DkL-Bz-IVQ"/>
-        <segue reference="K4o-OG-KdW"/>
-        <segue reference="BbP-VX-j6w"/>
+        <segue reference="vcc-r7-WV5"/>
+        <segue reference="5si-td-zZd"/>
+        <segue reference="qqg-TT-hRU"/>
     </inferredMetricsTieBreakers>
 </document>

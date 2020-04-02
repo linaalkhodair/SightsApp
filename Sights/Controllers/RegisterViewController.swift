@@ -22,6 +22,8 @@ extension UIViewController{
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var backImg: UIImageView!
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
@@ -40,6 +42,13 @@ class RegisterViewController: UIViewController {
         db = Firestore.firestore()
         self.HideKeyboard()
         
+//        let isGuest = UserDefaults.standard.bool(forKey: "isGuestClicked")
+//        if (isGuest){
+//            backBtn.alpha = 0
+//            backImg.alpha = 0
+//        }
+//        UserDefaults.standard.setValue(false, forKey: "isGuestClicked")
+//        
     }
     
     @IBAction func signUpTapped(_ sender: Any) {

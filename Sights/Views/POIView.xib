@@ -23,6 +23,12 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="264"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="color_6" translatesAutoresizingMaskIntoConstraints="NO" id="pAd-C2-wPd">
+                    <rect key="frame" x="0.0" y="-4" width="300" height="268"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.71999999999999997" alpha="1" colorSpace="calibratedWhite"/>
+                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="POI NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZpV-5H-WwH">
                     <rect key="frame" x="46" y="19" width="221" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -80,8 +86,8 @@ qcourtyard and a well.
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WIW-FV-znx">
-                    <rect key="frame" x="245" y="215" width="19" height="20"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="checkmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="WIW-FV-znx">
+                    <rect key="frame" x="245" y="214" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
@@ -109,17 +115,18 @@ qcourtyard and a well.
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.96930998563766479" green="0.68895420835951759" blue="0.74759239112765474" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <gestureRecognizers/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="56" y="-27.886056971514247"/>
+            <point key="canvasLocation" x="129.59999999999999" y="-111.54422788605699"/>
         </view>
     </objects>
     <resources>
         <image name="bookmark" catalog="system" width="56" height="64"/>
-        <image name="checkmark" catalog="system" width="64" height="56"/>
+        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
         <image name="clock (1)" width="256" height="256"/>
+        <image name="color_6" width="400" height="164"/>
         <image name="drop" width="261" height="295"/>
         <image name="eye.slash" catalog="system" width="64" height="42"/>
         <image name="placeholder (1)" width="256" height="256"/>

@@ -60,13 +60,13 @@ class LoginViewController: UIViewController {
                         let uid = authResult?.user.uid
                         UserDefaults.standard.set(uid, forKey: "uid")
                         
-                        let homeViewController = self?.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
+                        let storyboard = UIStoryboard(name: "SecondMain", bundle: nil)
+                        let homeVC = storyboard.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
                         
-                        self?.view.window?.rootViewController = homeViewController
+                        self?.perform(#selector(self!.loadTabBar))
+                        self?.view.window?.rootViewController = homeVC
                         self?.view.window?.makeKeyAndVisible()
-                        
-                        //performSegue(withIdentifier: "HomeVC", sender: self)
-                        
+                     
                         print("success")
                     }
                     else{
@@ -112,6 +112,12 @@ class LoginViewController: UIViewController {
         
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
+    }
+    
+    @objc func loadTabBar()
+    {
+        print("inside navbar")
+        self.App_Delegate.AddTabBar()
     }
     
     //  LOCK ORIENTATION TO PORTRAIT

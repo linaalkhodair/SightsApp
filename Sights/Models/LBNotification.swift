@@ -27,7 +27,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
     
     func searchVenues() {
         let parameter: [String: String] = [
-            "ll": "24.753579, 46.738136",
+            "ll": "\(lat), \(lng)",
             "radius": "600",
             "limit": "10",
             "intent": "browse",
@@ -131,7 +131,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                        
                         // here we need to create a POI object with all info needed then add POI to user's notification list
                         // also later on check to not send notification that exists in the notification list
-                        let poi = POI(ID: id, name: name!, location: loc!, latitude: lat!, longitude: lng!, rating: rating, briefInfo: desc!, openingHours: hours!, image: "", markState: false)
+//                        let poi = POI(ID: id, name: name!, location: loc!, latitude: lat!, longitude: lng!, rating: rating, briefInfo: desc!, openingHours: hours!, image: "", markState: false)
                         //then add POIObject to notification list
                         print("here inside lol")
                         isSent = true
@@ -181,7 +181,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
         //getting the notification request
-        let request = UNNotificationRequest(identifier: "SimplifiedIOSNotification", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "LBNotification", content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().delegate = self
         

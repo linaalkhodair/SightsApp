@@ -30,11 +30,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     var timer = Timer()
     
-    @IBOutlet weak var navBar: UINavigationBar!
-    @IBOutlet weak var navItem: UIBarButtonItem!
-    @IBOutlet weak var listImg: UIImageView!
-    @IBOutlet weak var profileImg: UIImageView!
-    @IBOutlet weak var cameraImg: UIImageView!
+//    @IBOutlet weak var navBar: UINavigationBar!
+//    @IBOutlet weak var navItem: UIBarButtonItem!
+//    @IBOutlet weak var listImg: UIImageView!
+//    @IBOutlet weak var profileImg: UIImageView!
+//    @IBOutlet weak var cameraImg: UIImageView!
     
     
     override func viewDidLoad() {
@@ -46,22 +46,23 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             view.addSubview(sceneLocationView)
             
             //adding navigation bar
-            view.addSubview(navBar)
-            view.addSubview(listImg)
-            view.addSubview(profileImg)
-            view.addSubview(cameraImg)
+//            view.addSubview(navBar)
+//            view.addSubview(listImg)
+//            view.addSubview(profileImg)
+//            view.addSubview(cameraImg)
             
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
+
             
         }
         else {
             
             checkLocationServices() // checks if location is authorized
+            
             //start the AR view
             sceneLocationView.run()
             
             view.addSubview(sceneLocationView)
-            
             db = Firestore.firestore()
             
             //Adding the popup view for additional info
@@ -70,10 +71,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             //view.addSubview(logoutButton)
             
             //adding navigation bar
-            view.addSubview(navBar)
-            view.addSubview(listImg)
-            view.addSubview(profileImg)
-            view.addSubview(cameraImg)
+//            view.addSubview(navBar)
+//            view.addSubview(listImg)
+//            view.addSubview(profileImg)
+//            view.addSubview(cameraImg)
             
             poiview.contentView.alpha = 0
             drivingPopup.contentView.alpha = 0
@@ -98,8 +99,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
         }// end of else
         //set nav bar to transparent
-        self.navBar.setBackgroundImage(UIImage(), for: .default)
-        self.navBar.shadowImage=UIImage()
+//        self.navBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navBar.shadowImage=UIImage()
         
         coreMotion.startUpdates { (activityType) in
             HomeViewController.activity = activityType
@@ -108,8 +109,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             //                 Alert.showBasicAlert(on: self, with: "You're currently walking..", message: "For a better experience continue walking and explore Riyadh!")
             //            }
         } //To get the user's motion when first started
-        
+
     } //end viewDidLoad
+    
+
     
     //Method called when tap on AR object
     @objc func handleTap(rec: UITapGestureRecognizer){
@@ -161,9 +164,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         //                print("Document does not exist")
         //            }
         //        }
-        
-        
-        
+                
         db.collection("POIs").whereField("ID", isEqualTo: ID)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -179,7 +180,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                         self.poiview.location.text = document.get("location") as! String
                         print("here insiddee")
                         //self.sceneLocationView.addSubview(poiView)
-                        self.poiview.contentView.alpha = 0.85
+                        self.poiview.contentView.alpha = 0.95
                         
                     }
                 }
@@ -386,19 +387,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     
     
-    //  LOCK ORIENTATION TO PORTRAIT
-    override var shouldAutorotate: Bool {
-        return false
-    }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.portrait
-    }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return UIInterfaceOrientation.portrait
-    }
-    
+//    //  LOCK ORIENTATION TO PORTRAIT
+//    override var shouldAutorotate: Bool {
+//        return false
+//    }
+//
+//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+//        return UIInterfaceOrientationMask.portrait
+//    }
+//
+//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+//        return UIInterfaceOrientation.portrait
+//    }
+//
     
     
 }

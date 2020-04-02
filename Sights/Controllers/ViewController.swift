@@ -17,27 +17,32 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-    }
+        
 
+    }
     
+
     @IBAction func guestTapped(_ sender: Any) {
        
         Auth.auth().signInAnonymously() { (authResult, error) in
             if error != nil {
                 //direct to home..
-                let homeViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
-                                    
-                //let homeViewController = self?.storyboard?.instantiateViewController(withIdentifier:  "HomeVC")
-                                    
-                self.view.window?.rootViewController = homeViewController
-                self.view.window?.makeKeyAndVisible()            }
+                
+                let storyboard = UIStoryboard(name: "Guest", bundle: nil)
+                let guestVC = storyboard.instantiateViewController(identifier: "GuestViewController") as! GuestViewController
+                
+                self.perform(#selector(self.loadTabBar))
+                self.view.window?.rootViewController = guestVC
+                self.view.window?.makeKeyAndVisible()
+                
+            }
             else {
                 //handling error
                 print("error")
             }
-            
+
         }
+        self.perform(#selector(loadTabBar))
       //  guard let user = authResult?.user else { return }
        // let isAnonymous = user.isAnonymous  // true
     }
@@ -56,6 +61,13 @@ class ViewController: UIViewController {
 
       }
 
+    @objc func loadTabBar()
+    {
+        print("inside navbar")
+        self.App_Delegate.AddGuestTabBar()
+    }
+    
+    
     @IBAction func signUpTapped(_ sender: Any) {
         
         let registerViewController = self.storyboard?.instantiateViewController(identifier: Constants.Storyboard.registerViewController) as? RegisterViewController
