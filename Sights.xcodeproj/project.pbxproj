@@ -49,6 +49,12 @@
 		E9DA06612435DDF1002CCE7A /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA06602435DDF1002CCE7A /* WeatherData.swift */; };
 		E9DA06632435DE22002CCE7A /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA06622435DE22002CCE7A /* WeatherManager.swift */; };
 		E9DA06652435DE41002CCE7A /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA06642435DE41002CCE7A /* WeatherModel.swift */; };
+		E9DA0668243608AB002CCE7A /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA0667243608AB002CCE7A /* Challenge.swift */; };
+		E9DA066A24360B5B002CCE7A /* HiddenObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA066924360B5B002CCE7A /* HiddenObject.swift */; };
+		E9DA066C243623AB002CCE7A /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA066B243623AB002CCE7A /* ChallengeViewController.swift */; };
+		E9DA067024362A64002CCE7A /* ChallengeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9DA066F24362A64002CCE7A /* ChallengeView.xib */; };
+		E9DA067224362A8F002CCE7A /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA067124362A8F002CCE7A /* ChallengeView.swift */; };
+		E9DA067424363A99002CCE7A /* ChallengePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +129,12 @@
 		E9DA06602435DDF1002CCE7A /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		E9DA06622435DE22002CCE7A /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		E9DA06642435DE41002CCE7A /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		E9DA0667243608AB002CCE7A /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		E9DA066924360B5B002CCE7A /* HiddenObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenObject.swift; sourceTree = "<group>"; };
+		E9DA066B243623AB002CCE7A /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
+		E9DA066F24362A64002CCE7A /* ChallengeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengeView.xib; sourceTree = "<group>"; };
+		E9DA067124362A8F002CCE7A /* ChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
+		E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePopUpVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +256,8 @@
 				E9A8447B23F4148A00E3124B /* LoginViewController.swift */,
 				E9A8447D23F414B500E3124B /* HomeViewController.swift */,
 				E9A8448D23F9EF8900E3124B /* ListViewController.swift */,
+				E9DA066B243623AB002CCE7A /* ChallengeViewController.swift */,
+				E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */,
 				E9A8448F23F9EFA700E3124B /* ProfileViewController.swift */,
 				E9A8444123F4061500E3124B /* ViewController.swift */,
 				E9DA062C24336DDB002CCE7A /* PopUpDetailViewController.swift */,
@@ -257,6 +271,8 @@
 		E9A8446E23F40BB600E3124B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E9DA066F24362A64002CCE7A /* ChallengeView.xib */,
+				E9DA067124362A8F002CCE7A /* ChallengeView.swift */,
 				E9A8448323F695FD00E3124B /* POIView.xib */,
 				E9A8448723F69AB700E3124B /* POIView.swift */,
 				E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */,
@@ -272,6 +288,8 @@
 				E9A8448923F7181F00E3124B /* POI.swift */,
 				E960222A240D11C400B8B18C /* LBNotification.swift */,
 				E960226A241CD6E300B8B18C /* CoreMotionManager.swift */,
+				E9DA0667243608AB002CCE7A /* Challenge.swift */,
+				E9DA066924360B5B002CCE7A /* HiddenObject.swift */,
 				E9DA06662435DE60002CCE7A /* Weather */,
 			);
 			path = Models;
@@ -422,6 +440,7 @@
 				E9DA065D2434BD55002CCE7A /* Guest.storyboard in Resources */,
 				E9A8448423F695FD00E3124B /* POIView.xib in Resources */,
 				E9A8447823F40CBC00E3124B /* sightsGif.gif in Resources */,
+				E9DA067024362A64002CCE7A /* ChallengeView.xib in Resources */,
 				E9DA061C242E6E5B002CCE7A /* DrivingPopUp.xib in Resources */,
 				E9A8448223F4167F00E3124B /* GoogleService-Info.plist in Resources */,
 				E9DA06312433B468002CCE7A /* PopUpDetailViewController.xib in Resources */,
@@ -571,17 +590,22 @@
 				E960226B241CD6E300B8B18C /* CoreMotionManager.swift in Sources */,
 				E9A8448E23F9EF8A00E3124B /* ListViewController.swift in Sources */,
 				E9A8448023F414CA00E3124B /* GifViewController.swift in Sources */,
+				E9DA066C243623AB002CCE7A /* ChallengeViewController.swift in Sources */,
 				E9DA06592433CDD8002CCE7A /* SplashViewController.swift in Sources */,
 				E9A8447E23F414B500E3124B /* HomeViewController.swift in Sources */,
 				E9A8447423F40C4500E3124B /* Alert.swift in Sources */,
 				E9A8447623F40C7300E3124B /* swift+gif.swift in Sources */,
 				E9A8448823F69AB700E3124B /* POIView.swift in Sources */,
+				E9DA067224362A8F002CCE7A /* ChallengeView.swift in Sources */,
+				E9DA0668243608AB002CCE7A /* Challenge.swift in Sources */,
 				E9DA065F2434C245002CCE7A /* GuestViewController.swift in Sources */,
 				E9DA06652435DE41002CCE7A /* WeatherModel.swift in Sources */,
 				E9A8449023F9EFA700E3124B /* ProfileViewController.swift in Sources */,
+				E9DA066A24360B5B002CCE7A /* HiddenObject.swift in Sources */,
 				E9A8448C23F98A7000E3124B /* CheckInternet.swift in Sources */,
 				E9A8447223F40C2E00E3124B /* Constants.swift in Sources */,
 				E9DA062F24336DFD002CCE7A /* User.swift in Sources */,
+				E9DA067424363A99002CCE7A /* ChallengePopUpVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

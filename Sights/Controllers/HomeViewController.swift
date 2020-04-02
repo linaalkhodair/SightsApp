@@ -17,6 +17,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var sceneLocationView = SceneLocationView()
     var poiview = POIView()
     var drivingPopup = DrivingPopUp()
+    static var challengeID: String = ""
+   // var challengeview = ChallengeView()
+    
     var db: Firestore!
     
     let locationManager = CLLocationManager()
@@ -53,7 +56,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
 
-            
         }
         else {
             
@@ -68,6 +70,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             //Adding the popup view for additional info
             view.addSubview(poiview.contentView)
             view.addSubview(drivingPopup.contentView)
+        //    view.addSubview(challengeview.contentView)
             //view.addSubview(logoutButton)
             
             //adding navigation bar
@@ -78,6 +81,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             poiview.contentView.alpha = 0
             drivingPopup.contentView.alpha = 0
+          //  challengeview.contentView.alpha = 0
             
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
                 
@@ -214,6 +218,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     let longitude = document.get("longitude")
                     let imageData = document.get("image")
                     let ID = document.get("ID")
+                    let hasChallenge = document.get("hasChallenge") as! String
                     //any additional data... maybe the get the describtion then pass it on to a method to display the additional info
                     
                     let coordinate = CLLocationCoordinate2D(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees)
@@ -229,6 +234,29 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     
                     if distance <= 150 { //sample distance
                         self.displayPOIobjects(latitude: latitude as! Double, longitude: longitude as! Double, img: imageData as! String, ID: ID as! String)
+                        if (hasChallenge != ""){
+                            //create challenge and start displaying
+                            print("theres a challenge")
+                            //display popup want to start a challenge..
+                            //if yes direct to challengevc
+                           // self.challengeview.contentView.alpha = 1
+                           // let challengeVC = ChallengePopUpVC()
+
+                            HomeViewController.challengeID = hasChallenge
+
+                            let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
+
+                            self.addChild(popOverVC)
+
+                            popOverVC.view.frame = self.view.frame
+                            self.view.addSubview(popOverVC.view)
+                            popOverVC.didMove(toParent: self)
+                            
+//                            let challenge = Challenge()
+//                            let hiddenObject = challenge.getChallenge(ID: hasChallenge)
+//                            self.displayPOIobjects(latitude: hiddenObject.latitude, longitude: hiddenObject.longitude, img: hiddenObject.image, ID: hiddenObject.ID)
+
+                        }
                     }
                     else {
                         print("POI is too far away!")
@@ -239,19 +267,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
     } //end func getPOI
     
+    
+        
     //---------------------------------------------------------------------------------------------------------------
     
     
     func displayPOIobjects(latitude: Double, longitude: Double, img: String, ID: String){
-
-        
         //set up for the image
         let url = URL(string: img)
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)
         
         //create the object
-        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude) //noura
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let location = CLLocation(coordinate: coordinate, altitude: 620)
         
         let annotationNode = LocationAnnotationNode(location: location, image: image!)
@@ -388,18 +416,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     
 //    //  LOCK ORIENTATION TO PORTRAIT
-//    override var shouldAutorotate: Bool {
-//        return false
-//    }
-//
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        return UIInterfaceOrientationMask.portrait
-//    }
-//
-//    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-//        return UIInterfaceOrientation.portrait
-//    }
-//
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
+   }
+
+   override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+      return UIInterfaceOrientation.portrait
+    }
+
     
     
 }

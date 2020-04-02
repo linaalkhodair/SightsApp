@@ -245,6 +245,21 @@ Explore Riyadh in the     		most enjoyable way</string>
             </objects>
             <point key="canvasLocation" x="2617" y="402"/>
         </scene>
+        <!--Challenge View Controller-->
+        <scene sceneID="r4T-tF-Omq">
+            <objects>
+                <viewController storyboardIdentifier="ChallengeVC" id="13z-TB-dpc" customClass="ChallengeViewController" customModule="Sights" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LS0-RG-Iz2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="RJo-Xn-9rc"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FcQ-ow-9PY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3956" y="402"/>
+        </scene>
         <!--Register View Controller-->
         <scene sceneID="0tE-9V-jm5">
             <objects>
@@ -565,9 +580,59 @@ Explore Riyadh in the     		most enjoyable way</string>
             </objects>
             <point key="canvasLocation" x="138" y="-118"/>
         </scene>
+        <!--Challenge Pop UpVC-->
+        <scene sceneID="7uz-km-3lX">
+            <objects>
+                <viewController storyboardIdentifier="ChallengePopUpVC" id="pNS-o4-QB4" customClass="ChallengePopUpVC" customModule="Sights" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AcB-Yg-3WM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xr8-Fr-nHb">
+                                <rect key="frame" x="34" y="275" width="307" height="262"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bv-m3-74I">
+                                        <rect key="frame" x="37" y="163" width="233" height="91"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Start" backgroundImage="button">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startTapped:" destination="pNS-o4-QB4" eventType="touchUpInside" id="9v2-y1-6Tf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecf-yk-pRg">
+                                        <rect key="frame" x="244" y="35" width="26" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" backgroundImage="xmark" catalog="system">
+                                            <color key="titleColor" red="0.96930998560000003" green="0.68895420839999999" blue="0.74759239109999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeTapped:" destination="pNS-o4-QB4" eventType="touchUpInside" id="CWj-7T-XHs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="YBh-DV-LdQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="xr8-Fr-nHb" id="0hu-My-bUx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oHA-Sq-ksd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3420" y="-446.30541871921184"/>
+        </scene>
     </scenes>
     <resources>
         <image name="background" width="802" height="1070"/>
+        <image name="button" width="228" height="71"/>
         <image name="circle" catalog="system" width="64" height="60"/>
         <image name="emptyfield" width="320" height="67"/>
         <image name="gradient" width="750" height="1624"/>
@@ -575,11 +640,12 @@ Explore Riyadh in the     		most enjoyable way</string>
         <image name="list" width="256" height="256"/>
         <image name="signupbutton" width="179" height="71"/>
         <image name="user" width="256" height="256"/>
+        <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iie-gU-lXR"/>
         <segue reference="vcc-r7-WV5"/>
-        <segue reference="5si-td-zZd"/>
+        <segue reference="K4o-OG-KdW"/>
         <segue reference="qqg-TT-hRU"/>
     </inferredMetricsTieBreakers>
 </document>
