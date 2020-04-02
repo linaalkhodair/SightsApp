@@ -588,32 +588,63 @@ Explore Riyadh in the     		most enjoyable way</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xr8-Fr-nHb">
-                                <rect key="frame" x="34" y="275" width="307" height="262"/>
+                            <view alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xr8-Fr-nHb">
+                                <rect key="frame" x="34" y="275" width="300" height="264"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bv-m3-74I">
-                                        <rect key="frame" x="37" y="163" width="233" height="91"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" image="color_3" translatesAutoresizingMaskIntoConstraints="NO" id="nLj-6W-wa7">
+                                        <rect key="frame" x="0.0" y="0.0" width="307" height="262"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <state key="normal" title="Start" backgroundImage="button">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="startTapped:" destination="pNS-o4-QB4" eventType="touchUpInside" id="9v2-y1-6Tf"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecf-yk-pRg">
-                                        <rect key="frame" x="244" y="35" width="26" height="28"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You will get free coffee coupon from Starbucks! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GqC-Oc-9X1">
+                                        <rect key="frame" x="38" y="129" width="254" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99n-F7-ZwL">
+                                        <rect key="frame" x="255" y="29.666666666666742" width="20" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" backgroundImage="xmark" catalog="system">
                                             <color key="titleColor" red="0.96930998560000003" green="0.68895420839999999" blue="0.74759239109999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
-                                            <action selector="closeTapped:" destination="pNS-o4-QB4" eventType="touchUpInside" id="CWj-7T-XHs"/>
+                                            <action selector="closeTapped:" destination="pNS-o4-QB4" eventType="touchUpInside" id="qok-km-vAw"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bv-m3-74I">
+                                        <rect key="frame" x="98" y="186" width="111" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
+                                        <state key="normal" title="Start" backgroundImage="button">
+                                            <color key="titleColor" red="0.49984782929999999" green="0.44818580149999998" blue="0.67061251399999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startTapped:" destination="pNS-o4-QB4" eventType="touchUpInside" id="9v2-y1-6Tf"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Challenge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xaa-X0-afD">
+                                        <rect key="frame" x="46" y="27" width="127" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="27"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Try to find hidden stars around Al Masmak Fortress" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lQ-l0-ffX">
+                                        <rect key="frame" x="38" y="64" width="254" height="57"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="IBC-Yt-UNY">
+                                        <rect key="frame" x="14" y="140" width="19" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -627,18 +658,20 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHA-Sq-ksd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3420" y="-446.30541871921184"/>
+            <point key="canvasLocation" x="3956" y="-347.29064039408871"/>
         </scene>
     </scenes>
     <resources>
         <image name="background" width="802" height="1070"/>
         <image name="button" width="228" height="71"/>
         <image name="circle" catalog="system" width="64" height="60"/>
+        <image name="color_3" width="400" height="164"/>
         <image name="emptyfield" width="320" height="67"/>
         <image name="gradient" width="750" height="1624"/>
         <image name="left-arrow" width="128" height="128"/>
         <image name="list" width="256" height="256"/>
         <image name="signupbutton" width="179" height="71"/>
+        <image name="star" width="256" height="256"/>
         <image name="user" width="256" height="256"/>
         <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>

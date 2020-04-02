@@ -16,6 +16,10 @@ class ChallengePopUpVC: UIViewController {
         
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        
+
+        contentView.layer.cornerRadius = 30.0
+        contentView.clipsToBounds = true
 
         print("inside popup")
 
@@ -23,7 +27,8 @@ class ChallengePopUpVC: UIViewController {
     
     @IBAction func closeTapped(_ sender: Any) {
         
-        self.dismiss(animated: true, completion: nil)
+        view.removeFromSuperview()
+        contentView.removeFromSuperview()
 
     }
     
