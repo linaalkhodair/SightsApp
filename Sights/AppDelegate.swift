@@ -88,6 +88,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         v2.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_round"), selectedImage: UIImage(named: "ic_round"))
         v3.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_user"), selectedImage: UIImage(named: "ic_user"))
         tabBarController.viewControllers = [v1, v2, v3]
+        tabBarController.selectedViewController = v2 //launch with camera view
+
 
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
@@ -115,7 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         v1.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_list"), selectedImage: UIImage(named: "ic_list"))
         v2.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_round"), selectedImage: UIImage(named: "ic_round"))
         v3.tabBarItem = ESTabBarItem.init(ExampleBasicContentView(),title: "", image: UIImage(named: "ic_user"), selectedImage: UIImage(named: "ic_user"))
-        tabBarController.viewControllers = [v1, v2, v3]
+       tabBarController.viewControllers = [v1, v2, v3]
+       tabBarController.selectedViewController = v2
 
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()
