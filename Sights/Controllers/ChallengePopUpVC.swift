@@ -28,23 +28,28 @@ class ChallengePopUpVC: UIViewController {
         
         db = Firestore.firestore()
         
-       // setInstructions()
+       setInstructions()
 
         print("inside popup")
 
     }
     
     func setInstructions(){
-//        db.collection("Challenges").document(HomeViewController.challengeID).getDocument { (documentSnapshot, err) in
-//            
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                print("ID POPUP:",documentSnapshot?.get("ID"))
-//                let inst = documentSnapshot?.get("instructions") as! String
-//                self.instructions.text = inst
-//            }
-//        }
+        
+        var chid = ChallengeViewController.chid
+        chid = chid?.trimmingCharacters(in: .whitespacesAndNewlines)
+        db.collection("Challenges").document(chid!).getDocument { (documentSnapshot, err) in
+            
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                let inst = documentSnapshot?.get("instructions") as! String
+                let reward = documentSnapshot?.get("reward") as! String
+                self.reward.text = "You'll get a coupon code " + reward
+                self.instructions.text = inst
+            }
+        }
         
     }
     
@@ -58,26 +63,17 @@ class ChallengePopUpVC: UIViewController {
     }
     
     
-    
     @IBAction func startTapped(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let challengeVC = storyboard.instantiateViewController(identifier: "ChallengeVC") as! ChallengeViewController
         print("inside direct")
-            
-    //    show(challengeVC, sender: self)
-        
-//        challengeVC.modalPresentationStyle = .fullScreen
-//        challengeVC.modalTransitionStyle = .crossDissolve
-//
-//        present(challengeVC, animated: true, completion: nil)
-        
-        
+                
         self.view.window?.rootViewController = challengeVC
         self.view.window?.makeKeyAndVisible()
         
-            self.view.removeFromSuperview()
-            self.contentView.removeFromSuperview()
+        self.view.removeFromSuperview()
+        self.contentView.removeFromSuperview()
         
     }
     

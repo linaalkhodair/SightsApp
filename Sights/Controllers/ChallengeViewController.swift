@@ -52,13 +52,6 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
 
     } //end viewDidLoad
     
-    override func viewDidAppear(_ animated: Bool){
-        super.viewDidAppear(animated)
-
-        
-        
-    }
-
 
     func startChallenge() {
 
