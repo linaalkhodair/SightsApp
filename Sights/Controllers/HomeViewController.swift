@@ -245,7 +245,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                             print("theres a challenge")
 
                             ChallengeViewController.chid = hasChallenge
-
+                            //CHECK IF USER HAS PLAYED THE CHALLENGE!!!!!!!!!!!
+                            
                             let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
 
                             self.addChild(popOverVC)

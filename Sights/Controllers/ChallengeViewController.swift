@@ -69,7 +69,7 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
             counterView.layer.cornerRadius = 30.0
             counterView.clipsToBounds = true
             
-            colorBackground.layer.cornerRadius = 25.0
+            colorBackground.layer.cornerRadius = 23.0
             colorBackground.clipsToBounds = true
             
             view.addSubview(rewardView.contentView)
@@ -97,6 +97,28 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
     } //end viewDidLoad
     
     @IBAction func exit(_ sender: Any) {
+        
+        print("entered...")
+        let alert = UIAlertController(title: "Are you sure you want to quit the challenge ?", message: "If you quit all collected objects will be gone, and you won't recieve a reward." , preferredStyle: UIAlertController.Style.alert)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {
+            (action: UIAlertAction!) in
+            
+            // Transition to Home Screen
+            let storyboard = UIStoryboard(name: "SecondMain", bundle: nil)
+            let homeVC = storyboard.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
+            print("inside direct")
+                    
+            self.view.window?.rootViewController = homeVC
+            self.view.window?.makeKeyAndVisible()
+            
+            self.perform(#selector(self.loadTabBar))
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
         
         
     }
@@ -195,8 +217,8 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
                 counter = counter + 1
                 counterLabel.text = "\(counter)"
                 if (self.counter == self.numOfHidden) {
-                    print("WINNINGGGGGGGG!!!")
                     
+                    print("WINNINGGGGGGGG!!!")
                     rewardView.contentView.alpha = 0.95
                 }
                 //its adding them on top of each other
@@ -274,7 +296,11 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
         return UIInterfaceOrientation.portrait
     }
 
-    
+    @objc func loadTabBar()
+    {
+        print("inside navbar")
+        self.App_Delegate.AddTabBar()
+    }
     
 }
 

@@ -11,9 +11,9 @@ import UIKit
 
 class RewardView: UIView {
     
-
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var couponCode: UILabel!
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,11 +29,11 @@ class RewardView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("RewardView", owner: self, options: nil)
         addSubview(contentView)
-        let r = CGRect(x: 37, y: 342, width: 284, height: 264)
+        let r = CGRect(x: 37, y: 342, width: 300, height: 300)
         contentView.frame = r
-        contentView.layer.cornerRadius = 23.0
+        contentView.layer.cornerRadius = contentView.frame.height/2
+        //contentView.layer.cornerRadius = 100.0
         contentView.clipsToBounds = true
-    
     
     }
 
@@ -42,8 +42,10 @@ class RewardView: UIView {
     }
     
     @IBAction func emailTapped(_ sender: Any) {
-   
-    
+        
+        
     }
+    
+
     
 }
