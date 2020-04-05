@@ -23,6 +23,9 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
     var userLoc = CLLocation()
     var counter: Int = 0
     var numOfHidden: Int = 0
+    let rewardView = RewardView()
+    var reward: String = ""
+    
     @IBOutlet weak var counterView: UIImageView!
     @IBOutlet weak var chLabel: UILabel!
     @IBOutlet weak var onLabel: UILabel!
@@ -31,6 +34,7 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var counterLabel: UILabel!
     @IBOutlet weak var numHiddenLabel: UILabel!
     @IBOutlet weak var slash: UILabel!
+    @IBOutlet weak var closeBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +54,7 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
             view.addSubview(sceneLocationView)
             
             db = Firestore.firestore()
+            
             view.addSubview(counterView)
             view.addSubview(chLabel)
             view.addSubview(onLabel)
@@ -57,6 +62,7 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
             view.addSubview(counterLabel)
             view.addSubview(slash)
             view.addSubview(numHiddenLabel)
+            view.addSubview(closeBtn)
             
             counterLabel.text = "\(counter)"
             
@@ -65,6 +71,10 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
             
             colorBackground.layer.cornerRadius = 25.0
             colorBackground.clipsToBounds = true
+            
+            view.addSubview(rewardView.contentView)
+            rewardView.contentView.alpha = 0
+            
 //            let double = 24.7114063
 //            let doubleDigits = double.digits   // // [1, 2, 3, 4]
 //
@@ -129,6 +139,9 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
                     for document in querySnapshot!.documents {
 
                        self.numOfHidden = document.get("numOfHidden") as! Int
+                       self.reward = document.get("reward") as! String
+                        self.rewardView.couponCode.text = self.reward
+                        
                         let total = document.get("numOfHidden") as! Int
                         print("TOTAL!",total)
                         self.numHiddenLabel.text = "\(total)"
@@ -183,8 +196,8 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
                 counterLabel.text = "\(counter)"
                 if (self.counter == self.numOfHidden) {
                     print("WINNINGGGGGGGG!!!")
-                    //sceneLocationView.removeAllNodes()
-                    //direct to home..
+                    
+                    rewardView.contentView.alpha = 0.95
                 }
                 //its adding them on top of each other
                 print("ID:", locationNode!.name!)

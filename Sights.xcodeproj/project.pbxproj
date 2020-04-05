@@ -11,6 +11,7 @@
 		7499F9E0FA1A96F6FFE58FF2 /* libPods-Sights-SightsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6B3C5BE8CA86A58F5FF78B /* libPods-Sights-SightsUITests.a */; };
 		C5A09D5DDC4625F16F26A304 /* libPods-Sights.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 843CDF09A3AC5161CF2F8F86 /* libPods-Sights.a */; };
 		E9196465243A36310010B8B6 /* RewardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9196464243A36310010B8B6 /* RewardView.xib */; };
+		E9196467243A387D0010B8B6 /* RewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9196466243A387D0010B8B6 /* RewardView.swift */; };
 		E960222B240D11C400B8B18C /* LBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960222A240D11C400B8B18C /* LBNotification.swift */; };
 		E960226B241CD6E300B8B18C /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960226A241CD6E300B8B18C /* CoreMotionManager.swift */; };
 		E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8443D23F4061500E3124B /* AppDelegate.swift */; };
@@ -84,6 +85,7 @@
 		AB903413DAF400D9B9C0A7D6 /* Pods-Sights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sights.release.xcconfig"; path = "Target Support Files/Pods-Sights/Pods-Sights.release.xcconfig"; sourceTree = "<group>"; };
 		E52A5DEC87F31DF609B32AEF /* Pods-SightsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SightsTests.release.xcconfig"; path = "Target Support Files/Pods-SightsTests/Pods-SightsTests.release.xcconfig"; sourceTree = "<group>"; };
 		E9196464243A36310010B8B6 /* RewardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardView.xib; sourceTree = "<group>"; };
+		E9196466243A387D0010B8B6 /* RewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardView.swift; sourceTree = "<group>"; };
 		E960222A240D11C400B8B18C /* LBNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBNotification.swift; sourceTree = "<group>"; };
 		E960226A241CD6E300B8B18C /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		E9A8443A23F4061500E3124B /* Sights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sights.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -274,6 +276,7 @@
 				E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */,
 				E9DA061D242E7057002CCE7A /* DrivingPopUp.swift */,
 				E9196464243A36310010B8B6 /* RewardView.xib */,
+				E9196466243A387D0010B8B6 /* RewardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				E9DA061E242E7057002CCE7A /* DrivingPopUp.swift in Sources */,
 				E960222B240D11C400B8B18C /* LBNotification.swift in Sources */,
 				E9A8448A23F7182100E3124B /* POI.swift in Sources */,
+				E9196467243A387D0010B8B6 /* RewardView.swift in Sources */,
 				E9DA062A24336D6B002CCE7A /* NotificationCell.swift in Sources */,
 				E9A8447C23F4148A00E3124B /* LoginViewController.swift in Sources */,
 				E960226B241CD6E300B8B18C /* CoreMotionManager.swift in Sources */,
