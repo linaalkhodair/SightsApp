@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var sceneLocationView = SceneLocationView()
     var poiview = POIView()
     var drivingPopup = DrivingPopUp()
-    static var challengeID: String = ""
+
    // var challengeview = ChallengeView()
     
     var db: Firestore!
@@ -29,7 +29,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     let regionInMeters: Double = 10000
     var userLoc = CLLocation()
     static var activity: String = " "
-    
+        
     
     var timer = Timer()
     
@@ -63,6 +63,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             //start the AR view
             sceneLocationView.run()
+            sceneLocationView.moveSceneHeadingClockwise()
+            sceneLocationView.moveSceneHeadingAntiClockwise()
+            
             
             view.addSubview(sceneLocationView)
             db = Firestore.firestore()
@@ -70,6 +73,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             //Adding the popup view for additional info
             view.addSubview(poiview.contentView)
             view.addSubview(drivingPopup.contentView)
+            
+            
         //    view.addSubview(challengeview.contentView)
             //view.addSubview(logoutButton)
             
@@ -86,12 +91,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
                 
             })
-            //--------------------------------CREATING AR OBJECTS----------------------------------
+            //--------------------------------CREATING AR OBJECTS----------------------------------------------------------
             
-            timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { (_) in
-                print("timer works")
-                // we will use it to get user updated loc and call the func again
-            })
             print("UID",UserDefaults.standard.string(forKey: "uid"))
             
             //iterate through all poi's in DB
@@ -176,12 +177,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 } else {
                     for document in querySnapshot!.documents {
                         
-                        self.poiview.POIName.text = document.get("name") as! String
-                        self.poiview.describtion.text = document.get("briefInfo") as! String
-                        self.poiview.openingHours.text = document.get("openingHours") as! String
+                        self.poiview.nameString = document.get("name") as! String
+                        self.poiview.descString = document.get("briefInfo") as! String
+                        self.poiview.hoursString = document.get("openingHours") as! String
                         var rating = document.get("rating") as! Double
-                        self.poiview.rating.text = "rating \(rating)"
-                        self.poiview.location.text = document.get("location") as! String
+                        self.poiview.rating.text = "rating \(rating)" //WE'LL SEE
+                        self.poiview.locString = document.get("location") as! String
+                        self.poiview.wanttovisit = document.get("wantToVisit") as! Bool
+                        self.poiview.visited = document.get("visited") as! Bool
+                        self.poiview.notinterested = document.get("notInterested") as! Bool
+                        
+                        self.poiview.setContent() //prepare content
+
                         print("here insiddee")
                         //self.sceneLocationView.addSubview(poiView)
                         self.poiview.contentView.alpha = 0.95
@@ -235,14 +242,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     if distance <= 150 { //sample distance
                         self.displayPOIobjects(latitude: latitude as! Double, longitude: longitude as! Double, img: imageData as! String, ID: ID as! String)
                         if (hasChallenge != ""){
-                            //create challenge and start displaying
                             print("theres a challenge")
-                            //display popup want to start a challenge..
-                            //if yes direct to challengevc
-                           // self.challengeview.contentView.alpha = 1
-                           // let challengeVC = ChallengePopUpVC()
 
-                            HomeViewController.challengeID = hasChallenge
+                            ChallengeViewController.chid = hasChallenge
 
                             let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
 
@@ -252,10 +254,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                             self.view.addSubview(popOverVC.view)
                             popOverVC.didMove(toParent: self)
                             
-//                            let challenge = Challenge()
-//                            let hiddenObject = challenge.getChallenge(ID: hasChallenge)
-//                            self.displayPOIobjects(latitude: hiddenObject.latitude, longitude: hiddenObject.longitude, img: hiddenObject.image, ID: hiddenObject.ID)
-
                         }
                     }
                     else {
@@ -267,8 +265,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
     } //end func getPOI
     
-    
-        
+  
+
     //---------------------------------------------------------------------------------------------------------------
     
     
@@ -388,7 +386,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
     //        self.view.addSubview(self.drivingPopup.contentView)
     //        drivingPopup.contentView.alpha = 0.85
-            Alert.showBasicAlert(on: self, with: "I bet you're currently walking huh?🚶🏻", message: "For a better experience continue walking and explore Riyadh!") //THIS WILL BE DELETED LATER *FOR TESTING PURPOSES*
+         //   Alert.showBasicAlert(on: self, with: "I bet you're currently walking huh?🚶🏻", message: "For a better experience continue walking and explore Riyadh!") //THIS WILL BE DELETED LATER *FOR TESTING PURPOSES*
             let distance = self.userLoc.distance(from: userLocation!)
             
             if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?

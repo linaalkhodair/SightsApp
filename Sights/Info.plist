@@ -22,12 +22,19 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Sights needs access to your camera to show you the awesome landmarks of Riyadh!</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Sights needs your location to notify you of Riyadh&apos;s awesome attractions!</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Sights needs your location to notify you of Riyadh's awesome attractions!</string>
+	<string>Sights needs your location to notify you of Riyadh&apos;s awesome attractions!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Sights needs your location to notify you of Riyadh's awesome attractions!</string>
+	<string>Sights needs your location to notify you of Riyadh&apos;s awesome attractions!</string>
 	<key>NSMotionUsageDescription</key>
 	<string>Sights needs access to your motion to encourage you to walk for better experience!</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

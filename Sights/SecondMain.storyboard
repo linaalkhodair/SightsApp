@@ -531,7 +531,7 @@
         <scene sceneID="XHC-9K-PrB">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="vLv-h1-oIG" customClass="HomeViewController" customModule="Sights" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bz3-AE-rIp">
+                    <view key="view" contentMode="scaleToFill" id="bz3-AE-rIp" customClass="ARSCNView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

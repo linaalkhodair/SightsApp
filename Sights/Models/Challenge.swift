@@ -39,37 +39,4 @@ class Challenge {
         db = Firestore.firestore()
     }
     
-    func getHiddenId(ID: String, completionHandler: @escaping (String)->Void) {
-        var id = ""
-                self.db.collection("Challenges").whereField("ID", isEqualTo: ID)
-                    .getDocuments() { (querySnapshot, err) in
-                        if let err = err {
-                            print("Error getting documents: \(err)")
-                        } else {
-                            for document in querySnapshot!.documents {
-        
-                                id = document.get("hiddenObjectId") as! String
-                                completionHandler(id)
-                                print("hiddenobjdd",id)
-                            }
-                        }
-                }
-    }
-    
-    func getChallenge(ID: String) {
-        var id = ""
-        var hiddenObj = HiddenObject()
-        getHiddenId(ID: ID) { (hiddenId) in
-            id = hiddenId
-            
-            print("id after",hiddenId)
-            
-            hiddenObj = hiddenObj.getHiddenObj(ID: id)
-            print("image url ----",hiddenObj.image)
-            
-        }
-        
-        //return hiddenObj
-    
-    }
 }

@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class ChallengePopUpVC: UIViewController {
 
-     @IBOutlet var contentView: UIView!
+    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var instructions: UILabel!
+    @IBOutlet weak var reward: UILabel!
+    var db: Firestore!
+    
     
     override func viewDidLoad() {
         
@@ -20,10 +25,30 @@ class ChallengePopUpVC: UIViewController {
 
         contentView.layer.cornerRadius = 30.0
         contentView.clipsToBounds = true
+        
+        db = Firestore.firestore()
+        
+       // setInstructions()
 
         print("inside popup")
 
     }
+    
+    func setInstructions(){
+//        db.collection("Challenges").document(HomeViewController.challengeID).getDocument { (documentSnapshot, err) in
+//            
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                print("ID POPUP:",documentSnapshot?.get("ID"))
+//                let inst = documentSnapshot?.get("instructions") as! String
+//                self.instructions.text = inst
+//            }
+//        }
+        
+    }
+    
+    
     
     @IBAction func closeTapped(_ sender: Any) {
         
@@ -32,14 +57,28 @@ class ChallengePopUpVC: UIViewController {
 
     }
     
+    
+    
     @IBAction func startTapped(_ sender: Any) {
-        
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let challengeVC = storyboard.instantiateViewController(identifier: "ChallengeVC") as! ChallengeViewController
         print("inside direct")
+            
+    //    show(challengeVC, sender: self)
+        
+//        challengeVC.modalPresentationStyle = .fullScreen
+//        challengeVC.modalTransitionStyle = .crossDissolve
+//
+//        present(challengeVC, animated: true, completion: nil)
+        
+        
         self.view.window?.rootViewController = challengeVC
         self.view.window?.makeKeyAndVisible()
+        
+            self.view.removeFromSuperview()
+            self.contentView.removeFromSuperview()
+        
     }
     
 }

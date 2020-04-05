@@ -26,6 +26,7 @@ class POI {
     var locationName: String
     var imgUrl: String
     var categorey: String
+    //add hasChallenge
     
     
     internal init(ID: String, name: String, rate: Double, long: Double, lat: Double, visited: Bool, notinterested: Bool, wanttovisit: Bool, description: String, openingHours: String, locationName: String, imgUrl: String, category: String) {

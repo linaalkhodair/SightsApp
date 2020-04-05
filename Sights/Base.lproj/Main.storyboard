@@ -258,7 +258,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FcQ-ow-9PY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3956" y="402"/>
+            <point key="canvasLocation" x="4697" y="-347"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="0tE-9V-jm5">
@@ -654,6 +654,8 @@ Explore Riyadh in the     		most enjoyable way</string>
                     </view>
                     <connections>
                         <outlet property="contentView" destination="xr8-Fr-nHb" id="0hu-My-bUx"/>
+                        <outlet property="instructions" destination="0lQ-l0-ffX" id="pk0-36-ye7"/>
+                        <outlet property="reward" destination="GqC-Oc-9X1" id="COs-lE-cJv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHA-Sq-ksd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
