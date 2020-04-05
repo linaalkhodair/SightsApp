@@ -10,6 +10,7 @@
 		4E128D2457CBD4D89DB9788E /* libPods-SightsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F54F37B7C2DD2D96D01514 /* libPods-SightsTests.a */; };
 		7499F9E0FA1A96F6FFE58FF2 /* libPods-Sights-SightsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6B3C5BE8CA86A58F5FF78B /* libPods-Sights-SightsUITests.a */; };
 		C5A09D5DDC4625F16F26A304 /* libPods-Sights.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 843CDF09A3AC5161CF2F8F86 /* libPods-Sights.a */; };
+		E9196465243A36310010B8B6 /* RewardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9196464243A36310010B8B6 /* RewardView.xib */; };
 		E960222B240D11C400B8B18C /* LBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960222A240D11C400B8B18C /* LBNotification.swift */; };
 		E960226B241CD6E300B8B18C /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960226A241CD6E300B8B18C /* CoreMotionManager.swift */; };
 		E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8443D23F4061500E3124B /* AppDelegate.swift */; };
@@ -52,8 +53,6 @@
 		E9DA0668243608AB002CCE7A /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA0667243608AB002CCE7A /* Challenge.swift */; };
 		E9DA066A24360B5B002CCE7A /* HiddenObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA066924360B5B002CCE7A /* HiddenObject.swift */; };
 		E9DA066C243623AB002CCE7A /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA066B243623AB002CCE7A /* ChallengeViewController.swift */; };
-		E9DA067024362A64002CCE7A /* ChallengeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9DA066F24362A64002CCE7A /* ChallengeView.xib */; };
-		E9DA067224362A8F002CCE7A /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA067124362A8F002CCE7A /* ChallengeView.swift */; };
 		E9DA067424363A99002CCE7A /* ChallengePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +83,7 @@
 		99F54F37B7C2DD2D96D01514 /* libPods-SightsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SightsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB903413DAF400D9B9C0A7D6 /* Pods-Sights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sights.release.xcconfig"; path = "Target Support Files/Pods-Sights/Pods-Sights.release.xcconfig"; sourceTree = "<group>"; };
 		E52A5DEC87F31DF609B32AEF /* Pods-SightsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SightsTests.release.xcconfig"; path = "Target Support Files/Pods-SightsTests/Pods-SightsTests.release.xcconfig"; sourceTree = "<group>"; };
+		E9196464243A36310010B8B6 /* RewardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardView.xib; sourceTree = "<group>"; };
 		E960222A240D11C400B8B18C /* LBNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBNotification.swift; sourceTree = "<group>"; };
 		E960226A241CD6E300B8B18C /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		E9A8443A23F4061500E3124B /* Sights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sights.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,8 +132,6 @@
 		E9DA0667243608AB002CCE7A /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		E9DA066924360B5B002CCE7A /* HiddenObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenObject.swift; sourceTree = "<group>"; };
 		E9DA066B243623AB002CCE7A /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
-		E9DA066F24362A64002CCE7A /* ChallengeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengeView.xib; sourceTree = "<group>"; };
-		E9DA067124362A8F002CCE7A /* ChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
 		E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePopUpVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,12 +269,11 @@
 		E9A8446E23F40BB600E3124B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E9DA066F24362A64002CCE7A /* ChallengeView.xib */,
-				E9DA067124362A8F002CCE7A /* ChallengeView.swift */,
 				E9A8448323F695FD00E3124B /* POIView.xib */,
 				E9A8448723F69AB700E3124B /* POIView.swift */,
 				E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */,
 				E9DA061D242E7057002CCE7A /* DrivingPopUp.swift */,
+				E9196464243A36310010B8B6 /* RewardView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -440,12 +437,12 @@
 				E9DA065D2434BD55002CCE7A /* Guest.storyboard in Resources */,
 				E9A8448423F695FD00E3124B /* POIView.xib in Resources */,
 				E9A8447823F40CBC00E3124B /* sightsGif.gif in Resources */,
-				E9DA067024362A64002CCE7A /* ChallengeView.xib in Resources */,
 				E9DA061C242E6E5B002CCE7A /* DrivingPopUp.xib in Resources */,
 				E9A8448223F4167F00E3124B /* GoogleService-Info.plist in Resources */,
 				E9DA06312433B468002CCE7A /* PopUpDetailViewController.xib in Resources */,
 				E9A8444723F4061900E3124B /* Assets.xcassets in Resources */,
 				E9DA06572433CCBF002CCE7A /* SecondMain.storyboard in Resources */,
+				E9196465243A36310010B8B6 /* RewardView.xib in Resources */,
 				E9A8444523F4061500E3124B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -596,7 +593,6 @@
 				E9A8447423F40C4500E3124B /* Alert.swift in Sources */,
 				E9A8447623F40C7300E3124B /* swift+gif.swift in Sources */,
 				E9A8448823F69AB700E3124B /* POIView.swift in Sources */,
-				E9DA067224362A8F002CCE7A /* ChallengeView.swift in Sources */,
 				E9DA0668243608AB002CCE7A /* Challenge.swift in Sources */,
 				E9DA065F2434C245002CCE7A /* GuestViewController.swift in Sources */,
 				E9DA06652435DE41002CCE7A /* WeatherModel.swift in Sources */,

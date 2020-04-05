@@ -21,7 +21,17 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
     static var chid: String!
     let regionInMeters: Double = 10000
     var userLoc = CLLocation()
-
+    var counter: Int = 0
+    var numOfHidden: Int = 0
+    @IBOutlet weak var counterView: UIImageView!
+    @IBOutlet weak var chLabel: UILabel!
+    @IBOutlet weak var onLabel: UILabel!
+    @IBOutlet weak var colorBackground: UIImageView!
+    
+    @IBOutlet weak var counterLabel: UILabel!
+    @IBOutlet weak var numHiddenLabel: UILabel!
+    @IBOutlet weak var slash: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +50,31 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
             view.addSubview(sceneLocationView)
             
             db = Firestore.firestore()
-            self.startChallenge()
+            view.addSubview(counterView)
+            view.addSubview(chLabel)
+            view.addSubview(onLabel)
+            view.addSubview(colorBackground)
+            view.addSubview(counterLabel)
+            view.addSubview(slash)
+            view.addSubview(numHiddenLabel)
+            
+            counterLabel.text = "\(counter)"
+            
+            counterView.layer.cornerRadius = 30.0
+            counterView.clipsToBounds = true
+            
+            colorBackground.layer.cornerRadius = 25.0
+            colorBackground.clipsToBounds = true
+//            let double = 24.7114063
+//            let doubleDigits = double.digits   // // [1, 2, 3, 4]
+//
+//            let randomDouble = Double.random(in: 24.7114063...24.7114999)
+//            print("RANDOM LATITUDE",randomDouble)
+//            print(doubleDigits)
+            
+            
+            setNumOfHidden()
+           // findHidden()
             
             //handling when an AR object is tapped
             let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
@@ -52,8 +86,35 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
 
     } //end viewDidLoad
     
+    @IBAction func exit(_ sender: Any) {
+        
+        
+    }
+    
+    
+    func findHidden() {
+        var chid = ChallengeViewController.chid
+        chid = chid!.trimmingCharacters(in: .whitespacesAndNewlines)
+        print("***CHID",chid)
+        
+        db.collection("Challenges/\(chid!)/hiddenObjects").getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
+                    let hoid = document.get("ID") as! String
 
-    func startChallenge() {
+                    print("HERE HERE HERE")
+                    self.getHiddenObj(ID: hoid)
+                }
+                
+            }
+        }
+    }
+    
+
+    func setNumOfHidden() {
 
         print("chid",ChallengeViewController.chid)
         var chid = ChallengeViewController.chid
@@ -66,12 +127,13 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
+
+                       self.numOfHidden = document.get("numOfHidden") as! Int
+                        let total = document.get("numOfHidden") as! Int
+                        print("TOTAL!",total)
+                        self.numHiddenLabel.text = "\(total)"
                         
-                       let hoid = document.get("hiddenObjectId") as! String
-                        print("hoid",hoid)
-
-                        self.getHiddenObj(ID: hoid)
-
+                        self.findHidden()
 
                     }
                 }
@@ -116,6 +178,14 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
                 print("yes")
                 let locationNode = getLocationNode(node: tappedNode!)
                 //try
+                sceneLocationView.removeLocationNode(locationNode: locationNode!)
+                counter = counter + 1
+                counterLabel.text = "\(counter)"
+                if (self.counter == self.numOfHidden) {
+                    print("WINNINGGGGGGGG!!!")
+                    //sceneLocationView.removeAllNodes()
+                    //direct to home..
+                }
                 //its adding them on top of each other
                 print("ID:", locationNode!.name!)
                 let ID = locationNode?.name
@@ -193,4 +263,14 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
 
     
     
+}
+
+extension StringProtocol  {
+    var digits: [Int] { compactMap{ $0.wholeNumberValue } }
+}
+extension LosslessStringConvertible {
+    var string: String { .init(self) }
+}
+extension Numeric where Self: LosslessStringConvertible {
+    var digits: [Int] { string.digits }
 }

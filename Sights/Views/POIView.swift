@@ -60,7 +60,15 @@ class POIView: UIView {
         contentView.layer.cornerRadius = 23.0
         contentView.clipsToBounds = true
         
-
+        //Guest user cannot mark POI
+        let user = Auth.auth().currentUser
+        let isAnon = user?.isAnonymous
+        
+        if isAnon! {
+            notInterested.alpha = 0
+            Visited.alpha = 0
+            wantToVisit.alpha = 0
+        }
 
         
     }
@@ -133,11 +141,7 @@ class POIView: UIView {
         //button.isSelected = !button.isSelected
     }
     
-    //handle when a guest user tries to tap on of the marking options -> telling them to register for more features etc.
-    //  guard let user = authResult?.user else { return }
-    // let isAnonymous = user.isAnonymous  // true
-    
-    
+        
     //*********ADD MARK STATES TO USER OFFICIALLY********
     
 }
