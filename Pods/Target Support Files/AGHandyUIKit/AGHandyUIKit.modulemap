@@ -1,0 +1,6 @@
+framework module AGHandyUIKit {
+  umbrella header "AGHandyUIKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

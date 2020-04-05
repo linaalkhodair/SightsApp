@@ -1,0 +1,6 @@
+module PopItUp {
+  umbrella header "PopItUp-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module Pods_SightsTests {
+  umbrella header "Pods-SightsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
