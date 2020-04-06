@@ -48,7 +48,7 @@
                         <action selector="emailTapped:" destination="-1" eventType="touchUpInside" id="SFE-8J-Zec"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="YOU WON!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skW-CC-QCk">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOU WON!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skW-CC-QCk">
                     <rect key="frame" x="79.5" y="43" width="135" height="36"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -65,10 +65,10 @@
                     <color key="textColor" red="0.54567912019999998" green="0.30970359720000001" blue="0.94947652279999994" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Use this code to gain your reward " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHD-OG-Udb">
-                    <rect key="frame" x="75" y="78" width="150" height="60"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Use this code to gain your reward " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vR9-5m-pEg">
+                    <rect key="frame" x="56" y="82" width="190" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="u3G-5r-O6c"/>
+                        <constraint firstAttribute="height" constant="60" id="KlV-wo-zNi"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -78,15 +78,16 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="yHD-OG-Udb" firstAttribute="top" secondItem="skW-CC-QCk" secondAttribute="bottom" constant="8" id="9P8-UZ-cYR"/>
+                <constraint firstItem="skW-CC-QCk" firstAttribute="leading" secondItem="Enx-ma-Ihg" secondAttribute="leading" constant="79.5" id="404-Cw-T0J"/>
                 <constraint firstItem="KJj-3c-CRa" firstAttribute="top" secondItem="cQa-Mb-NiW" secondAttribute="top" constant="-4" id="CFX-P0-g7V"/>
-                <constraint firstItem="J2e-nd-BV5" firstAttribute="centerX" secondItem="yHD-OG-Udb" secondAttribute="centerX" id="Efm-hV-JgO"/>
                 <constraint firstItem="KJj-3c-CRa" firstAttribute="leading" secondItem="Enx-ma-Ihg" secondAttribute="leading" id="HBj-MZ-XJw"/>
-                <constraint firstItem="yHD-OG-Udb" firstAttribute="centerX" secondItem="skW-CC-QCk" secondAttribute="centerX" id="LgG-ID-6Lb"/>
+                <constraint firstItem="vR9-5m-pEg" firstAttribute="centerX" secondItem="G7s-Eu-vvc" secondAttribute="centerX" id="JSK-X1-APF"/>
+                <constraint firstItem="J2e-nd-BV5" firstAttribute="top" secondItem="vR9-5m-pEg" secondAttribute="bottom" constant="6" id="XYM-Vc-h8q"/>
+                <constraint firstItem="J2e-nd-BV5" firstAttribute="leading" secondItem="Enx-ma-Ihg" secondAttribute="leading" constant="64" id="bWQ-fb-KGV"/>
                 <constraint firstItem="Enx-ma-Ihg" firstAttribute="bottom" secondItem="G7s-Eu-vvc" secondAttribute="bottom" constant="60" id="fQK-Gz-HBh"/>
-                <constraint firstItem="G7s-Eu-vvc" firstAttribute="centerX" secondItem="yHD-OG-Udb" secondAttribute="centerX" id="gBw-rk-FwB"/>
                 <constraint firstItem="G7s-Eu-vvc" firstAttribute="centerX" secondItem="cQa-Mb-NiW" secondAttribute="centerX" id="mAP-FX-96Z"/>
-                <constraint firstItem="J2e-nd-BV5" firstAttribute="top" secondItem="yHD-OG-Udb" secondAttribute="bottom" constant="8" id="s6g-fk-5Cs"/>
+                <constraint firstItem="J2e-nd-BV5" firstAttribute="centerX" secondItem="G7s-Eu-vvc" secondAttribute="centerX" id="qt8-Vf-E3T"/>
+                <constraint firstItem="skW-CC-QCk" firstAttribute="top" secondItem="Enx-ma-Ihg" secondAttribute="top" constant="43" id="vx5-WN-Y2Y"/>
                 <constraint firstItem="G7s-Eu-vvc" firstAttribute="top" secondItem="J2e-nd-BV5" secondAttribute="bottom" constant="8" id="yRi-eb-Hdn"/>
                 <constraint firstItem="G7s-Eu-vvc" firstAttribute="centerX" secondItem="KJj-3c-CRa" secondAttribute="centerX" id="yuq-Qp-28f"/>
                 <constraint firstItem="KJj-3c-CRa" firstAttribute="bottom" secondItem="Enx-ma-Ihg" secondAttribute="bottom" id="zpj-Qb-kbs"/>

@@ -13,7 +13,7 @@ import CoreLocation
 import SceneKit
 import ARKit
 
-class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
+class ChallengeViewController: UIViewController {
     
     var sceneLocationView = SceneLocationView()
     
@@ -66,9 +66,9 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
             
             counterLabel.text = "\(counter)"
             
-            counterView.layer.cornerRadius = 20.0
+            counterView.layer.cornerRadius = 40.0
             counterView.clipsToBounds = true
-            
+        
             colorBackground.layer.cornerRadius = 23.0
             colorBackground.clipsToBounds = true
             
@@ -219,7 +219,15 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
                 if (self.counter == self.numOfHidden) {
                     
                     print("WINNINGGGGGGGG!!!")
-                    rewardView.contentView.alpha = 0.95
+                   // rewardView.contentView.alpha = 0.95
+                    
+                    let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RewardViewController") as! RewardViewController
+
+                    self.addChild(popOverVC)
+
+                    popOverVC.view.frame = self.view.frame
+                    self.view.addSubview(popOverVC.view)
+                    popOverVC.didMove(toParent: self)
                 }
                 //its adding them on top of each other
                 print("ID:", locationNode!.name!)

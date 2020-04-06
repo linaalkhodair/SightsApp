@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MessageUI
 
 class RewardView: UIView {
     
@@ -42,10 +43,14 @@ class RewardView: UIView {
     }
     
     @IBAction func emailTapped(_ sender: Any) {
-        
+       
+      
         
     }
     
 
     
 }
+
+
+
