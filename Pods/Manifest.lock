@@ -278,6 +278,7 @@ PODS:
   - nanopb/encode (0.3.9011)
   - PopItUp (1.1.0)
   - PromisesObjC (1.2.8)
+  - SAConfettiView (0.1.8)
   - SwiftGifOrigin (1.7.0)
   - SwiftyJSON (4.3.0)
 
@@ -291,6 +292,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - FoursquareAPIClient
   - PopItUp
+  - SAConfettiView
   - SwiftGifOrigin (~> 1.7.0)
   - SwiftyJSON (~> 4.0)
 
@@ -323,6 +325,7 @@ SPEC REPOS:
     - nanopb
     - PopItUp
     - PromisesObjC
+    - SAConfettiView
     - SwiftGifOrigin
     - SwiftyJSON
 
@@ -354,9 +357,10 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PopItUp: dddf67d4c4a53ec1573f22d09cff305b01eeeaa1
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  SAConfettiView: c87031a2280659261b730fce3669fb10e73636ee
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: b7c3d3f66e4013badef3b13d807c1bf50e85b78c
+PODFILE CHECKSUM: 252040285877851b9440566e99fdfcb17ee2b4ca
 
 COCOAPODS: 1.8.4

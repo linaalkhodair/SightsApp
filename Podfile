@@ -18,6 +18,7 @@ pod 'ESTabBarController-swift'
 pod 'AGHandyUIKit'
 pod 'PopItUp'
 pod 'Cosmos'
+pod 'SAConfettiView'
 
   target 'SightsTests' do
     inherit! :search_paths

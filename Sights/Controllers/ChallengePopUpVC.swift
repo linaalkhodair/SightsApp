@@ -45,8 +45,6 @@ class ChallengePopUpVC: UIViewController {
             } else {
                 
                 let inst = documentSnapshot?.get("instructions") as! String
-                let reward = documentSnapshot?.get("reward") as! String
-                self.reward.text = "You'll get a coupon code " + reward
                 self.instructions.text = inst
             }
         }

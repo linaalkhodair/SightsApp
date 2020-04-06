@@ -16,12 +16,14 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
     @IBOutlet weak var rewardLabel: UILabel!
     
     var db: Firestore!
+    var reward: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-
+        setReward()
+        
         contentView.layer.cornerRadius = contentView.frame.height/2
         contentView.clipsToBounds = true
         
@@ -36,8 +38,8 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
              if let err = err {
                  print("Error getting documents: \(err)")
              } else {
-                 let reward = documentSnapshot?.get("reward") as! String
-                self.rewardLabel.text = reward
+                self.reward = documentSnapshot?.get("reward") as! String
+                self.rewardLabel.text = self.reward
              }
          }
     }
@@ -45,12 +47,26 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
     @IBAction func sendEmail(_ sender: Any) {
         
         //send email then direct to home.
-        showMailComposer()
+        getUserEmail()
         
         
     }
     
-    func showMailComposer() {
+    func getUserEmail() {
+        let uid = Auth.auth().currentUser?.uid
+        
+        db.collection("users").document(uid!).getDocument { (documentSnapshot, err) in
+            
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+               let email = documentSnapshot?.get("email") as! String
+                self.showMailComposer(email: email)
+            }
+        }
+    }
+    
+    func showMailComposer(email: String) {
             
         guard MFMailComposeViewController.canSendMail() else {
                 //Show alert informing the user
@@ -59,26 +75,15 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
             
         let composer = MFMailComposeViewController()
         composer.mailComposeDelegate = self
-        composer.setToRecipients(["support@seanallen.co"])
-        composer.setSubject("HELP!")
-        composer.setMessageBody("I love your videos, but... help!", isHTML: false)
-        
+        composer.setToRecipients([email])
+        composer.setSubject("Reward from Sights!")
+        composer.setMessageBody("Thank you for using Sights, your reward \(reward)", isHTML: false)
             
         present(composer, animated: true)
        
     }
     
-    func directToHome(){
-        
-                let storyboard = UIStoryboard(name: "SecondMain", bundle: nil)
-                let homeVC = storyboard.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
-                print("inside direct")
-    
-                self.view.window?.rootViewController = homeVC
-                self.view.window?.makeKeyAndVisible()
-        
-                self.perform(#selector(self.loadTabBar))
-    }
+
     
     @IBAction func closeTapped(_ sender: Any) {
         //direct to HOMEVC
@@ -97,7 +102,7 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
 
 extension ViewController: MFMailComposeViewControllerDelegate {
 
-func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, didFinishWith error: Error?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, didFinishWith error: Error?) {
     
     if let _ = error {
         //Show error alert
@@ -108,16 +113,31 @@ func mailComposeController(_ controller: MFMailComposeViewController, didFinishW
     switch result {
     case .cancelled:
         print("Cancelled")
+        directToHome()
     case .failed:
         print("Failed to send")
     case .saved:
         print("Saved")
+        directToHome()
     case .sent:
         print("Email Sent")
+        directToHome()
     @unknown default:
         break
     }
     
     controller.dismiss(animated: true)
+    }
+    
+    func directToHome(){
+        
+        let storyboard = UIStoryboard(name: "SecondMain", bundle: nil)
+        let homeVC = storyboard.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
+        print("inside direct")
+    
+        self.view.window?.rootViewController = homeVC
+        self.view.window?.makeKeyAndVisible()
+        
+        self.perform(#selector(self.loadTabBar))
     }
 }

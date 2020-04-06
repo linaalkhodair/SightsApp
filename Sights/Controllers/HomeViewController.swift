@@ -247,6 +247,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                             ChallengeViewController.chid = hasChallenge
                             //CHECK IF USER HAS PLAYED THE CHALLENGE!!!!!!!!!!!
                             
+                            //CHECK IF REGISTERED USER
+                            let user = Auth.auth().currentUser
+                            let isAnon = user?.isAnonymous
+                            
+                            if !isAnon! {
+                                //display challenge
+                            }
+                            
+                            
                             let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
 
                             self.addChild(popOverVC)

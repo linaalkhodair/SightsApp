@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-Sights-SightsUITests/Pods-Sights-SightsUITests-resources.sh
 ${PODS_ROOT}/ESTabBarController-swift/Sources/en.lproj
+${PODS_CONFIGURATION_BUILD_DIR}/SAConfettiView/SAConfettiView.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle

@@ -12,6 +12,7 @@ import ARCL
 import CoreLocation
 import SceneKit
 import ARKit
+import SAConfettiView
 
 class ChallengeViewController: UIViewController {
     
@@ -220,7 +221,11 @@ class ChallengeViewController: UIViewController {
                     
                     print("WINNINGGGGGGGG!!!")
                    // rewardView.contentView.alpha = 0.95
-                    
+                    let confettiView = SAConfettiView(frame: self.view.bounds)
+                    self.view.addSubview(confettiView)
+                    confettiView.type = .Confetti
+                    confettiView.startConfetti()
+
                     let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RewardViewController") as! RewardViewController
 
                     self.addChild(popOverVC)
