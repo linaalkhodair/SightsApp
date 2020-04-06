@@ -67,23 +67,28 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
     }
     
     func showMailComposer(email: String) {
-            
-        guard MFMailComposeViewController.canSendMail() else {
-                //Show alert informing the user
-                return
-        }
-            
-        let composer = MFMailComposeViewController()
-        composer.mailComposeDelegate = self
-        composer.setToRecipients([email])
-        composer.setSubject("Reward from Sights!")
-        composer.setMessageBody("Thank you for using Sights, your reward \(reward)", isHTML: false)
-            
-        present(composer, animated: true)
-       
-    }
-    
-
+           guard MFMailComposeViewController.canSendMail() else {
+                           //Show alert informing#imageLiteral(resourceName: "SimplePDF.pdf") the user
+                            return
+                   }
+                   let composer = MFMailComposeViewController()
+                   composer.mailComposeDelegate = self
+                   composer.setToRecipients([email])
+                   composer.setSubject("Reward from Sights!")
+                   composer.setMessageBody("Thank you for using Sights, your reward  \(reward)", isHTML: false)
+                   guard let filePath = Bundle.main.path(forResource: "SimplePDF", ofType: "pdf") else {
+                       return }
+        
+                let url = URL(fileURLWithPath: filePath)
+                  do {
+                 let attachmentData = try Data(contentsOf: url)
+                      composer.addAttachmentData(attachmentData, mimeType: "application/pdf", fileName: "SimplePDF")
+                    composer.mailComposeDelegate = self
+                  self.present(composer, animated: true, completion: nil)
+                 } catch let error {
+                      print("We have encountered error \(error.localizedDescription)")
+                  }
+               }
     
     @IBAction func closeTapped(_ sender: Any) {
         //direct to HOMEVC
@@ -102,32 +107,32 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
 
 extension ViewController: MFMailComposeViewControllerDelegate {
 
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, didFinishWith error: Error?) {
-    
-    if let _ = error {
-        //Show error alert
-        controller.dismiss(animated: true)
-        return
+ func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+         switch result {
+               case .cancelled:
+                   print("User cancelled")
+                   break
+
+               case .saved:
+                   print("Mail is saved by user")
+                   break
+
+               case .sent:
+                   print("Mail is sent successfully")
+                   break
+
+               case .failed:
+                   print("Sending mail is failed")
+                   break
+               default:
+                   break
+               }
+
+               controller.dismiss(animated: true)
+
+
     }
-    
-    switch result {
-    case .cancelled:
-        print("Cancelled")
-        directToHome()
-    case .failed:
-        print("Failed to send")
-    case .saved:
-        print("Saved")
-        directToHome()
-    case .sent:
-        print("Email Sent")
-        directToHome()
-    @unknown default:
-        break
-    }
-    
-    controller.dismiss(animated: true)
-    }
+
     
     func directToHome(){
         
