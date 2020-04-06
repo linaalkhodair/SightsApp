@@ -253,16 +253,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                             
                             if !isAnon! {
                                 //display challenge
+                                let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
+
+                                self.addChild(popOverVC)
+
+                                popOverVC.view.frame = self.view.frame
+                                self.view.addSubview(popOverVC.view)
+                                popOverVC.didMove(toParent: self)
+
                             }
-                            
-                            
-                            let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
-
-                            self.addChild(popOverVC)
-
-                            popOverVC.view.frame = self.view.frame
-                            self.view.addSubview(popOverVC.view)
-                            popOverVC.didMove(toParent: self)
                             
                         }
                     }

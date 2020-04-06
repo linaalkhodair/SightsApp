@@ -75,21 +75,14 @@ class ChallengeViewController: UIViewController {
             
             view.addSubview(rewardView.contentView)
             rewardView.contentView.alpha = 0
-            
-//            let double = 24.7114063
-//            let doubleDigits = double.digits   // // [1, 2, 3, 4]
-//
-//            let randomDouble = Double.random(in: 24.7114063...24.7114999)
-//            print("RANDOM LATITUDE",randomDouble)
-//            print(doubleDigits)
-            
-            
+                        
             setNumOfHidden()
-           // findHidden()
-            
+           
             //handling when an AR object is tapped
             let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
             sceneLocationView.addGestureRecognizer(tap)
+            
+//            randomLocation(lat: 24.711359, lng: 46.769160)
             
         }// end of else
        
@@ -190,8 +183,14 @@ class ChallengeViewController: UIViewController {
                             print("inside CVC")
                             hobj.ID = document.get("ID") as! String
                             print(document.get("ID") as! String)
-                            hobj.latitude = document.get("latitude") as! Double
-                            hobj.longitude = document.get("longitude") as! Double
+                            
+                            let latitude = document.get("latitude") as! Double
+                            let longitude = document.get("longitude") as! Double
+                            let loc = self.randomLocation(lat: latitude, lng: longitude)
+                            
+                            hobj.latitude = loc.latitude
+                            hobj.longitude = loc.longitude
+                            
                             hobj.image = document.get("image") as! String
                            self.displayHiddenObjects(hiddenObject: hobj)
                             
@@ -199,9 +198,41 @@ class ChallengeViewController: UIViewController {
                     }
             }
         
-        }
+    }
         
+    func randomCoordinates(coordinate: Double) -> Double {
+        
+        let start = coordinate
+        let limit = coordinate + 0.000111
+        let randomDouble = Double.random(in: start...limit)
+        print("random ",randomDouble)
+        return randomDouble
+        
+    } //Another randomizing func
     
+    func randomLocation(lat: Double, lng: Double) -> CLLocationCoordinate2D {
+        
+        let radiusInDeg: Double = 200 / 111320 // 100 is the radius we can change it
+        let u = Double.random(in: 0...1)
+        let v = Double.random(in: 0...1)
+        let w = radiusInDeg * sqrt(u)
+        let t = 2 * Double.pi * v
+        
+        let x = w * cos(t)
+        let y = w * sin(t)
+        
+        let new_x = x / cos(lat.degreesToRadians)
+        
+        let finalLat = lat + y
+        let finalLng = lng + new_x
+        
+       // print("NEW LAT",finalLat)
+       // print("NEW LNG",finalLng)
+        
+        let coordinates = CLLocationCoordinate2D(latitude: finalLat, longitude: finalLng)
+        
+        return coordinates
+    }
     
     //Method called when tap on AR object
     @objc func handleTap(rec: UITapGestureRecognizer){
@@ -225,7 +256,8 @@ class ChallengeViewController: UIViewController {
                     self.view.addSubview(confettiView)
                     confettiView.type = .Confetti
                     confettiView.startConfetti()
-
+                    addRewardToUser()
+                    
                     let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RewardViewController") as! RewardViewController
 
                     self.addChild(popOverVC)
@@ -245,12 +277,22 @@ class ChallengeViewController: UIViewController {
     }
     
     
-    
     //---------------------------------------------------------------------------------------------------------------
     
-    func setChallengeView(ID: String)  {
-     
+    func addRewardToUser(){
+        
+        let uid = Auth.auth().currentUser?.uid
+        
+        db.collection("users/\(uid!)/rewards").addDocument(data:[
+            "reward" : reward
+        ])
+        
+        db.collection("users").document(uid!).updateData([
+            "playedChallenge" : true
+        ])
+        
     }
+    
     
     //---------------------------------------------------------------------------------------------------------------
     

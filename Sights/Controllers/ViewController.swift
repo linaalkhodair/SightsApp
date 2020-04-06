@@ -13,6 +13,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    
+    static var isGuest: Bool = false
 
 
     override func viewDidLoad() {
@@ -27,7 +29,7 @@ class ViewController: UIViewController {
         Auth.auth().signInAnonymously() { (authResult, error) in
             if error != nil {
                 //direct to home..
-                
+                ViewController.isGuest = true
                 let storyboard = UIStoryboard(name: "Guest", bundle: nil)
                 let guestVC = storyboard.instantiateViewController(identifier: "GuestViewController") as! GuestViewController
                 

@@ -22,6 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         return true
     }
     
+    func applicationWillTerminate(_ application: UIApplication) {
+        
+        let firebaseAuth = Auth.auth()
+        UserDefaults.standard.removeObject(forKey: "uid")
+        do {
+            try firebaseAuth.signOut()
+            print("signed out")
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
     func loadUserData(){
            db = Firestore.firestore()
            //let userID = Auth.auth().currentUser!.uid
