@@ -66,7 +66,7 @@ class ChallengeViewController: UIViewController, CLLocationManagerDelegate {
             
             counterLabel.text = "\(counter)"
             
-            counterView.layer.cornerRadius = 30.0
+            counterView.layer.cornerRadius = 20.0
             counterView.clipsToBounds = true
             
             colorBackground.layer.cornerRadius = 23.0

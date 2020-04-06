@@ -36,6 +36,8 @@ class RegisterViewController: UIViewController {
         name.layer.cornerRadius = 15.0 //make the fields rounded
         name.clipsToBounds = true
         
+        
+        
         email.layer.cornerRadius = 15.0 //make the fields rounded
         email.clipsToBounds = true
         
@@ -186,4 +188,9 @@ class RegisterViewController: UIViewController {
         return UIInterfaceOrientation.portrait
     }
     
+    @IBAction func backTapped(_ sender: Any) {
+        
+        self.App_Delegate.AddGuestTabBar()
+        
+    }
 }
