@@ -13,9 +13,13 @@ import CoreLocation
 import SceneKit
 import ARKit
 import SAConfettiView
+import AVFoundation
 
 class ChallengeViewController: UIViewController {
     
+    var audioPlayer = AVAudioPlayer()
+//    var audioPlayer2 = AVAudioPlayer()
+
     var sceneLocationView = SceneLocationView()
     
     var db: Firestore!
@@ -86,7 +90,17 @@ class ChallengeViewController: UIViewController {
             
         }// end of else
        
-       
+       //sound file
+        let sound = Bundle.main.path(forResource: "sound", ofType: "mp3")
+//        let sound2 = Bundle.main.path(forResource: "clapping", ofType: "mp3")
+        
+        do{
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+//          audioPlayer2 =  try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound2!))
+        }
+        catch{
+            print(error)
+        }
 
     } //end viewDidLoad
     
@@ -246,6 +260,7 @@ class ChallengeViewController: UIViewController {
                 let locationNode = getLocationNode(node: tappedNode!)
                 //try
                 sceneLocationView.removeLocationNode(locationNode: locationNode!)
+                audioPlayer.play() //play sound effect 
                 counter = counter + 1
                 counterLabel.text = "\(counter)"
                 if (self.counter == self.numOfHidden) {
@@ -256,6 +271,7 @@ class ChallengeViewController: UIViewController {
                     self.view.addSubview(confettiView)
                     confettiView.type = .Confetti
                     confettiView.startConfetti()
+//                    audioPlayer2.play() 
                     addRewardToUser()
                     
                     let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RewardViewController") as! RewardViewController
