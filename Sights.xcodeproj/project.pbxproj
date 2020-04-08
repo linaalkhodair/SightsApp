@@ -40,6 +40,7 @@
 		E9A8448E23F9EF8A00E3124B /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448D23F9EF8900E3124B /* ListViewController.swift */; };
 		E9A8449023F9EFA700E3124B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8448F23F9EFA700E3124B /* ProfileViewController.swift */; };
 		E9CCED02243B2B8B00B887A5 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CCED01243B2B8B00B887A5 /* RewardViewController.swift */; };
+		E9CCED08243DBE0600B887A5 /* Rewards.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E9CCED07243DBE0600B887A5 /* Rewards.pdf */; };
 		E9DA061C242E6E5B002CCE7A /* DrivingPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */; };
 		E9DA061E242E7057002CCE7A /* DrivingPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA061D242E7057002CCE7A /* DrivingPopUp.swift */; };
 		E9DA062824336D6B002CCE7A /* RecommendationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA062424336D6A002CCE7A /* RecommendationCell.swift */; };
@@ -124,6 +125,7 @@
 		E9A8448D23F9EF8900E3124B /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		E9A8448F23F9EFA700E3124B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E9CCED01243B2B8B00B887A5 /* RewardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
+		E9CCED07243DBE0600B887A5 /* Rewards.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Rewards.pdf; sourceTree = "<group>"; };
 		E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrivingPopUp.xib; sourceTree = "<group>"; };
 		E9DA061D242E7057002CCE7A /* DrivingPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrivingPopUp.swift; sourceTree = "<group>"; };
 		E9DA062424336D6A002CCE7A /* RecommendationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationCell.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				E9DA06562433CCBF002CCE7A /* SecondMain.storyboard */,
 				E9DA065C2434BD55002CCE7A /* Guest.storyboard */,
 				E9A8444623F4061900E3124B /* Assets.xcassets */,
+				E9CCED07243DBE0600B887A5 /* Rewards.pdf */,
 				E9A8447023F40BC700E3124B /* Helpers */,
 				E9A8444823F4061900E3124B /* LaunchScreen.storyboard */,
 				E9A8447723F40CBB00E3124B /* sightsGif.gif */,
@@ -464,6 +467,7 @@
 				E9DA061C242E6E5B002CCE7A /* DrivingPopUp.xib in Resources */,
 				E9A8448223F4167F00E3124B /* GoogleService-Info.plist in Resources */,
 				E9DA06312433B468002CCE7A /* PopUpDetailViewController.xib in Resources */,
+				E9CCED08243DBE0600B887A5 /* Rewards.pdf in Resources */,
 				E9A8444723F4061900E3124B /* Assets.xcassets in Resources */,
 				E9DA06572433CCBF002CCE7A /* SecondMain.storyboard in Resources */,
 				E9196465243A36310010B8B6 /* RewardView.xib in Resources */,

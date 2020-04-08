@@ -9,6 +9,7 @@
 import UserNotifications
 import FoursquareAPIClient
 import SwiftyJSON
+import Firebase
 
 
 class LBNotification: NSObject, UNUserNotificationCenterDelegate {
@@ -16,7 +17,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
     var lat: Double
     var lng: Double
     let client = FoursquareAPIClient(clientId: Constants.FoursquareClient.clientId, clientSecret: Constants.FoursquareClient.clientSecret)
- 
+    var db: Firestore!
 
     init(lat: Double, lng: Double) {
         self.lat = lat
@@ -27,7 +28,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
     
     func searchVenues() {
         let parameter: [String: String] = [
-            "ll": "\(lat), \(lng)",
+            "ll": "24.754808, 46.738183",
             "radius": "600",
             "limit": "10",
             "intent": "browse",
@@ -112,10 +113,21 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                 if desc == nil {
                     desc = "" //? idk
                 }
-                var hours = json["response"]["venue"]["hours"]["status"].string //?
+                var days = json["response"]["venue"]["hours"]["timeframes"][0]["days"].stringValue //?
+                var hours = json["response"]["venue"]["hours"]["timeframes"][0]["open"][0]["renderedTime"].stringValue //?
                 if hours == nil {
                     hours = "8:00 AM - 10:00 PM"
                 }
+                if days == nil {
+                    hours = "Sun-Thurs"
+                }
+                let time = days + ", " + hours //???????
+                //PHOTO -> BEST PHOTO
+            
+                let photo = json["response"]["venue"]["bestPhoto"]["prefix"].string
+                print("Photo",photo)
+                
+                let category = json["response"]["venue"]["categories"][0]["name"].stringValue
                 
                 let lat = json["response"]["venue"]["location"]["lat"].double
                 let lng = json["response"]["venue"]["location"]["lng"].double
@@ -124,19 +136,25 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                     print("rating from: ", rating)
                     
                     if (rating > 2)  {
+                        
+                        
+                        self.notiExists(id: id) { (exists) in
+                            print("ex",exists)
+                            
+                        if !exists {
                         self.foursquareNotification(name: name!)
-                        let timestamp = NSDate.now //we must add it to notification when we store it in the DB
-                        print("timestamp")
-                        //timestamp.compare(Date) --> this is then used when loading notification list check if it has lasted two days then delete it
-                       
-                        // here we need to create a POI object with all info needed then add POI to user's notification list
-                        // also later on check to not send notification that exists in the notification list
-//                        let poi = POI(ID: id, name: name!, location: loc!, latitude: lat!, longitude: lng!, rating: rating, briefInfo: desc!, openingHours: hours!, image: "", markState: false)
+                            
+                        let poi = POI(ID: id, name: name!, rate: rating, long: lng!, lat: lat!, visited: false, notinterested: false, wanttovisit: false, description: desc!, openingHours: time, locationName: loc!, imgUrl: photo!, category: category)
+                            
+                        self.addNotificationList(poi: poi)
                         //then add POIObject to notification list
                         print("here inside lol")
                         isSent = true
                         print("isSent hereee", isSent)
                         completionHandler(isSent)
+                            } //end if exists
+                        }
+                        
                     }
                     
                 } //end if rating
@@ -162,6 +180,48 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
         
     }//end getVenueDetails
     
+    func addNotificationList(poi: POI) {
+        
+        db = Firestore.firestore()
+        let uid = Auth.auth().currentUser?.uid
+        let timestamp = NSDate.now
+        
+        db.collection("users/\(uid!)/notificationsList").document(poi.ID).setData([
+            "ID" : poi.ID,
+            "briefInfo" : poi.description,
+            "category" : poi.categorey,
+            "latitude" : poi.lat,
+            "longitude" : poi.long,
+            "name" : poi.name,
+            "notInterested" : poi.notinterested,
+            "visited" : poi.visited,
+            "wantToVisit" : poi.wanttovisit,
+            "rating" : poi.rate,
+            "openingHours" : poi.openingHours,
+            "location" : poi.locationName,
+            "timestamp" : timestamp,
+            "image" : poi.imgUrl
+        ])
+        
+    }
+    
+    func notiExists(id: String, completionHandler: @escaping (Bool)->Void) {
+        db = Firestore.firestore()
+        let uid = Auth.auth().currentUser?.uid
+        var exists: Bool = false
+        
+        db.collection("users/\(uid!)/notificationsList").document(id).getDocument { (docSnapshot, err) in
+            if let err = err {
+                print("Document doesn't exist, \(err)")
+                
+            } else {
+                exists = docSnapshot!.exists
+                completionHandler(exists)
+             
+            }
+        }
+
+    }
     
     func foursquareNotification(name: String) {
         

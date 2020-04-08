@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import MessageUI
 
-class RewardViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class RewardViewController: UIViewController {
 
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var rewardLabel: UILabel!
@@ -71,18 +71,18 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
                            //Show alert informing#imageLiteral(resourceName: "SimplePDF.pdf") the user
                             return
                    }
-                   let composer = MFMailComposeViewController()
+                let composer = MFMailComposeViewController()
                    composer.mailComposeDelegate = self
                    composer.setToRecipients([email])
                    composer.setSubject("Reward from Sights!")
                    composer.setMessageBody("", isHTML: false)
-                   guard let filePath = Bundle.main.path(forResource: "Reward", ofType: "pdf") else {
+                   guard let filePath = Bundle.main.path(forResource: "Rewards", ofType: "pdf") else {
                        return }
         
                 let url = URL(fileURLWithPath: filePath)
                   do {
                  let attachmentData = try Data(contentsOf: url)
-                      composer.addAttachmentData(attachmentData, mimeType: "application/pdf", fileName: "Reward")
+                      composer.addAttachmentData(attachmentData, mimeType: "application/pdf", fileName: "Rewards")
                     composer.mailComposeDelegate = self
                   self.present(composer, animated: true, completion: nil)
                  } catch let error {
@@ -105,7 +105,7 @@ class RewardViewController: UIViewController, MFMailComposeViewControllerDelegat
 
 
 
-extension ViewController: MFMailComposeViewControllerDelegate {
+extension RewardViewController: MFMailComposeViewControllerDelegate {
 
  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
          switch result {
@@ -129,7 +129,7 @@ extension ViewController: MFMailComposeViewControllerDelegate {
                }
 
                controller.dismiss(animated: true)
-
+               directToHome()
 
     }
 
