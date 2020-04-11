@@ -64,7 +64,7 @@ class POIView: UIView {
         let user = Auth.auth().currentUser
         let isAnon = user?.isAnonymous
         
-        if isAnon! {
+        if isAnon ?? true {
             notInterested.alpha = 0
             Visited.alpha = 0
             wantToVisit.alpha = 0

@@ -310,7 +310,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="RJo-Xn-9rc"/>
                     </view>
                     <connections>
@@ -769,7 +769,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You will get free coffee coupon from Starbucks! " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GqC-Oc-9X1">
-                                        <rect key="frame" x="42" y="129" width="254" height="57"/>
+                                        <rect key="frame" x="28" y="129" width="254" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -791,7 +791,7 @@ Explore Riyadh in the     		most enjoyable way</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
                                         <state key="normal" title="Start" backgroundImage="button">
-                                            <color key="titleColor" red="0.49984782929999999" green="0.44818580149999998" blue="0.67061251399999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="titleColor" red="0.49803921568627452" green="0.44705882352941173" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
                                             <action selector="startTapped:" destination="pNS-o4-QB4" eventType="touchUpInside" id="9v2-y1-6Tf"/>
@@ -804,11 +804,6 @@ Explore Riyadh in the     		most enjoyable way</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="IBC-Yt-UNY">
-                                        <rect key="frame" x="14" y="140" width="19" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Try to find hidden stars around Al Masmak Fortress" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lQ-l0-ffX">
                                         <rect key="frame" x="28" y="64" width="250" height="57"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -816,6 +811,11 @@ Explore Riyadh in the     		most enjoyable way</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="coupon (1)" translatesAutoresizingMaskIntoConstraints="NO" id="f8k-5o-9nz">
+                                        <rect key="frame" x="158" y="154" width="42" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -840,12 +840,12 @@ Explore Riyadh in the     		most enjoyable way</string>
         <image name="circle" catalog="system" width="64" height="60"/>
         <image name="color_1" width="400" height="164"/>
         <image name="color_3" width="400" height="164"/>
+        <image name="coupon (1)" width="128" height="128"/>
         <image name="emptyfield" width="320" height="67"/>
         <image name="gradient" width="750" height="1624"/>
         <image name="left-arrow" width="128" height="128"/>
         <image name="list" width="256" height="256"/>
         <image name="signupbutton" width="179" height="71"/>
-        <image name="star" width="256" height="256"/>
         <image name="user" width="256" height="256"/>
         <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>

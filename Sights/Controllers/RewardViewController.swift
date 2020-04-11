@@ -95,6 +95,8 @@ class RewardViewController: UIViewController {
         view.removeFromSuperview()
         contentView.removeFromSuperview()
         
+        directToHome() //?
+        
     }
     
     @objc func loadTabBar()

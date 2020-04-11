@@ -28,7 +28,7 @@ class ChallengeViewController: UIViewController {
     var userLoc = CLLocation()
     var counter: Int = 0
     var numOfHidden: Int = 0
-    let rewardView = RewardView()
+
     var reward: String = ""
     
     @IBOutlet weak var counterView: UIImageView!
@@ -76,9 +76,7 @@ class ChallengeViewController: UIViewController {
         
             colorBackground.layer.cornerRadius = 23.0
             colorBackground.clipsToBounds = true
-            
-            view.addSubview(rewardView.contentView)
-            rewardView.contentView.alpha = 0
+
                         
             setNumOfHidden()
            
@@ -86,7 +84,6 @@ class ChallengeViewController: UIViewController {
             let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
             sceneLocationView.addGestureRecognizer(tap)
             
-//            randomLocation(lat: 24.711359, lng: 46.769160)
             
         }// end of else
        
@@ -170,7 +167,7 @@ class ChallengeViewController: UIViewController {
 
                        self.numOfHidden = document.get("numOfHidden") as! Int
                        self.reward = document.get("reward") as! String
-                        self.rewardView.couponCode.text = self.reward
+                       // self.rewardView.couponCode.text = self.reward
                         
                         let total = document.get("numOfHidden") as! Int
                         print("TOTAL!",total)
@@ -303,10 +300,11 @@ class ChallengeViewController: UIViewController {
             "reward" : reward
         ])
         
-        db.collection("users").document(uid!).updateData([
-            "playedChallenge" : true
+        //adding challenge to list of played challenges..?
+        let chid = ChallengeViewController.chid!.trimmingCharacters(in: .whitespacesAndNewlines)
+        db.collection("users/\(uid!)/playedChallenges").document(chid).setData([
+            "ID" : chid
         ])
-        
     }
     
     

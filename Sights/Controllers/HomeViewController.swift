@@ -17,8 +17,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     var sceneLocationView = SceneLocationView()
     var poiview = POIView()
     var drivingPopup = DrivingPopUp()
-
-   // var challengeview = ChallengeView()
     
     var db: Firestore!
     
@@ -32,13 +30,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
     
     var timer = Timer()
-    
-//    @IBOutlet weak var navBar: UINavigationBar!
-//    @IBOutlet weak var navItem: UIBarButtonItem!
-//    @IBOutlet weak var listImg: UIImageView!
-//    @IBOutlet weak var profileImg: UIImageView!
-//    @IBOutlet weak var cameraImg: UIImageView!
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +39,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             sceneLocationView.run()
             view.addSubview(sceneLocationView)
-            
-            //adding navigation bar
-//            view.addSubview(navBar)
-//            view.addSubview(listImg)
-//            view.addSubview(profileImg)
-//            view.addSubview(cameraImg)
-            
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
 
         }
@@ -74,19 +59,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             view.addSubview(poiview.contentView)
             view.addSubview(drivingPopup.contentView)
             
-            
-        //    view.addSubview(challengeview.contentView)
-            //view.addSubview(logoutButton)
-            
-            //adding navigation bar
-//            view.addSubview(navBar)
-//            view.addSubview(listImg)
-//            view.addSubview(profileImg)
-//            view.addSubview(cameraImg)
-            
             poiview.contentView.alpha = 0
             drivingPopup.contentView.alpha = 0
-          //  challengeview.contentView.alpha = 0
             
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
                 
@@ -103,16 +77,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             sceneLocationView.addGestureRecognizer(tap)
             
         }// end of else
-        //set nav bar to transparent
-//        self.navBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navBar.shadowImage=UIImage()
+
         
         coreMotion.startUpdates { (activityType) in
             HomeViewController.activity = activityType
-            //            if (activityType == "walking"){
-            //                print("$$$inside walking$$$")
-            //                 Alert.showBasicAlert(on: self, with: "You're currently walking..", message: "For a better experience continue walking and explore Riyadh!")
-            //            }
         } //To get the user's motion when first started
 
     } //end viewDidLoad
@@ -151,25 +119,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         poiview.setPoiId(ID: ID)
         
-        //        let docRef = db.collection("POIs").document(id)
-        //        db.collection("POIs").document(ID).getDocument { (DocumentSnapshot, error) in
-        //            if DocumentSnapshot!.exists {
-        //
-        //                poiView.POIName.text = DocumentSnapshot!.get("name") as! String
-        //                poiView.describtion.text = DocumentSnapshot!.get("briefInfo") as! String
-        //                poiView.openingHours.text = DocumentSnapshot!.get("openingHours") as! String
-        //                var rating = DocumentSnapshot!.get("rating") as! Double
-        //                poiView.rating.text = "rating \(rating)"
-        //                poiView.location.text = DocumentSnapshot!.get("location") as! String
-        //                print("here insiddee")
-        //                 self.sceneLocationView.addSubview(poiView)
-        //
-        //
-        //            } else {
-        //                print("Document does not exist")
-        //            }
-        //        }
-                
         db.collection("POIs").whereField("ID", isEqualTo: ID)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -252,15 +201,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                             let isAnon = user?.isAnonymous
                             
                             if !isAnon! {
-                                //display challenge
-                                let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
-
-                                self.addChild(popOverVC)
-
-                                popOverVC.view.frame = self.view.frame
-                                self.view.addSubview(popOverVC.view)
-                                popOverVC.didMove(toParent: self)
-
+                                //display challenge after some time..
+                                //I think time better 120 .. later onx
+                                self.timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: false, block: { (_) in
+                                    print("timer works")
+                                    self.displayChallenge(chid: hasChallenge)
+                                })
                             }
                             
                         }
@@ -275,6 +221,29 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     } //end func getPOI
     
   
+    func displayChallenge(chid: String) {
+        let uid = Auth.auth().currentUser?.uid
+        
+        db.collection("users/\(uid!)/playedChallenges").document(chid).getDocument { (docSnapshot, err) in
+            if let err = err {
+                print("Document doesn't exist \(err)")
+            } else {
+                
+                if (!docSnapshot!.exists) {
+                    
+                    let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
+
+                    self.addChild(popOverVC)
+
+                    popOverVC.view.frame = self.view.frame
+                    self.view.addSubview(popOverVC.view)
+                    popOverVC.didMove(toParent: self)
+                }
+            }
+        }
+        
+        
+    }
 
     //---------------------------------------------------------------------------------------------------------------
     

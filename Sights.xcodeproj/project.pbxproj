@@ -13,8 +13,6 @@
 		5D842815243CA9230097ABC9 /* clapping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5D842814243CA9230097ABC9 /* clapping.mp3 */; };
 		7499F9E0FA1A96F6FFE58FF2 /* libPods-Sights-SightsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6B3C5BE8CA86A58F5FF78B /* libPods-Sights-SightsUITests.a */; };
 		C5A09D5DDC4625F16F26A304 /* libPods-Sights.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 843CDF09A3AC5161CF2F8F86 /* libPods-Sights.a */; };
-		E9196465243A36310010B8B6 /* RewardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9196464243A36310010B8B6 /* RewardView.xib */; };
-		E9196467243A387D0010B8B6 /* RewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9196466243A387D0010B8B6 /* RewardView.swift */; };
 		E960222B240D11C400B8B18C /* LBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960222A240D11C400B8B18C /* LBNotification.swift */; };
 		E960226B241CD6E300B8B18C /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960226A241CD6E300B8B18C /* CoreMotionManager.swift */; };
 		E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8443D23F4061500E3124B /* AppDelegate.swift */; };
@@ -92,8 +90,6 @@
 		99F54F37B7C2DD2D96D01514 /* libPods-SightsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SightsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB903413DAF400D9B9C0A7D6 /* Pods-Sights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sights.release.xcconfig"; path = "Target Support Files/Pods-Sights/Pods-Sights.release.xcconfig"; sourceTree = "<group>"; };
 		E52A5DEC87F31DF609B32AEF /* Pods-SightsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SightsTests.release.xcconfig"; path = "Target Support Files/Pods-SightsTests/Pods-SightsTests.release.xcconfig"; sourceTree = "<group>"; };
-		E9196464243A36310010B8B6 /* RewardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardView.xib; sourceTree = "<group>"; };
-		E9196466243A387D0010B8B6 /* RewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardView.swift; sourceTree = "<group>"; };
 		E960222A240D11C400B8B18C /* LBNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBNotification.swift; sourceTree = "<group>"; };
 		E960226A241CD6E300B8B18C /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		E9A8443A23F4061500E3124B /* Sights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sights.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,7 +206,6 @@
 		E9A8443123F4061500E3124B = {
 			isa = PBXGroup;
 			children = (
-				5D84280B243C90630097ABC9 /* sound */,
 				E9A8443C23F4061500E3124B /* Sights */,
 				E9A8445323F4061900E3124B /* SightsTests */,
 				E9A8445E23F4061900E3124B /* SightsUITests */,
@@ -243,10 +238,10 @@
 				E9DA06562433CCBF002CCE7A /* SecondMain.storyboard */,
 				E9DA065C2434BD55002CCE7A /* Guest.storyboard */,
 				E9A8444623F4061900E3124B /* Assets.xcassets */,
-				E9CCED07243DBE0600B887A5 /* Rewards.pdf */,
 				E9A8447023F40BC700E3124B /* Helpers */,
+				E9CCED0B2441063800B887A5 /* PDFs */,
+				5D84280B243C90630097ABC9 /* sound */,
 				E9A8444823F4061900E3124B /* LaunchScreen.storyboard */,
-				E9A8447723F40CBB00E3124B /* sightsGif.gif */,
 				E9A8448123F4167F00E3124B /* GoogleService-Info.plist */,
 				E9A8444B23F4061900E3124B /* Info.plist */,
 			);
@@ -298,8 +293,6 @@
 				E9A8448723F69AB700E3124B /* POIView.swift */,
 				E9DA061B242E6E5B002CCE7A /* DrivingPopUp.xib */,
 				E9DA061D242E7057002CCE7A /* DrivingPopUp.swift */,
-				E9196464243A36310010B8B6 /* RewardView.xib */,
-				E9196466243A387D0010B8B6 /* RewardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -327,6 +320,15 @@
 				E9A8448B23F98A6F00E3124B /* CheckInternet.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E9CCED0B2441063800B887A5 /* PDFs */ = {
+			isa = PBXGroup;
+			children = (
+				E9CCED07243DBE0600B887A5 /* Rewards.pdf */,
+				E9A8447723F40CBB00E3124B /* sightsGif.gif */,
+			);
+			path = PDFs;
 			sourceTree = "<group>";
 		};
 		E9DA062324336D6A002CCE7A /* UI */ = {
@@ -470,7 +472,6 @@
 				E9CCED08243DBE0600B887A5 /* Rewards.pdf in Resources */,
 				E9A8444723F4061900E3124B /* Assets.xcassets in Resources */,
 				E9DA06572433CCBF002CCE7A /* SecondMain.storyboard in Resources */,
-				E9196465243A36310010B8B6 /* RewardView.xib in Resources */,
 				5D842813243CA8AB0097ABC9 /* Reward.pdf in Resources */,
 				5D842815243CA9230097ABC9 /* clapping.mp3 in Resources */,
 				E9A8444523F4061500E3124B /* Main.storyboard in Resources */,
@@ -613,7 +614,6 @@
 				E960222B240D11C400B8B18C /* LBNotification.swift in Sources */,
 				E9A8448A23F7182100E3124B /* POI.swift in Sources */,
 				E9CCED02243B2B8B00B887A5 /* RewardViewController.swift in Sources */,
-				E9196467243A387D0010B8B6 /* RewardView.swift in Sources */,
 				E9DA062A24336D6B002CCE7A /* NotificationCell.swift in Sources */,
 				E9A8447C23F4148A00E3124B /* LoginViewController.swift in Sources */,
 				E960226B241CD6E300B8B18C /* CoreMotionManager.swift in Sources */,
