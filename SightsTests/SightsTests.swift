@@ -69,6 +69,26 @@ class SightsTests: XCTestCase {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
+        LBNotification(lat: 24.754808, lng: 46.738183).searchVenues()
+            
+        let hvc = HomeViewController()
+        hvc.viewDidLoad()
+        hvc.getPOI()
+
+        ListViewController().viewDidLoad()
+        
+        let poiView = hvc.setPOIView(ID: "aYLkWgVxQYKKr4ADl8MH")
+        let btn = UIButton()
+        poiView.clk_Visited(button: btn)
+            
+        let coreMotion = CoreMotionManager()
+
+            coreMotion.startUpdates { (actual) in
+
+            }
+            
+            
+             
         }
     }
 

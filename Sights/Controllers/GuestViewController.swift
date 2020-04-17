@@ -11,12 +11,16 @@ import UIKit
 class GuestViewController: UIViewController {
 
     @IBOutlet weak var signUp: UIButton!
+    @IBOutlet weak var login: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         signUp.layer.cornerRadius = 25.0 //make the button rounded
         signUp.clipsToBounds = true
+        
+        login.layer.cornerRadius = 25.0 //make the button rounded
+        login.clipsToBounds = true
     }
     
 

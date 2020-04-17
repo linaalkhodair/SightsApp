@@ -519,6 +519,7 @@
                         <outlet property="RewardsView" destination="A3a-kg-kKw" id="wl9-JQ-bEz"/>
                         <outlet property="VisitListView" destination="6G8-gX-BCF" id="kwe-eW-4Zr"/>
                         <outlet property="dateLabel" destination="ODp-Mq-DX2" id="hgj-gD-o47"/>
+                        <outlet property="nameLabel" destination="oe9-Xi-4fA" id="d0o-l6-2qR"/>
                         <outlet property="weatherDegree" destination="KD7-wE-wpl" id="TqN-ez-qSs"/>
                         <outlet property="weatherImage" destination="vxV-Gx-dlR" id="t6B-VV-TOx"/>
                     </connections>

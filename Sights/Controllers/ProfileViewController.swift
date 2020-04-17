@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var weatherDegree: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
     var weatherManager = WeatherManager()
 
@@ -41,10 +42,23 @@ class ProfileViewController: UIViewController {
         
         weatherManager.delegate = self
         weatherManager.fetchWeather(cityName: "Riyadh")
+        
+        setName()
 
        }
     
-    
+    func setName() {
+        let db = Firestore.firestore()
+        let userID = Auth.auth().currentUser!.uid
+        db.collection("users").document(userID).getDocument { (docSnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let name = docSnapshot?.get("name") as? String
+                self.nameLabel.text = "Hello \(name.unsafelyUnwrapped)!"
+            }
+        }
+    }
     
     //  LOCK ORIENTATION TO PORTRAIT
       override var shouldAutorotate: Bool {

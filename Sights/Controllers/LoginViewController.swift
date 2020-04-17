@@ -120,6 +120,10 @@ class LoginViewController: UIViewController {
         self.App_Delegate.AddTabBar()
     }
     
+    @IBAction func backTapped(_ sender: Any) {
+        self.App_Delegate.AddGuestTabBar()
+
+    }
     //  LOCK ORIENTATION TO PORTRAIT
     override var shouldAutorotate: Bool {
         return false
