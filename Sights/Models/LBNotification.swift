@@ -223,7 +223,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
 
     }
     
-    func foursquareNotification(name: String) {
+    func foursquareNotification(name: String) -> Bool {
         
         //creating the notification content
         let content = UNMutableNotificationContent()
@@ -247,6 +247,8 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
         
         //adding the notification to notification center
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        return true
         
     }
     

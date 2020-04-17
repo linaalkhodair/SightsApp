@@ -7,10 +7,51 @@
 //
 
 import XCTest
+
 @testable import Sights
+import CoreLocation
 
 class SightsTests: XCTestCase {
+    
+    
+    func testRandomHiddenLocation() {
 
+        let challengeVC = ChallengeViewController()
+        let actual = challengeVC.randomLocation(lat: 24.3453, lng: 43.7392)
+        
+        XCTAssertFalse(24.3453 == actual.latitude)
+        XCTAssertFalse(43.7392 == actual.longitude)
+
+    }
+
+    func testPOIview() {
+        
+        let homeVC = HomeViewController()
+        let actual = homeVC.setPOIView(ID: "aYLkWgVxQYKKr4ADl8MH")
+        
+        XCTAssertNotNil(actual)
+        
+    }
+    
+    func testMotion() {
+        
+        let expected = "stationary"
+        let coreMotion = CoreMotionManager()
+        
+        coreMotion.startUpdates { (actual) in
+            XCTAssertTrue(expected == actual)
+        }
+    }
+    
+    func testLBnotification() {
+        
+        let notification = LBNotification(lat: 24.754808, lng: 46.738183)
+        let actual = notification.foursquareNotification(name: "sample")
+        
+        XCTAssertNotNil(actual)
+        
+    }
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }

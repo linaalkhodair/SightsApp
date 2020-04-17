@@ -141,6 +141,10 @@ class RegisterViewController: UIViewController {
             return "Invalid email format, please use a valid email and try again."
         }
         
+        if name.text!.count > 15 {
+            return "Invalid name length, name should be 15 charachters or less."
+        }
+        
         return nil
         
     }
