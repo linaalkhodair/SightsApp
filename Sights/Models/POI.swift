@@ -26,7 +26,6 @@ class POI {
     var locationName: String
     var imgUrl: String
     var categorey: String
-    //add hasChallenge
     
     
     internal init(ID: String, name: String, rate: Double, long: Double, lat: Double, visited: Bool, notinterested: Bool, wanttovisit: Bool, description: String, openingHours: String, locationName: String, imgUrl: String, category: String) {
@@ -44,6 +43,23 @@ class POI {
         self.imgUrl = imgUrl
         self.categorey = category
     }
+    
+    internal init(ID: String, name: String, rate: Double, long: Double, lat: Double, description: String, openingHours: String, locationName: String, imgUrl: String, category: String) {
+        self.ID = ID
+        self.name = name
+        self.rate = rate
+        self.long = long
+        self.lat = lat
+        self.visited = false
+        self.notinterested = false
+        self.wanttovisit = false
+        self.description = description
+        self.openingHours = openingHours
+        self.locationName = locationName
+        self.imgUrl = imgUrl
+        self.categorey = category
+    }
+    
 }//end POI
 
 class category{
@@ -58,6 +74,17 @@ class category{
 }// end category
 
 
+class reward{
+    
+    var title: String
+    var code: String
+    
+    internal init(title: String, code: String) {
+        self.title = title
+        self.code = code
+    }
+}//end reward
+    
     
 
 

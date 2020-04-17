@@ -5,119 +5,186 @@
 //  Created by HARSHIT on 23/02/20.
 //  Copyright © 2020 HARSHIT. All rights reserved.
 //
-
 import UIKit
 import PopItUp
 import Firebase
+
+var globalPOI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1")
 
 class ListViewController: UIViewController
 {
     @IBOutlet var RecommendationView:UICollectionView?
     @IBOutlet var NotificationView:UICollectionView?
     
-    var db: Firestore!
+    
+    var poolList = [POI]()
+    var notiList = [POI]()
+    var recommendationList = [POI]()
+    
+    var recommend = Recommend(rewardList: [POI](), markedList: [POI](), recommendationCategories: [category](), visitedList: [POI](), wanttovisitList: [POI](), notInterestedList: [POI](), notiList: [POI](), recommendList: [POI]())
+    
 
     
     var POI1: POI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1")
     var POI2: POI = POI(ID: "2", name:  "2name", rate:  2.0, long:  222, lat: 222, visited: false, notinterested: false, wanttovisit: false , description:  "2desc", openingHours: "2open",locationName:  "2locname", imgUrl:  "2url", category: "cat2")
     var POI3: POI = POI(ID: "3", name:  "3name", rate:  3.0, long:  333, lat: 333, visited: false, notinterested: false, wanttovisit: true , description:  "3desc", openingHours: "3open",locationName:  "3locname", imgUrl:  "3url", category: "cat3")
-     var POI4: POI = POI(ID: "4", name:  "4name", rate:  4.0, long:  444, lat: 444, visited: true, notinterested: true, wanttovisit: false , description:  "4desc", openingHours: "4open",locationName:  "4locname", imgUrl:  "4url", category: "cat4")
+    var POI4: POI = POI(ID: "4", name:  "4name", rate:  4.0, long:  444, lat: 444, visited: true, notinterested: true, wanttovisit: false , description:  "4desc", openingHours: "4open",locationName:  "4locname", imgUrl:  "4url", category: "cat4")
     var POI5: POI = POI(ID: "5", name:  "5name", rate:  5.0, long:  555, lat: 555, visited: false, notinterested: false, wanttovisit: false , description:  "5desc", openingHours: "5open",locationName:  "5locname", imgUrl:  "5url", category: "cat2")
     
-    var poolList = [POI]()
-    var visitedList = [POI]()
-    var wanttovisitList = [POI]()
-    var notInterestedList = [POI]()
-    var notiList = [POI]()
-    var rewardlist = [POI]()
-    var recommendationlist = [category]()
     
-//    var NotificationArray = [data(label: "This is Label1", desc: "this is a description1 very very very veryvery veryvery veryvery veryvery very looooong long long long  very very very veryvery veryvery veryvery veryvery very looooong long long long  very very very veryvery veryvery veryvery veryvery very looooong long long long  very very very veryvery veryvery veryvery veryvery very looooong long long long  very very very veryvery veryvery veryvery veryvery very looooong long long long  very very very veryvery veryvery veryvery veryvery very looooong long long long"), data(label: "This is Label2", desc: "this is a description2"), data(label: "This is Label3", desc: "this is a description3"), data(label: "This is Label4", desc: "this is a description4"), data(label: "This is Label5", desc: "this is a description5"), data(label: "This is Label6", desc: "this is a description6"), data(label: "This is Label7", desc: "this is a description7"), data(label: "This is Label8", desc: "this is a description8"), data(label: "This is Label9", desc: "this is a description9"), data(label: "This is Label10", desc: "this is a description10"), data(label: "This is Label11", desc: "this is a description11"), data(label: "This is Label12", desc: "this is a description12"), data(label: "This is Label13", desc: "this is a description13"), data(label: "This is Label14", desc: "this is a description14")]
-   
-//    var RecommendationArray = [data(label: "This is Label1", desc: "this is a description1"), data(label: "This is Label2", desc: "this is a description2"), data(label: "This is Label3", desc: "this is a description3"), data(label: "This is Label4", desc: "this is a description4")]
+    //    var visitedList = [POI]()
+    //    var wanttovisitList = [POI]()
+    //    var notInterestedList = [POI]()
     
+    //    var rewardlist = [POI]()
+    //    var recommendationlist = [category]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //poolList.append(POI1)
-        //poolList.append(POI2)
-        //poolList.append(POI3)
-        //poolList.append(POI4)
-        print("entered lisst")
-        notiList.append(POI5)
-        notiList.append(POI4)
-        recommendationlist.append(category(name: "cat1", count: 1))
-        recommendationlist.append(category(name: "cat2", count: 0))
-        recommendationlist.append(category(name: "cat3", count: 1))
-        recommendationlist.append(category(name: "cat4", count: 0))
+        notiList.append(POI1)
+        notiList.append(POI2)
+
         
-        db = Firestore.firestore()
-        //let userID = Auth.auth().currentUser!.uid
-        let userID = "5x141iiWqQT5Wk5GEjMTO6CXrDw2"
-        print("@#@#@#@#@#@#@#@#@#@#@#@# I'm before db first call")
-        db.collection("users").document(userID).collection("markedList").getDocuments(){ (querySnapshot, err) in
-                if let err = err {
-                    print("@#@#@#@#@#@#@#@#@#@#@#@# I'm in error1")
-                    print("Error getting documents: \(err)")
-                } else {
-                    print("@#@#@#@#@#@#@#@#@#@#@#@# yay no error1")
-
-                    for userdocument in querySnapshot!.documents {
-                        self.db.collection("POIs").document(userdocument.documentID+"").getDocument(){ (document, error) in
-                            if let document = document, document.exists {
-                                print("@#@#@#@#@#@#@#@#@#@#@#@# yay no error2")
-                                print("@#@#@#@#@#@#@#@#@#@#@#@# " + document.documentID + "  " + userdocument.documentID)
-
-                                //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                                //print("Document data: \(dataDescription)")
-                                let poi = POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, visited: userdocument.get("visited") as! Bool, notinterested: userdocument.get("notInterested") as! Bool, wanttovisit: userdocument.get("wantToVisit") as! Bool, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String)
-                                
-                                print("@#@#@#@#@#@#@#@#@#@#@#@# " + poi.ID + "  " + poi.name)
-
-                             self.getUser().markedList.append(poi)
-                                self.poolList.append(poi)
-                                self.RecommendationView?.reloadData()
-                             for p in self.getUser().markedList{
-                                    print("&&&&&&&&&&&&&&&&&&&&& && && && : " + p.name)
-                                }
-                            } else {
-                                print("@#@#@#@#@#@#@#@#@#@#@#@# error2")
-
-                                print("Document does not exist")
-                            }
-                        }
-
-                    }//end for
-            }//end else
-        }//
-        
-        //let markedList :AppDelegate? = UIApplication.shared.delegate as? AppDelegate
-        //let u = markedList?.getUser()
-        //poolList = getUser().markedList
-        //poolList.append(contentsOf: getUser().markedList )
-//        var u = user(ID: "5x141iiWqQT5Wk5GEjMTO6CXrDw2", name: "helpme", email: "email", rewardList: rewardlist, markedList: poolList, recommendationcategories: recommendationlist, visitedList: visitedList, wanttovisitList: wanttovisitList, notInterestedList: notInterestedList, notiList: notiList)
-//        //poolList.append(contentsOf: u.markedList)
-//        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$I'm empty")
-//        for p in u.markedList{
-//                  print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$mark: " + p.name)
-//              }
-        
-        for p in poolList{
-            print("pool: " + p.name)
-        }
-        
-        for p in getUser().markedList{
-            print("app: " + p.name)
-        }
-
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        recommend = Recommend(rewardList: [POI](), markedList: [POI](), recommendationCategories: [category](), visitedList: [POI](), wanttovisitList: [POI](), notInterestedList: [POI](), notiList: [POI](), recommendList: [POI]())
+        poolList=[POI]()
+        recommendationList=[POI]()
+        
+        var db = Firestore.firestore()
+        let userID = Auth.auth().currentUser!.uid
+        //let userID = UserDefaults.standard.string(forKey: "uid")!
+        print("this is user ID !$%^%$#$%^$#@%^$#@!#$#%^&&$#@#%$^&*%&$#@  "+userID)
+        db.collection("users").document(userID).collection("markedList").getDocuments(){ (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for userdocument in querySnapshot!.documents {
 
-}
+                    for i in globalPOIList{
+                        if(i.ID == userdocument.documentID){
+                            i.wanttovisit = userdocument.get("wantToVisit") as! Bool
+                            i.visited = userdocument.get("visited") as! Bool
+                            i.notinterested = userdocument.get("notInterested") as! Bool
+                            self.poolList.append(i)
+                            self.RecommendationView?.reloadData()
+                            self.recommend.markedList.append(i)
+                            print("appended in list pool "+i.name)
+                            
+                        }//end if
+                       
+                    }//end for i
+               
+                    
+                }//end for
+
+            }//end else
+            self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
+            self.NotificationView?.reloadData()
+        }
+        
+        notiList=[POI]()
+       
+        db.collection("users").document(userID).collection("notificationsList").getDocuments(){ (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for userdocument in querySnapshot!.documents {
+
+                    for i in globalPOIList{
+                        if(i.ID == userdocument.documentID){
+                            i.wanttovisit = userdocument.get("wantToVisit") as! Bool
+                            i.visited = userdocument.get("visited") as! Bool
+                            i.notinterested = userdocument.get("notInterested") as! Bool
+                            self.notiList.append(i)
+                            self.poolList.append(i)
+                            self.NotificationView?.reloadData()
+                            //self.recommend.markedList.append(i)
+                            print("appended in list noti "+i.name)
+                            
+                        }//end if
+                       
+                    }//end for i
+               
+                }//end for
+
+            }//end else
+            self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
+            self.NotificationView?.reloadData()
+        }
+        
+        //self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
+
+//        db.collection("users").document(userID).collection("notificationsList").getDocuments(){ (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for userdocument in querySnapshot!.documents {
+//
+//                    let poi = POI(ID: userdocument.documentID, name: userdocument.get("name") as! String, rate: userdocument.get("rating") as! Double, long: userdocument.get("longitude") as! Double, lat:userdocument.get("latitude") as! Double, description: userdocument.get("briefInfo") as! String, openingHours: userdocument.get("openingHours") as! String, locationName: userdocument.get("location") as! String, imgUrl: userdocument.get("image") as! String, category: userdocument.get("category") as! String)
+//
+//                    poi.wanttovisit = userdocument.get("wantToVisit") as! Bool
+//                    poi.visited = userdocument.get("visited") as! Bool
+//                    poi.notinterested = userdocument.get("notInterested") as! Bool
+//
+//                    self.notiList.append(poi)
+//                    if(!self.isExist(theList: globalPOIList, poi: poi)){
+//                        globalPOIList.append(poi)
+//                    }
+//                    self.NotificationView?.reloadData()
+//
+//                }//end for
+//            }//end else
+//
+//        }
+        
+//        print("----------------pool---------------")
+//        for i in poolList{
+//            print("---------------" + i.name)
+//        }
+//        print("--------------------------------------")
+//       // recommend.markedList = poolList
+//        //recommend.sort(poiList: poolList)
+//        //recommendationList = recommend.getRecommendationList(list: poolList)
+//        print("----------------recommend---------------")
+//        for i in recommendationList{
+//            print("---------------" + i.name)
+//        }
+//        print("--------------------------------------")
+//        print("----------------NOTI---------------")
+//        for i in recommendationList{
+//            print("---------------" + i.name)
+//        }
+//        print("--------------------------------------")
+        
+        self.NotificationView?.reloadData()
+        self.RecommendationView?.reloadData()
+        
+        print("--------------------------------------")
+        for i in globalPOIList{
+            print("---------------" + i.name)
+        }
+        print("--------------------------------------")
+    }//end viewWillAppear
+    
+    //this method check if the POI is inside a list
+    func isExist(theList: [POI], poi: POI) -> Bool{
+        for p in theList {
+            if(p.ID == poi.ID){
+                return true
+            }
+        }//end for
+        return false
+    }//end isExist
+    
+}//end class
 
 
 // MARK: UICollectionViewDelegate
-
 extension ListViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -126,7 +193,7 @@ extension ListViewController:UICollectionViewDelegate,UICollectionViewDataSource
         case NotificationView:
             return notiList.count
         case RecommendationView:
-            return poolList.count
+            return recommendationList.count
         default:
             return 0
         }
@@ -145,8 +212,8 @@ extension ListViewController:UICollectionViewDelegate,UICollectionViewDataSource
         case RecommendationView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendationCell", for: indexPath) as? RecommendationCell
             cell?.backgroundImage?.image = UIImage.init(named: "color_\((indexPath.row%6)+1)")
-            cell?.lable?.text = poolList[indexPath.row].name
-            cell?.desc?.text = poolList[indexPath.row].locationName
+            cell?.lable?.text = recommendationList[indexPath.row].name
+            cell?.desc?.text = recommendationList[indexPath.row].locationName
             return cell!
         default:
             return UICollectionViewCell()
@@ -171,43 +238,48 @@ extension ListViewController:UICollectionViewDelegate,UICollectionViewDataSource
         switch collectionView {
         case NotificationView:
             let pinPopup = PopUpDetailViewController()
-            pinPopup.setContent(name: notiList[indexPath.row].name, loc: notiList[indexPath.row].locationName, stars: notiList[indexPath.row].rate , hours: notiList[indexPath.row].openingHours, desc: notiList[indexPath.row].description, img: "https://static01.nyt.com/images/2019/12/03/world/03xp-lilbub/merlin_165345945_7a6f87a8-cdf3-4d00-b389-282ad7630953-articleLarge.jpg?quality=75&auto=webp&disable=upscale", want: notiList[indexPath.row].wanttovisit, visit:  notiList[indexPath.row].visited, not: notiList[indexPath.row].notinterested)
+            pinPopup.setContent(id: notiList[indexPath.row].ID,name: notiList[indexPath.row].name, loc: notiList[indexPath.row].locationName, stars: notiList[indexPath.row].rate , hours: notiList[indexPath.row].openingHours, desc: notiList[indexPath.row].description, img: notiList[indexPath.row].imgUrl, want: notiList[indexPath.row].wanttovisit, visit:  notiList[indexPath.row].visited, not: notiList[indexPath.row].notinterested)
+            
+            globalPOI = notiList[indexPath.row]
+            
             presentPopup(pinPopup,
-            animated: true,
-            backgroundStyle: .blur(.light), // present the popup with a blur effect has background
+                         animated: true,
+                         backgroundStyle: .blur(.light), // present the popup with a blur effect has background
                 constraints: [.width(Screen.WIDTHFORPER(per: 90.0))], // fix leading edge and the width
-            transitioning: .zoom, // the popup come and goes from the left side of the screen
-            autoDismiss: false, // when touching outside the popup bound it is not dismissed
-            completion: nil)
+                transitioning: .zoom, // the popup come and goes from the left side of the screen
+                autoDismiss: false, // when touching outside the popup bound it is not dismissed
+                completion: nil)
             return
         case RecommendationView:
             let pinPopup = PopUpDetailViewController()
-            pinPopup.setContent(name: poolList[indexPath.row].name, loc: poolList[indexPath.row].locationName, stars: poolList[indexPath.row].rate, hours: poolList[indexPath.row].openingHours, desc: poolList[indexPath.row].description, img: poolList[indexPath.row].imgUrl, want: poolList[indexPath.row].wanttovisit, visit:  poolList[indexPath.row].visited, not: poolList[indexPath.row].notinterested)
+            pinPopup.setContent(id: recommendationList[indexPath.row].ID,name: recommendationList[indexPath.row].name, loc: recommendationList[indexPath.row].locationName, stars: recommendationList[indexPath.row].rate, hours: recommendationList[indexPath.row].openingHours, desc: recommendationList[indexPath.row].description, img: recommendationList[indexPath.row].imgUrl, want: recommendationList[indexPath.row].wanttovisit, visit:  recommendationList[indexPath.row].visited, not: recommendationList[indexPath.row].notinterested)
+            
+            globalPOI = recommendationList[indexPath.row]
+            
             presentPopup(pinPopup,
-            animated: true,
-            backgroundStyle: .blur(.light), // present the popup with a blur effect has background
-            constraints: [.width(Screen.WIDTHFORPER(per: 90.0))], // fix leading edge and the width
-            transitioning: .zoom, // the popup come and goes from the left side of the screen
-            autoDismiss: false, // when touching outside the popup bound it is not dismissed
-            completion: nil)
+                         animated: true,
+                         backgroundStyle: .blur(.light), // present the popup with a blur effect has background
+                constraints: [.width(Screen.WIDTHFORPER(per: 90.0))], // fix leading edge and the width
+                transitioning: .zoom, // the popup come and goes from the left side of the screen
+                autoDismiss: false, // when touching outside the popup bound it is not dismissed
+                completion: nil)
+            //            let userID = Auth.auth().currentUser!.uid
+            //            var db = Firestore.firestore()
+            //            db.collection("users").document(userID).collection("markedList").document(poolList[indexPath.row].ID).addSnapshotListener { documentSnapshot, error in
+            //                guard let document = documentSnapshot else {
+            //                    print("Error fetching document: \(error!)")
+            //                    return
+            //                }
+            //                let source = document.metadata.hasPendingWrites ? "Local" : "Server"
+            //                print("\(source) data: \(document.data() ?? [:])")
+            // }
+            
             return
         default:
             return
         }
-//        let pinPopup = PopUpDetailViewController()
-//        pinPopup.setContent(name: "hello",loc: "String", stars: 2.3, hours: "String", desc: "String")
-//        presentPopup(pinPopup,
-//        animated: true,
-//        backgroundStyle: .blur(.light), // present the popup with a blur effect has background
-//        constraints: [.leading(20), .trailing(20)], // fix leading edge and the width
-//        transitioning: .zoom, // the popup come and goes from the left side of the screen
-//        autoDismiss: true, // when touching outside the popup bound it is not dismissed
-//        completion: nil)
     }
-    func getUser()->user{
-        var u = user(ID: "5x141iiWqQT5Wk5GEjMTO6CXrDw2", name: "helpme", email: "email", rewardList: [POI](), markedList: [POI](), recommendationcategories: [category]())
-        return u
-    }
+    
     
     //  LOCK ORIENTATION TO PORTRAIT
     override var shouldAutorotate: Bool {
@@ -221,10 +293,5 @@ extension ListViewController:UICollectionViewDelegate,UICollectionViewDataSource
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return UIInterfaceOrientation.portrait
     }
+    
 }
-
-//struct data {
-//    var label : String
-//    var desc : String
-//
-//}

@@ -12,6 +12,8 @@ import ARCL
 import CoreLocation
 import SceneKit
 
+var globalPOIList = [POI]()
+
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     
     var sceneLocationView = SceneLocationView()
@@ -71,7 +73,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             
             //iterate through all poi's in DB
             self.getPOI()
-            
+            self.getNotiPOI()
+
             //handling when an AR object is tapped
             let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
             sceneLocationView.addGestureRecognizer(tap)
@@ -170,6 +173,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             } else {
                 
                 for document in querySnapshot!.documents {
+                    
+                    globalPOIList.append(POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String))
+                    
                     let latitude = document.get("latitude")
                     let longitude = document.get("longitude")
                     let imageData = document.get("image")
@@ -384,6 +390,23 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         
     }
+    
+    func getNotiPOI(){
+          
+          //iterate through POIs
+          db.collection("NotificationsPOIs").getDocuments() { (querySnapshot, err) in
+              if let err = err {
+                  print("Error getting documents: \(err)")
+              } else {
+                  for document in querySnapshot!.documents {
+
+                     globalPOIList.append(POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String))
+                     
+                 }//end for
+              }
+          }
+          
+      } //end func getPOI
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
