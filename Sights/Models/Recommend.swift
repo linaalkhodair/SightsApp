@@ -37,9 +37,9 @@ class Recommend {
         print("im indide get recommendation list")
         sort(poiList: list)
         recommendationCategories.sort(by: { $0.count > $1.count })
-        recommend(matchedList: match())
         
-        return recommendList
+        
+        return recommend(matchedList: match())
     }
     
     //==============================================================================================//
@@ -296,7 +296,7 @@ class Recommend {
             if(recommendationCategories[0].count>0){
                 
                 for i in globalPOIList{
-                    if(recommendationCategories[0].name == i.categorey && i.notinterested == false){
+                    if(recommendationCategories[0].name == i.categorey && i.notinterested == false && i.visited == false){
                         if(!isExist(theList: matchedList, poi: i)){
                             matchedList.append(i)
                         }//end exist
@@ -313,7 +313,7 @@ class Recommend {
             if(recommendationCategories[0].count>0){
                  
                  for i in globalPOIList{
-                     if(recommendationCategories[0].name == i.categorey && i.notinterested == false){
+                    if(recommendationCategories[0].name == i.categorey && i.notinterested == false && i.visited == false){
                          if(!isExist(theList: matchedList, poi: i)){
                              matchedList.append(i)
                          }//end exist
@@ -325,7 +325,7 @@ class Recommend {
             if(recommendationCategories[1].count>0){
                  
                  for i in globalPOIList{
-                     if(recommendationCategories[1].name == i.categorey && i.notinterested == false){
+                     if(recommendationCategories[1].name == i.categorey && i.notinterested == false && i.visited == false){
                          if(!isExist(theList: matchedList, poi: i)){
                              matchedList.append(i)
                          }//end exist
@@ -340,7 +340,7 @@ class Recommend {
         return matchedList
     }//end match
     
-    func recommend(matchedList: [POI]){
+    func recommend(matchedList: [POI]) -> [POI]{
         print("im inside recommend ")
         
         recommendList = [POI]()
@@ -349,12 +349,13 @@ class Recommend {
             print("----XXX XX XXX XX XXX XX XXX XX ---- YES I'm empty recommend()")
             for i in 0...3{
                 var randomPOI = globalPOIList.randomElement()!
-                while(isExist(theList: recommendList, poi: randomPOI) || randomPOI.notinterested == true){
+                while(isExist(theList: recommendList, poi: randomPOI) || randomPOI.notinterested == true || randomPOI.visited == true){
                     randomPOI = globalPOIList.randomElement()!
                 }
                 recommendList.append(randomPOI)
+                print("i'm recommending " + randomPOI.name)
             }//end for
-            return
+            return recommendList
         }//end empty
         
         if(recommendationCategories.count>0 && recommendationCategories.count<4){//1-3
@@ -374,7 +375,7 @@ class Recommend {
                 }//end for
             }//end else
             
-            return
+            return recommendList
         }//end 1-3
         
         if(recommendationCategories.count>3){//>4
@@ -393,9 +394,10 @@ class Recommend {
                 }//end for
             }//end else
             
-            return
+            return recommendList
         }//end >4
-        
+        return recommendList
+
     }//end recommend
     
     

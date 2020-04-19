@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RewardDetailsViewController" customModule="Sights" customModuleProvider="target">
+            <connections>
+                <outlet property="codeLabel" destination="9Ev-An-cp0" id="AEo-Rz-Vc3"/>
+                <outlet property="emailButton" destination="uPN-Mw-3OI" id="5po-67-ZH7"/>
+                <outlet property="placeLabel" destination="lJD-Dx-H7N" id="A9E-hj-FGd"/>
+                <outlet property="rewardView" destination="Bnw-f9-FBt" id="MVm-8j-lMj"/>
+                <outlet property="view" destination="Bnw-f9-FBt" id="EMx-MC-5fk"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="center" id="Bnw-f9-FBt">
+            <rect key="frame" x="0.0" y="0.0" width="316" height="202"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0s-83-GaH">
+                    <rect key="frame" x="276" y="22" width="20" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="Gzi-yY-jou"/>
+                        <constraint firstAttribute="height" constant="21.5" id="mI7-L2-ftP"/>
+                    </constraints>
+                    <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" backgroundImage="xmark" catalog="system">
+                        <color key="titleColor" red="0.75099390749999995" green="0.74354642630000001" blue="0.94512265920000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <connections>
+                        <action selector="closeBtnTapped:" destination="-1" eventType="touchUpInside" id="p2a-sK-vhC"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9Ev-An-cp0">
+                    <rect key="frame" x="16" y="56" width="284" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="284" id="scP-XR-kVh"/>
+                        <constraint firstAttribute="height" constant="24" id="t9P-Gt-P0p"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPN-Mw-3OI">
+                    <rect key="frame" x="83" y="126" width="150" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="5hA-W0-CqB"/>
+                        <constraint firstAttribute="height" constant="56" id="jhq-kD-PZb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="23"/>
+                    <state key="normal" title="email it" backgroundImage="color_3">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="EmailReward:" destination="-1" eventType="touchUpInside" id="VJl-Iq-5Bj"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="use it at Place" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lJD-Dx-H7N">
+                    <rect key="frame" x="16" y="88" width="284" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="284" id="QDm-ME-om8"/>
+                        <constraint firstAttribute="height" constant="21" id="uBb-Jo-Aug"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="uPN-Mw-3OI" firstAttribute="centerX" secondItem="Bnw-f9-FBt" secondAttribute="centerX" id="GtF-5g-QBp"/>
+                <constraint firstItem="lJD-Dx-H7N" firstAttribute="centerX" secondItem="Bnw-f9-FBt" secondAttribute="centerX" id="Ib1-pH-vJx"/>
+                <constraint firstAttribute="trailing" secondItem="F0s-83-GaH" secondAttribute="trailing" constant="20" id="LcC-T2-res"/>
+                <constraint firstAttribute="bottom" secondItem="uPN-Mw-3OI" secondAttribute="bottom" constant="20" id="NKc-tZ-j4l"/>
+                <constraint firstItem="lJD-Dx-H7N" firstAttribute="top" secondItem="9Ev-An-cp0" secondAttribute="bottom" constant="8" id="b2Q-er-WqM"/>
+                <constraint firstItem="9Ev-An-cp0" firstAttribute="centerX" secondItem="Bnw-f9-FBt" secondAttribute="centerX" id="frW-LU-688"/>
+                <constraint firstItem="F0s-83-GaH" firstAttribute="top" secondItem="Bnw-f9-FBt" secondAttribute="top" constant="20" id="hMm-MN-L2c"/>
+                <constraint firstItem="uPN-Mw-3OI" firstAttribute="top" secondItem="lJD-Dx-H7N" secondAttribute="bottom" constant="17" id="rjE-5p-h25"/>
+                <constraint firstItem="9Ev-An-cp0" firstAttribute="top" secondItem="Bnw-f9-FBt" secondAttribute="top" constant="56" id="vQT-S9-bol"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="L5I-6v-42P"/>
+            <point key="canvasLocation" x="-115.94202898550725" y="-67.633928571428569"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="color_3" width="400" height="164"/>
+        <image name="xmark" catalog="system" width="64" height="56"/>
+    </resources>
+</document>

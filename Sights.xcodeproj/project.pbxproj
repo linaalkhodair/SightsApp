@@ -58,6 +58,8 @@
 		E9DA066A24360B5B002CCE7A /* HiddenObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA066924360B5B002CCE7A /* HiddenObject.swift */; };
 		E9DA066C243623AB002CCE7A /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA066B243623AB002CCE7A /* ChallengeViewController.swift */; };
 		E9DA067424363A99002CCE7A /* ChallengePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */; };
+		FC5EE9F4244C920900BCE84F /* RewardDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5EE9F2244C920900BCE84F /* RewardDetailsViewController.swift */; };
+		FC5EE9F5244C920900BCE84F /* RewardDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5EE9F3244C920900BCE84F /* RewardDetailsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +143,8 @@
 		E9DA066924360B5B002CCE7A /* HiddenObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenObject.swift; sourceTree = "<group>"; };
 		E9DA066B243623AB002CCE7A /* ChallengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
 		E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePopUpVC.swift; sourceTree = "<group>"; };
+		FC5EE9F2244C920900BCE84F /* RewardDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDetailsViewController.swift; sourceTree = "<group>"; };
+		FC5EE9F3244C920900BCE84F /* RewardDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardDetailsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +342,8 @@
 				E9DA062424336D6A002CCE7A /* RecommendationCell.swift */,
 				E9DA062624336D6A002CCE7A /* NotificationCell.swift */,
 				E9DA062724336D6A002CCE7A /* SwiftExtensionClass.swift */,
+				FC5EE9F2244C920900BCE84F /* RewardDetailsViewController.swift */,
+				FC5EE9F3244C920900BCE84F /* RewardDetailsViewController.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -466,6 +472,7 @@
 				E9DA065D2434BD55002CCE7A /* Guest.storyboard in Resources */,
 				E9A8448423F695FD00E3124B /* POIView.xib in Resources */,
 				E9A8447823F40CBC00E3124B /* sightsGif.gif in Resources */,
+				FC5EE9F5244C920900BCE84F /* RewardDetailsViewController.xib in Resources */,
 				E9DA061C242E6E5B002CCE7A /* DrivingPopUp.xib in Resources */,
 				E9A8448223F4167F00E3124B /* GoogleService-Info.plist in Resources */,
 				E9DA06312433B468002CCE7A /* PopUpDetailViewController.xib in Resources */,
@@ -613,6 +620,7 @@
 				E960222B240D11C400B8B18C /* LBNotification.swift in Sources */,
 				E9A8448A23F7182100E3124B /* POI.swift in Sources */,
 				E9CCED02243B2B8B00B887A5 /* RewardViewController.swift in Sources */,
+				FC5EE9F4244C920900BCE84F /* RewardDetailsViewController.swift in Sources */,
 				E9DA062A24336D6B002CCE7A /* NotificationCell.swift in Sources */,
 				E9A8447C23F4148A00E3124B /* LoginViewController.swift in Sources */,
 				E960226B241CD6E300B8B18C /* CoreMotionManager.swift in Sources */,

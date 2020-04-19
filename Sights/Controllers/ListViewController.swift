@@ -24,12 +24,12 @@ class ListViewController: UIViewController
     var recommend = Recommend(rewardList: [POI](), markedList: [POI](), recommendationCategories: [category](), visitedList: [POI](), wanttovisitList: [POI](), notInterestedList: [POI](), notiList: [POI](), recommendList: [POI]())
     
 
-    
-    var POI1: POI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1")
-    var POI2: POI = POI(ID: "2", name:  "2name", rate:  2.0, long:  222, lat: 222, visited: false, notinterested: false, wanttovisit: false , description:  "2desc", openingHours: "2open",locationName:  "2locname", imgUrl:  "2url", category: "cat2")
-    var POI3: POI = POI(ID: "3", name:  "3name", rate:  3.0, long:  333, lat: 333, visited: false, notinterested: false, wanttovisit: true , description:  "3desc", openingHours: "3open",locationName:  "3locname", imgUrl:  "3url", category: "cat3")
-    var POI4: POI = POI(ID: "4", name:  "4name", rate:  4.0, long:  444, lat: 444, visited: true, notinterested: true, wanttovisit: false , description:  "4desc", openingHours: "4open",locationName:  "4locname", imgUrl:  "4url", category: "cat4")
-    var POI5: POI = POI(ID: "5", name:  "5name", rate:  5.0, long:  555, lat: 555, visited: false, notinterested: false, wanttovisit: false , description:  "5desc", openingHours: "5open",locationName:  "5locname", imgUrl:  "5url", category: "cat2")
+//
+//    var POI1: POI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1")
+//    var POI2: POI = POI(ID: "2", name:  "2name", rate:  2.0, long:  222, lat: 222, visited: false, notinterested: false, wanttovisit: false , description:  "2desc", openingHours: "2open",locationName:  "2locname", imgUrl:  "2url", category: "cat2")
+//    var POI3: POI = POI(ID: "3", name:  "3name", rate:  3.0, long:  333, lat: 333, visited: false, notinterested: false, wanttovisit: true , description:  "3desc", openingHours: "3open",locationName:  "3locname", imgUrl:  "3url", category: "cat3")
+//    var POI4: POI = POI(ID: "4", name:  "4name", rate:  4.0, long:  444, lat: 444, visited: true, notinterested: true, wanttovisit: false , description:  "4desc", openingHours: "4open",locationName:  "4locname", imgUrl:  "4url", category: "cat4")
+//    var POI5: POI = POI(ID: "5", name:  "5name", rate:  5.0, long:  555, lat: 555, visited: false, notinterested: false, wanttovisit: false , description:  "5desc", openingHours: "5open",locationName:  "5locname", imgUrl:  "5url", category: "cat2")
     
     
     //    var visitedList = [POI]()
@@ -42,8 +42,8 @@ class ListViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        notiList.append(POI1)
-        notiList.append(POI2)
+        //notiList.append(POI1)
+        //notiList.append(POI2)
 
         
     }
@@ -70,9 +70,14 @@ class ListViewController: UIViewController
                             i.wanttovisit = userdocument.get("wantToVisit") as! Bool
                             i.visited = userdocument.get("visited") as! Bool
                             i.notinterested = userdocument.get("notInterested") as! Bool
-                            self.poolList.append(i)
+                            if(!self.isExist(theList: self.notiList, poi: i)){
+                                self.poolList.append(i)
+                            }
                             self.RecommendationView?.reloadData()
-                            self.recommend.markedList.append(i)
+                            if(!self.isExist(theList: self.recommend.markedList, poi: i)){
+                                self.recommend.markedList.append(i)
+                            }
+                            self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
                             print("appended in list pool "+i.name)
                             
                         }//end if
@@ -84,6 +89,7 @@ class ListViewController: UIViewController
 
             }//end else
             self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
+            self.RecommendationView?.reloadData()
             self.NotificationView?.reloadData()
         }
         
@@ -100,8 +106,12 @@ class ListViewController: UIViewController
                             i.wanttovisit = userdocument.get("wantToVisit") as! Bool
                             i.visited = userdocument.get("visited") as! Bool
                             i.notinterested = userdocument.get("notInterested") as! Bool
-                            self.notiList.append(i)
-                            self.poolList.append(i)
+                            if(!self.isExist(theList: self.notiList, poi: i)){
+                                self.notiList.append(i)
+                            }
+                            if(!self.isExist(theList: self.notiList, poi: i)){
+                                self.poolList.append(i)
+                            }
                             self.NotificationView?.reloadData()
                             //self.recommend.markedList.append(i)
                             print("appended in list noti "+i.name)
@@ -109,57 +119,19 @@ class ListViewController: UIViewController
                         }//end if
                        
                     }//end for i
+                    
                
                 }//end for
+                
 
             }//end else
-            self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
+            //self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
+            for i in self.recommendationList {
+                print("this is in List" + i.name)
+            }
             self.NotificationView?.reloadData()
         }
-        
-        //self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
 
-//        db.collection("users").document(userID).collection("notificationsList").getDocuments(){ (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                for userdocument in querySnapshot!.documents {
-//
-//                    let poi = POI(ID: userdocument.documentID, name: userdocument.get("name") as! String, rate: userdocument.get("rating") as! Double, long: userdocument.get("longitude") as! Double, lat:userdocument.get("latitude") as! Double, description: userdocument.get("briefInfo") as! String, openingHours: userdocument.get("openingHours") as! String, locationName: userdocument.get("location") as! String, imgUrl: userdocument.get("image") as! String, category: userdocument.get("category") as! String)
-//
-//                    poi.wanttovisit = userdocument.get("wantToVisit") as! Bool
-//                    poi.visited = userdocument.get("visited") as! Bool
-//                    poi.notinterested = userdocument.get("notInterested") as! Bool
-//
-//                    self.notiList.append(poi)
-//                    if(!self.isExist(theList: globalPOIList, poi: poi)){
-//                        globalPOIList.append(poi)
-//                    }
-//                    self.NotificationView?.reloadData()
-//
-//                }//end for
-//            }//end else
-//
-//        }
-        
-//        print("----------------pool---------------")
-//        for i in poolList{
-//            print("---------------" + i.name)
-//        }
-//        print("--------------------------------------")
-//       // recommend.markedList = poolList
-//        //recommend.sort(poiList: poolList)
-//        //recommendationList = recommend.getRecommendationList(list: poolList)
-//        print("----------------recommend---------------")
-//        for i in recommendationList{
-//            print("---------------" + i.name)
-//        }
-//        print("--------------------------------------")
-//        print("----------------NOTI---------------")
-//        for i in recommendationList{
-//            print("---------------" + i.name)
-//        }
-//        print("--------------------------------------")
         
         self.NotificationView?.reloadData()
         self.RecommendationView?.reloadData()
