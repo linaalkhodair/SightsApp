@@ -75,8 +75,8 @@ class SightsTests: XCTestCase {
         hvc.viewDidLoad()
         hvc.getPOI()
 
-        ListViewController().viewDidLoad()
-        
+        ListViewController().viewDidAppear(true)
+        ProfileViewController().viewWillAppear(true)
         let poiView = hvc.setPOIView(ID: "aYLkWgVxQYKKr4ADl8MH")
         let btn = UIButton()
         poiView.clk_Visited(button: btn)

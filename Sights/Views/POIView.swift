@@ -11,6 +11,7 @@ import Firebase
 
 class POIView: UIView {
     
+    var ID : String = "id"
     var nameString : String = "name"
     var starsDouble : Double = 5.0
     var locString : String = "location"
@@ -100,9 +101,13 @@ class POIView: UIView {
     @IBAction func closeBtnTapped(_ sender: Any) {
         contentView.removeFromSuperview()
         
-        //self.removeFromSuperview()
-//        contentView.alpha = 0
-        print("Inside custom view")
+        updateMark(mark: "notInterested", value: notinterested, poiId: ID)
+        updateMark(mark: "visited", value: visited, poiId: ID)
+        updateMark(mark: "wantToVisit", value: wanttovisit, poiId: ID)
+        
+        globalPOI.notinterested = notinterested
+        globalPOI.visited = visited
+        globalPOI.wanttovisit = wanttovisit
         
     }
     
@@ -143,5 +148,38 @@ class POIView: UIView {
     
         
     //*********ADD MARK STATES TO USER OFFICIALLY********
+    
+    func updateMark(mark: String, value: Bool, poiId: String){
+        let userID = Auth.auth().currentUser!.uid
+        var db = Firestore.firestore()
+        //db.collection("users").document(userID).collection("markedList").document(ID).updateData([mark : value])
+        let userRef = db.collection("users").document(userID).collection("markedList").document(ID)
+        
+        // Set the "capital" field of the city 'DC'
+        userRef.updateData([
+            mark+"" : value
+        ]) { err in
+            if let err = err {
+                if(!(self.notinterested==false && self.visited==false && self.wanttovisit==false)){
+                db.collection("users").document(userID).collection("markedList").document(self.ID).setData([
+                        "wantToVisit": self.wanttovisit,
+                        "visited": self.visited,
+                        "notInterested": self.notinterested
+                    ]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                        }
+                    }
+                }
+                print("!!!!!!!!!!!!Error updating document: \(err.localizedDescription)")
+            } else {
+                print("!!!!!!!!!!!!Document successfully updated")
+            }
+        }
+        
+    } //end func updateMark
+
     
 }

@@ -128,7 +128,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        
+                        self.poiview.ID = ID
                         self.poiview.nameString = document.get("name") as! String
                         self.poiview.descString = document.get("briefInfo") as! String
                         self.poiview.hoursString = document.get("openingHours") as! String
