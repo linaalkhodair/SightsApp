@@ -28,6 +28,7 @@ class RewardDetailsViewController: UIViewController {
         
         db = Firestore.firestore()
         emailButton.layer.cornerRadius = 20
+        emailButton.clipsToBounds = true
         rewardView.layer.cornerRadius = 20
     }
     
@@ -72,7 +73,7 @@ class RewardDetailsViewController: UIViewController {
                             return
                    }
                 let composer = MFMailComposeViewController()
-                    composer.mailComposeDelegate = self as! MFMailComposeViewControllerDelegate
+        composer.mailComposeDelegate = self as MFMailComposeViewControllerDelegate
                    composer.setToRecipients([email])
                    composer.setSubject("Reward from Sights!")
                    composer.setMessageBody("", isHTML: false)
@@ -83,11 +84,40 @@ class RewardDetailsViewController: UIViewController {
                   do {
                  let attachmentData = try Data(contentsOf: url)
                     composer.addAttachmentData(attachmentData, mimeType: "application/pdf", fileName: "Rewards")
-                    composer.mailComposeDelegate = self as! MFMailComposeViewControllerDelegate
+                    composer.mailComposeDelegate = self as MFMailComposeViewControllerDelegate
                   self.present(composer, animated: true, completion: nil)
                  } catch let error {
                       print("We have encountered error \(error.localizedDescription)")
                   }
                }
+
+}
+
+extension RewardDetailsViewController: MFMailComposeViewControllerDelegate {
+
+func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+              case .cancelled:
+                  print("User cancelled")
+                  break
+
+              case .saved:
+                  print("Mail is saved by user")
+                  break
+
+              case .sent:
+                  print("Mail is sent successfully")
+                  break
+
+              case .failed:
+                  print("Sending mail is failed")
+                  break
+              default:
+                  break
+              }
+
+              controller.dismiss(animated: true)
+
+   }
 
 }
