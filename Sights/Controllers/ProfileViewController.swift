@@ -39,8 +39,8 @@ class ProfileViewController: UIViewController {
         
         print("HERE PROFILEEEE")
         
-        var POI1: POI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1")
-        var POI2: POI = POI(ID: "2", name:  "2name", rate:  2.0, long:  222, lat: 222, visited: false, notinterested: false, wanttovisit: false , description:  "2desc", openingHours: "2open",locationName:  "2locname", imgUrl:  "2url", category: "cat2")
+        var POI1: POI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1",fullimg: "")
+        var POI2: POI = POI(ID: "2", name:  "2name", rate:  2.0, long:  222, lat: 222, visited: false, notinterested: false, wanttovisit: false , description:  "2desc", openingHours: "2open",locationName:  "2locname", imgUrl:  "2url", category: "cat2",fullimg: "")
         
         let monthName = DateFormatter().monthSymbols[Date().month - 1]
         
@@ -229,7 +229,7 @@ extension ProfileViewController:UICollectionViewDelegate,UICollectionViewDataSou
             return
         case VisitListView:
             let pinPopup = PopUpDetailViewController()
-            pinPopup.setContent(id: wantToVisit[indexPath.row].ID,name: wantToVisit[indexPath.row].name, loc: wantToVisit[indexPath.row].locationName, stars: wantToVisit[indexPath.row].rate, hours: wantToVisit[indexPath.row].openingHours, desc: wantToVisit[indexPath.row].description, img: wantToVisit[indexPath.row].imgUrl, want: wantToVisit[indexPath.row].wanttovisit, visit:  wantToVisit[indexPath.row].visited, not: wantToVisit[indexPath.row].notinterested)
+            pinPopup.setContent(id: wantToVisit[indexPath.row].ID,name: wantToVisit[indexPath.row].name, loc: wantToVisit[indexPath.row].locationName, stars: wantToVisit[indexPath.row].rate, hours: wantToVisit[indexPath.row].openingHours, desc: wantToVisit[indexPath.row].description, img: wantToVisit[indexPath.row].fullimg, want: wantToVisit[indexPath.row].wanttovisit, visit:  wantToVisit[indexPath.row].visited, not: wantToVisit[indexPath.row].notinterested)
             
             globalPOI = wantToVisit[indexPath.row]
             

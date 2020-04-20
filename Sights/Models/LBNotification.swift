@@ -144,7 +144,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                         if !exists {
                         self.foursquareNotification(name: name!)
                             
-                        let poi = POI(ID: id, name: name!, rate: rating, long: lng!, lat: lat!, visited: false, notinterested: false, wanttovisit: false, description: desc!, openingHours: time, locationName: loc!, imgUrl: photo!, category: category)
+                        let poi = POI(ID: id, name: name!, rate: rating, long: lng!, lat: lat!, visited: false, notinterested: false, wanttovisit: false, description: desc!, openingHours: time, locationName: loc!, imgUrl: photo!, category: category, fullimg: "")
                             
                         self.addNotificationList(poi: poi)
                         //then add POIObject to notification list

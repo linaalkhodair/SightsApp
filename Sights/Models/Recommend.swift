@@ -419,21 +419,21 @@ class Recommend {
                 
                 var db = Firestore.firestore()
                 print("inside dp hhhhhhhhhhhhhhhhhhhhhhh")
-                db.collection("POIs").whereField("category", isEqualTo: TheCategory.name).getDocuments(){ (querySnapshot, err) in
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    } else {
-                        print("inside dp hhhhhhhhhhhhhhhhhhhhhhh")
-                         for document in querySnapshot!.documents {
-                        let poi = POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String)
-                        
-                        localCategories.append(poi)
-                            print("inside dp hhhhhhhhhhhhhhhhhhhhhhh"+poi.categorey)
-                            print("inside db  hhhhhhhhhhhhhhhhhhhhhhh"+String(localCategories.count))
-                        }
-                        
-                    }//end else
-                }//end getDoc
+//                db.collection("POIs").whereField("category", isEqualTo: TheCategory.name).getDocuments(){ (querySnapshot, err) in
+//                    if let err = err {
+//                        print("Error getting documents: \(err)")
+//                    } else {
+//                        print("inside dp hhhhhhhhhhhhhhhhhhhhhhh")
+//                         for document in querySnapshot!.documents {
+//                        let poi = POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String)
+//
+//                        localCategories.append(poi)
+//                            print("inside dp hhhhhhhhhhhhhhhhhhhhhhh"+poi.categorey)
+//                            print("inside db  hhhhhhhhhhhhhhhhhhhhhhh"+String(localCategories.count))
+//                        }
+//
+//                    }//end else
+//                }//end getDoc
                 var numOfRec = 0
                 print("hhhhhhhhhhhhhhhhhhhhhhh"+String(localCategories.count))
                 if(localCategories.count < 5){

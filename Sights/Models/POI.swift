@@ -26,9 +26,10 @@ class POI {
     var locationName: String
     var imgUrl: String
     var categorey: String
+    var fullimg: String
     
     
-    internal init(ID: String, name: String, rate: Double, long: Double, lat: Double, visited: Bool, notinterested: Bool, wanttovisit: Bool, description: String, openingHours: String, locationName: String, imgUrl: String, category: String) {
+    internal init(ID: String, name: String, rate: Double, long: Double, lat: Double, visited: Bool, notinterested: Bool, wanttovisit: Bool, description: String, openingHours: String, locationName: String, imgUrl: String, category: String, fullimg: String) {
         self.ID = ID
         self.name = name
         self.rate = rate
@@ -42,9 +43,10 @@ class POI {
         self.locationName = locationName
         self.imgUrl = imgUrl
         self.categorey = category
+        self.fullimg = fullimg
     }
     
-    internal init(ID: String, name: String, rate: Double, long: Double, lat: Double, description: String, openingHours: String, locationName: String, imgUrl: String, category: String) {
+    internal init(ID: String, name: String, rate: Double, long: Double, lat: Double, description: String, openingHours: String, locationName: String, imgUrl: String, category: String, fullimg: String) {
         self.ID = ID
         self.name = name
         self.rate = rate
@@ -58,6 +60,8 @@ class POI {
         self.locationName = locationName
         self.imgUrl = imgUrl
         self.categorey = category
+        self.fullimg = fullimg
+
     }
     
 }//end POI

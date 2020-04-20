@@ -9,7 +9,7 @@ import UIKit
 import PopItUp
 import Firebase
 
-var globalPOI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1")
+var globalPOI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1", fullimg: "")
 
 class ListViewController: UIViewController
 {
@@ -210,7 +210,7 @@ extension ListViewController:UICollectionViewDelegate,UICollectionViewDataSource
         switch collectionView {
         case NotificationView:
             let pinPopup = PopUpDetailViewController()
-            pinPopup.setContent(id: notiList[indexPath.row].ID,name: notiList[indexPath.row].name, loc: notiList[indexPath.row].locationName, stars: notiList[indexPath.row].rate , hours: notiList[indexPath.row].openingHours, desc: notiList[indexPath.row].description, img: notiList[indexPath.row].imgUrl, want: notiList[indexPath.row].wanttovisit, visit:  notiList[indexPath.row].visited, not: notiList[indexPath.row].notinterested)
+            pinPopup.setContent(id: notiList[indexPath.row].ID,name: notiList[indexPath.row].name, loc: notiList[indexPath.row].locationName, stars: notiList[indexPath.row].rate , hours: notiList[indexPath.row].openingHours, desc: notiList[indexPath.row].description, img: notiList[indexPath.row].fullimg, want: notiList[indexPath.row].wanttovisit, visit:  notiList[indexPath.row].visited, not: notiList[indexPath.row].notinterested)
             
             globalPOI = notiList[indexPath.row]
             
@@ -224,7 +224,7 @@ extension ListViewController:UICollectionViewDelegate,UICollectionViewDataSource
             return
         case RecommendationView:
             let pinPopup = PopUpDetailViewController()
-            pinPopup.setContent(id: recommendationList[indexPath.row].ID,name: recommendationList[indexPath.row].name, loc: recommendationList[indexPath.row].locationName, stars: recommendationList[indexPath.row].rate, hours: recommendationList[indexPath.row].openingHours, desc: recommendationList[indexPath.row].description, img: recommendationList[indexPath.row].imgUrl, want: recommendationList[indexPath.row].wanttovisit, visit:  recommendationList[indexPath.row].visited, not: recommendationList[indexPath.row].notinterested)
+            pinPopup.setContent(id: recommendationList[indexPath.row].ID,name: recommendationList[indexPath.row].name, loc: recommendationList[indexPath.row].locationName, stars: recommendationList[indexPath.row].rate, hours: recommendationList[indexPath.row].openingHours, desc: recommendationList[indexPath.row].description, img: recommendationList[indexPath.row].fullimg, want: recommendationList[indexPath.row].wanttovisit, visit:  recommendationList[indexPath.row].visited, not: recommendationList[indexPath.row].notinterested)
             
             globalPOI = recommendationList[indexPath.row]
             

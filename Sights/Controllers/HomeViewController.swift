@@ -135,9 +135,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                         var rating = document.get("rating") as! Double
                         self.poiview.rating.text = "rating \(rating)" //WE'LL SEE
                         self.poiview.locString = document.get("location") as! String
-                        self.poiview.wanttovisit = document.get("wantToVisit") as! Bool
-                        self.poiview.visited = document.get("visited") as! Bool
-                        self.poiview.notinterested = document.get("notInterested") as! Bool
+                        self.poiview.wanttovisit = false
+                        self.poiview.visited = false
+                        self.poiview.notinterested = false
                         
                         self.poiview.setContent() //prepare content
 
@@ -174,7 +174,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 
                 for document in querySnapshot!.documents {
                     
-                    globalPOIList.append(POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String))
+                    globalPOIList.append(POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String, fullimg: document.get("fullimg") as! String))
                     
                     let latitude = document.get("latitude")
                     let longitude = document.get("longitude")
@@ -400,7 +400,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
               } else {
                   for document in querySnapshot!.documents {
 
-                     globalPOIList.append(POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String))
+                    globalPOIList.append(POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String, fullimg: document.get("image") as! String))
                      
                  }//end for
               }
