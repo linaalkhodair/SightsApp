@@ -70,9 +70,13 @@ class ListViewController: UIViewController
                             i.wanttovisit = userdocument.get("wantToVisit") as! Bool
                             i.visited = userdocument.get("visited") as! Bool
                             i.notinterested = userdocument.get("notInterested") as! Bool
-                            if(!self.isExist(theList: self.notiList, poi: i)){
+                            if(!self.isExist(theList: self.poolList, poi: i)){
                                 self.poolList.append(i)
                             }
+                            for j in self.poolList {
+                                print(">>>>>>>>>>>>>>> &&&& &&& && & this is in pool (marked loop) " + j.name)
+                            }
+
                             self.RecommendationView?.reloadData()
                             if(!self.isExist(theList: self.recommend.markedList, poi: i)){
                                 self.recommend.markedList.append(i)
@@ -103,9 +107,9 @@ class ListViewController: UIViewController
 
                     for i in globalPOIList{
                         if(i.ID == userdocument.documentID){
-                            i.wanttovisit = userdocument.get("wantToVisit") as! Bool
-                            i.visited = userdocument.get("visited") as! Bool
-                            i.notinterested = userdocument.get("notInterested") as! Bool
+                            //i.wanttovisit = false
+                            //i.visited = false
+                            //i.notinterested = false
                             if(!self.isExist(theList: self.notiList, poi: i)){
                                 self.notiList.append(i)
                             }
@@ -113,7 +117,7 @@ class ListViewController: UIViewController
                                 self.poolList.append(i)
                             }
                             self.NotificationView?.reloadData()
-                            //self.recommend.markedList.append(i)
+                            self.recommend.markedList.append(i)
                             print("appended in list noti "+i.name)
                             
                         }//end if

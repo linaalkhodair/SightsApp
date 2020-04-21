@@ -18,13 +18,13 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
     var lng: Double
     let client = FoursquareAPIClient(clientId: Constants.FoursquareClient.clientId, clientSecret: Constants.FoursquareClient.clientSecret)
     var db: Firestore!
-
+    
     init(lat: Double, lng: Double) {
         self.lat = lat
         self.lng = lng
         
     }
-
+    
     
     func searchVenues() {
         let parameter: [String: String] = [
@@ -64,7 +64,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
             }
         }
         
-
+        
     } // end searchVenues
     
     // recursive func to iterate through all venues and find a venue with a high rating to notify user
@@ -109,7 +109,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                 if loc == nil {
                     loc = "Riyadh, Saudi Arabia."
                 }
-               var desc = json["response"]["venue"]["location"]["description"].string
+                var desc = json["response"]["venue"]["location"]["description"].string
                 if desc == nil {
                     desc = "" //? idk
                 }
@@ -123,7 +123,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                 }
                 let time = days + ", " + hours //???????
                 //PHOTO -> BEST PHOTO
-            
+                
                 let photo = json["response"]["venue"]["bestPhoto"]["prefix"].string
                 print("Photo",photo)
                 
@@ -131,7 +131,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                 
                 let lat = json["response"]["venue"]["location"]["lat"].double
                 let lng = json["response"]["venue"]["location"]["lng"].double
-
+                
                 if let rating:Double = json["response"]["venue"]["rating"].double {
                     print("rating from: ", rating)
                     
@@ -141,17 +141,17 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                         self.notiExists(id: id) { (exists) in
                             print("ex",exists)
                             
-                        if !exists {
-                        self.foursquareNotification(name: name!)
-                            
-                        let poi = POI(ID: id, name: name!, rate: rating, long: lng!, lat: lat!, visited: false, notinterested: false, wanttovisit: false, description: desc!, openingHours: time, locationName: loc!, imgUrl: photo!, category: category, fullimg: "")
-                            
-                        self.addNotificationList(poi: poi)
-                        //then add POIObject to notification list
-                        print("here inside lol")
-                        isSent = true
-                        print("isSent hereee", isSent)
-                        completionHandler(isSent)
+                            if !exists {
+                                self.foursquareNotification(name: name!)
+                                
+                                let poi = POI(ID: id, name: name!, rate: rating, long: lng!, lat: lat!, visited: false, notinterested: false, wanttovisit: false, description: desc!, openingHours: time, locationName: loc!, imgUrl: photo!, category: category, fullimg: "")
+                                
+                                self.addNotificationList(poi: poi)
+                                //then add POIObject to notification list
+                                print("here inside lol")
+                                isSent = true
+                                print("isSent hereee", isSent)
+                                completionHandler(isSent)
                             } //end if exists
                         }
                         
@@ -188,22 +188,37 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
         
         db.collection("users/\(uid!)/notificationsList").document(poi.ID).setData([
             "ID" : poi.ID,
+            "timestamp" : timestamp,
+        ])
+        
+        db.collection("NotificationsPOIs").document(poi.ID).setData([
+            "ID" : poi.ID,
             "briefInfo" : poi.description,
             "category" : poi.categorey,
             "latitude" : poi.lat,
             "longitude" : poi.long,
             "name" : poi.name,
-            "notInterested" : poi.notinterested,
-            "visited" : poi.visited,
-            "wantToVisit" : poi.wanttovisit,
             "rating" : poi.rate,
             "openingHours" : poi.openingHours,
             "location" : poi.locationName,
-            "timestamp" : timestamp,
             "image" : poi.imgUrl
         ])
         
+        
+        if(!self.isExist(theList: globalPOIList, thepoi: poi)){
+            globalPOIList.append(poi)
+        }
+        
     }
+    
+    func isExist(theList: [POI], thepoi: POI) -> Bool{
+        for p in theList {
+            if(p.ID == thepoi.ID){
+                return true
+            }
+        }//end for
+        return false
+    }//end isExist
     
     func notiExists(id: String, completionHandler: @escaping (Bool)->Void) {
         db = Firestore.firestore()
@@ -217,10 +232,10 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
             } else {
                 exists = docSnapshot!.exists
                 completionHandler(exists)
-             
+                
             }
         }
-
+        
     }
     
     func foursquareNotification(name: String) -> Bool {
@@ -253,7 +268,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
     }
     
     //---------------------------------------------SETTINGS------------------------------------------------------------------
-
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         //displaying the ios local notification when app is in foreground
@@ -262,12 +277,12 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
     
     //update notification badge when entered
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-
+        
         //UI updates are done in the main thread
         DispatchQueue.main.async {
             UIApplication.shared.applicationIconBadgeNumber -= 1
         }
-
+        
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests(completionHandler: {requests in
             //Update only the notifications that have userInfo["timeInterval"] set
@@ -275,15 +290,15 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                 requests
                     .filter{ rq in
                         return rq.content.userInfo["timeInterval"] is Double?
-                    }
-                    .map { request in
-                        let newContent: UNMutableNotificationContent = request.content.mutableCopy() as! UNMutableNotificationContent
-                        newContent.badge = (Int(truncating: request.content.badge ?? 0) - 1) as NSNumber
-                        let newRequest: UNNotificationRequest =
-                            UNNotificationRequest(identifier: request.identifier,
-                                                  content: newContent,
-                                                  trigger: request.trigger)
-                        return newRequest
+                }
+                .map { request in
+                    let newContent: UNMutableNotificationContent = request.content.mutableCopy() as! UNMutableNotificationContent
+                    newContent.badge = (Int(truncating: request.content.badge ?? 0) - 1) as NSNumber
+                    let newRequest: UNNotificationRequest =
+                        UNNotificationRequest(identifier: request.identifier,
+                                              content: newContent,
+                                              trigger: request.trigger)
+                    return newRequest
             }
             newRequests.forEach { center.add($0, withCompletionHandler: { (error) in
                 // Handle error
