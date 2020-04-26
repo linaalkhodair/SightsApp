@@ -21,7 +21,7 @@
                     <rect key="frame" x="10" y="112" width="298" height="70"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <string key="text">I bet you're currently driving huh?
+                    <string key="text">Keep your eyes on the road
 for a better experience start walking 
 to enjoy AR! 🤳🏼</string>
                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
@@ -43,14 +43,19 @@ to enjoy AR! 🤳🏼</string>
                         <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="fM7-Gr-ZLB"/>
                     </connections>
                 </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="oHj-Ja-C2s">
+                    <rect key="frame" x="273" y="115" width="19" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-114" y="-67"/>
+            <point key="canvasLocation" x="-115.2" y="-67.466266866566727"/>
         </view>
     </objects>
     <resources>
+        <image name="phone" width="256" height="256"/>
         <image name="traffic" width="128" height="128"/>
         <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>
