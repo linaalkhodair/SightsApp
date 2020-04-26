@@ -57,10 +57,10 @@
             </objects>
             <point key="canvasLocation" x="704" y="13"/>
         </scene>
-        <!--List View Controller-->
+        <!--Guest List View Controller-->
         <scene sceneID="JRX-8d-7oq">
             <objects>
-                <viewController storyboardIdentifier="ListViewController" id="7mV-OM-UiF" customClass="ListViewController" customModule="Sights" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GuestListViewController" id="7mV-OM-UiF" customClass="GuestListViewController" customModule="Sights" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VvW-75-nTC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,8 +145,8 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="7mV-OM-UiF" id="Xfw-eA-bpb"/>
-                                    <outlet property="delegate" destination="7mV-OM-UiF" id="fFz-rr-4qo"/>
+                                    <outlet property="dataSource" destination="7mV-OM-UiF" id="47y-eT-V51"/>
+                                    <outlet property="delegate" destination="7mV-OM-UiF" id="xtb-tb-knf"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -163,7 +163,7 @@
                         <viewLayoutGuide key="safeArea" id="2vn-ET-C3D"/>
                     </view>
                     <connections>
-                        <outlet property="NotificationView" destination="e2C-h5-6Yg" id="KOg-Sp-oWa"/>
+                        <outlet property="NotificationView" destination="e2C-h5-6Yg" id="Czq-DY-7m0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gj8-HK-qav" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -487,7 +487,6 @@
         <image name="tri" width="1172" height="716"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8py-or-WH0"/>
         <segue reference="nXq-eE-mPR"/>
     </inferredMetricsTieBreakers>
 </document>

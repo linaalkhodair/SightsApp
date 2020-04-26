@@ -138,22 +138,31 @@ class ProfileViewController: UIViewController {
     
     @IBAction func logoutTapped(_ sender: Any) {
         
-        let firebaseAuth = Auth.auth()
-        UserDefaults.standard.removeObject(forKey: "uid")
-        do {
-            try firebaseAuth.signOut()
-            print("signed out")
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
+        let alert = UIAlertController(title: "Logout", message: "Are you sure you want to logout?!" , preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+               let firebaseAuth = Auth.auth()
+                     UserDefaults.standard.removeObject(forKey: "uid")
+                     do {
+                         try firebaseAuth.signOut()
+                         print("signed out")
+                     } catch let signOutError as NSError {
+                         print ("Error signing out: %@", signOutError)
+                     }
+                     
+                     //Direct to sign up and login page...
+                     
+                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                     let mainVC = storyboard.instantiateViewController(identifier: "MainVC") as! ViewController
+                     
+                     self.view.window?.rootViewController = mainVC
+                     self.view.window?.makeKeyAndVisible()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
         
-        //Direct to sign up and login page...
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mainVC = storyboard.instantiateViewController(identifier: "MainVC") as! ViewController
         
-        self.view.window?.rootViewController = mainVC
-        self.view.window?.makeKeyAndVisible()
+       
         
     }
     

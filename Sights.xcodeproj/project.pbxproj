@@ -60,6 +60,7 @@
 		E9DA067424363A99002CCE7A /* ChallengePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */; };
 		FC5EE9F4244C920900BCE84F /* RewardDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5EE9F2244C920900BCE84F /* RewardDetailsViewController.swift */; };
 		FC5EE9F5244C920900BCE84F /* RewardDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5EE9F3244C920900BCE84F /* RewardDetailsViewController.xib */; };
+		FCCCE49E245635A90008DEED /* GuestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCCE49D245635A90008DEED /* GuestListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		E9DA067324363A99002CCE7A /* ChallengePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePopUpVC.swift; sourceTree = "<group>"; };
 		FC5EE9F2244C920900BCE84F /* RewardDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDetailsViewController.swift; sourceTree = "<group>"; };
 		FC5EE9F3244C920900BCE84F /* RewardDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardDetailsViewController.xib; sourceTree = "<group>"; };
+		FCCCE49D245635A90008DEED /* GuestListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 				E9DA06582433CDD8002CCE7A /* SplashViewController.swift */,
 				E9A8447F23F414CA00E3124B /* GifViewController.swift */,
 				E9DA065E2434C245002CCE7A /* GuestViewController.swift */,
+				FCCCE49D245635A90008DEED /* GuestListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 			files = (
 				E9DA062D24336DDB002CCE7A /* PopUpDetailViewController.swift in Sources */,
 				E9A8444223F4061500E3124B /* ViewController.swift in Sources */,
+				FCCCE49E245635A90008DEED /* GuestListViewController.swift in Sources */,
 				E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */,
 				E9A8447A23F4146B00E3124B /* RegisterViewController.swift in Sources */,
 				E9DA06632435DE22002CCE7A /* WeatherManager.swift in Sources */,
@@ -816,14 +820,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3PL8CD7C53;
+				DEVELOPMENT_TEAM = THU336WA8H;
 				INFOPLIST_FILE = Sights/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Noura.sights;
+				PRODUCT_BUNDLE_IDENTIFIER = Shahad.Sights;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -836,14 +840,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3PL8CD7C53;
+				DEVELOPMENT_TEAM = THU336WA8H;
 				INFOPLIST_FILE = Sights/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Noura.sights;
+				PRODUCT_BUNDLE_IDENTIFIER = Shahad.Sights;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

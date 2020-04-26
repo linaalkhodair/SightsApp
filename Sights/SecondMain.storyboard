@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hY4-P9-12L">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hY4-P9-12L">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -449,10 +449,10 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_settings" translatesAutoresizingMaskIntoConstraints="NO" id="Dtt-g5-duE">
-                                <rect key="frame" x="354" y="35" width="40" height="40"/>
+                                <rect key="frame" x="369" y="40" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Dtt-g5-duE" secondAttribute="height" multiplier="1:1" id="uFS-rF-qI0"/>
-                                    <constraint firstAttribute="height" constant="40" id="vWC-xd-9Bs"/>
+                                    <constraint firstAttribute="height" constant="25" id="vWC-xd-9Bs"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ic_weather" translatesAutoresizingMaskIntoConstraints="NO" id="vxV-Gx-dlR">
@@ -484,7 +484,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Dtt-g5-duE" firstAttribute="top" secondItem="CNZ-9c-wnH" secondAttribute="top" constant="35" id="0Ve-p2-xEK"/>
+                            <constraint firstItem="Dtt-g5-duE" firstAttribute="top" secondItem="CNZ-9c-wnH" secondAttribute="top" constant="40" id="0Ve-p2-xEK"/>
                             <constraint firstItem="vxV-Gx-dlR" firstAttribute="leading" secondItem="CNZ-9c-wnH" secondAttribute="leading" constant="20" id="3ig-fV-f3h"/>
                             <constraint firstItem="vxV-Gx-dlR" firstAttribute="bottom" secondItem="CNZ-9c-wnH" secondAttribute="bottom" multiplier="0.87" id="4SB-XP-b9i"/>
                             <constraint firstItem="iOc-b5-IVj" firstAttribute="leading" secondItem="CEQ-CH-89o" secondAttribute="leading" constant="20" id="4j7-eT-fSu"/>
@@ -547,7 +547,7 @@
     <resources>
         <image name="color_1" width="400" height="164"/>
         <image name="ic_place_marker" width="512" height="512"/>
-        <image name="ic_settings" width="512" height="512"/>
+        <image name="ic_settings" width="128" height="128"/>
         <image name="ic_weather" width="512" height="512"/>
         <image name="splash1" width="350" height="339"/>
         <image name="tri" width="1172" height="716"/>
