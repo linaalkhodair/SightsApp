@@ -13,6 +13,16 @@
 		5D842815243CA9230097ABC9 /* clapping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5D842814243CA9230097ABC9 /* clapping.mp3 */; };
 		7499F9E0FA1A96F6FFE58FF2 /* libPods-Sights-SightsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6B3C5BE8CA86A58F5FF78B /* libPods-Sights-SightsUITests.a */; };
 		C5A09D5DDC4625F16F26A304 /* libPods-Sights.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 843CDF09A3AC5161CF2F8F86 /* libPods-Sights.a */; };
+		E94C7D71245740D7002AD0DF /* tower.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D69245740D7002AD0DF /* tower.dae */; };
+		E94C7D72245740D7002AD0DF /* fish.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D6A245740D7002AD0DF /* fish.dae */; };
+		E94C7D73245740D7002AD0DF /* fort.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D6B245740D7002AD0DF /* fort.dae */; };
+		E94C7D74245740D7002AD0DF /* PUSHILIN_ferris_wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D6C245740D7002AD0DF /* PUSHILIN_ferris_wheel.png */; };
+		E94C7D75245740D7002AD0DF /* Skyscraper_BaseColor.png in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D6D245740D7002AD0DF /* Skyscraper_BaseColor.png */; };
+		E94C7D76245740D7002AD0DF /* airplane.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D6E245740D7002AD0DF /* airplane.dae */; };
+		E94C7D77245740D7002AD0DF /* AlkhairPark.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D6F245740D7002AD0DF /* AlkhairPark.dae */; };
+		E94C7D78245740D7002AD0DF /* 1405 Plane.png in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D70245740D7002AD0DF /* 1405 Plane.png */; };
+		E94C7D7A245742A5002AD0DF /* LinasHome.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D79245742A5002AD0DF /* LinasHome.dae */; };
+		E94C7D7C245742AB002AD0DF /* FarmHouse_BaseColor.png in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D7B245742AB002AD0DF /* FarmHouse_BaseColor.png */; };
 		E960222B240D11C400B8B18C /* LBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960222A240D11C400B8B18C /* LBNotification.swift */; };
 		E960226B241CD6E300B8B18C /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960226A241CD6E300B8B18C /* CoreMotionManager.swift */; };
 		E9A8443E23F4061500E3124B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8443D23F4061500E3124B /* AppDelegate.swift */; };
@@ -93,6 +103,16 @@
 		99F54F37B7C2DD2D96D01514 /* libPods-SightsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SightsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB903413DAF400D9B9C0A7D6 /* Pods-Sights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sights.release.xcconfig"; path = "Target Support Files/Pods-Sights/Pods-Sights.release.xcconfig"; sourceTree = "<group>"; };
 		E52A5DEC87F31DF609B32AEF /* Pods-SightsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SightsTests.release.xcconfig"; path = "Target Support Files/Pods-SightsTests/Pods-SightsTests.release.xcconfig"; sourceTree = "<group>"; };
+		E94C7D69245740D7002AD0DF /* tower.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = tower.dae; sourceTree = "<group>"; };
+		E94C7D6A245740D7002AD0DF /* fish.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = fish.dae; sourceTree = "<group>"; };
+		E94C7D6B245740D7002AD0DF /* fort.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = fort.dae; sourceTree = "<group>"; };
+		E94C7D6C245740D7002AD0DF /* PUSHILIN_ferris_wheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PUSHILIN_ferris_wheel.png; sourceTree = "<group>"; };
+		E94C7D6D245740D7002AD0DF /* Skyscraper_BaseColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Skyscraper_BaseColor.png; sourceTree = "<group>"; };
+		E94C7D6E245740D7002AD0DF /* airplane.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = airplane.dae; sourceTree = "<group>"; };
+		E94C7D6F245740D7002AD0DF /* AlkhairPark.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = AlkhairPark.dae; sourceTree = "<group>"; };
+		E94C7D70245740D7002AD0DF /* 1405 Plane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1405 Plane.png"; sourceTree = "<group>"; };
+		E94C7D79245742A5002AD0DF /* LinasHome.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = LinasHome.dae; sourceTree = "<group>"; };
+		E94C7D7B245742AB002AD0DF /* FarmHouse_BaseColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FarmHouse_BaseColor.png; sourceTree = "<group>"; };
 		E960222A240D11C400B8B18C /* LBNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBNotification.swift; sourceTree = "<group>"; };
 		E960226A241CD6E300B8B18C /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		E9A8443A23F4061500E3124B /* Sights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sights.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +229,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E94C7D68245740D7002AD0DF /* 3D Objects */ = {
+			isa = PBXGroup;
+			children = (
+				E94C7D79245742A5002AD0DF /* LinasHome.dae */,
+				E94C7D7B245742AB002AD0DF /* FarmHouse_BaseColor.png */,
+				E94C7D69245740D7002AD0DF /* tower.dae */,
+				E94C7D6A245740D7002AD0DF /* fish.dae */,
+				E94C7D6B245740D7002AD0DF /* fort.dae */,
+				E94C7D6C245740D7002AD0DF /* PUSHILIN_ferris_wheel.png */,
+				E94C7D6D245740D7002AD0DF /* Skyscraper_BaseColor.png */,
+				E94C7D6E245740D7002AD0DF /* airplane.dae */,
+				E94C7D6F245740D7002AD0DF /* AlkhairPark.dae */,
+				E94C7D70245740D7002AD0DF /* 1405 Plane.png */,
+			);
+			path = "3D Objects";
+			sourceTree = "<group>";
+		};
 		E9A8443123F4061500E3124B = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +280,7 @@
 				E9DA06562433CCBF002CCE7A /* SecondMain.storyboard */,
 				E9DA065C2434BD55002CCE7A /* Guest.storyboard */,
 				E9A8444623F4061900E3124B /* Assets.xcassets */,
+				E94C7D68245740D7002AD0DF /* 3D Objects */,
 				E9A8447023F40BC700E3124B /* Helpers */,
 				E9CCED0B2441063800B887A5 /* PDFs */,
 				5D84280B243C90630097ABC9 /* sound */,
@@ -471,19 +509,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D84280D243C91E70097ABC9 /* sound.mp3 in Resources */,
+				E94C7D76245740D7002AD0DF /* airplane.dae in Resources */,
+				E94C7D71245740D7002AD0DF /* tower.dae in Resources */,
+				E94C7D78245740D7002AD0DF /* 1405 Plane.png in Resources */,
 				E9A8444A23F4061900E3124B /* LaunchScreen.storyboard in Resources */,
+				E94C7D7C245742AB002AD0DF /* FarmHouse_BaseColor.png in Resources */,
 				E9DA065D2434BD55002CCE7A /* Guest.storyboard in Resources */,
 				E9A8448423F695FD00E3124B /* POIView.xib in Resources */,
+				E94C7D77245740D7002AD0DF /* AlkhairPark.dae in Resources */,
+				E94C7D73245740D7002AD0DF /* fort.dae in Resources */,
+				E94C7D75245740D7002AD0DF /* Skyscraper_BaseColor.png in Resources */,
+				E94C7D74245740D7002AD0DF /* PUSHILIN_ferris_wheel.png in Resources */,
 				E9A8447823F40CBC00E3124B /* sightsGif.gif in Resources */,
 				FC5EE9F5244C920900BCE84F /* RewardDetailsViewController.xib in Resources */,
 				E9DA061C242E6E5B002CCE7A /* DrivingPopUp.xib in Resources */,
 				E9A8448223F4167F00E3124B /* GoogleService-Info.plist in Resources */,
 				E9DA06312433B468002CCE7A /* PopUpDetailViewController.xib in Resources */,
+				E94C7D72245740D7002AD0DF /* fish.dae in Resources */,
 				E9CCED08243DBE0600B887A5 /* Rewards.pdf in Resources */,
 				E9A8444723F4061900E3124B /* Assets.xcassets in Resources */,
 				E9DA06572433CCBF002CCE7A /* SecondMain.storyboard in Resources */,
 				5D842815243CA9230097ABC9 /* clapping.mp3 in Resources */,
 				E9A8444523F4061500E3124B /* Main.storyboard in Resources */,
+				E94C7D7A245742A5002AD0DF /* LinasHome.dae in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

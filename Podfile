@@ -20,6 +20,7 @@ pod 'PopItUp'
 pod 'Cosmos'
 pod 'SAConfettiView'
 
+
   target 'SightsTests' do
     inherit! :search_paths
     # Pods for testing

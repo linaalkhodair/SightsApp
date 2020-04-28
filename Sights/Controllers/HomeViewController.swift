@@ -14,11 +14,12 @@ import SceneKit
 
 var globalPOIList = [POI]()
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
+class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate, LNTouchDelegate {
     
     var sceneLocationView = SceneLocationView()
     var poiview = POIView()
     var drivingPopup = DrivingPopUp()
+    
     
     var db: Firestore!
     
@@ -29,10 +30,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     let regionInMeters: Double = 10000
     var userLoc = CLLocation()
     static var activity: String = " "
-        
+    
     
     var timer = Timer()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,17 +43,18 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             sceneLocationView.run()
             view.addSubview(sceneLocationView)
             Alert.showBasicAlert(on: self, with: "WiFi is Turned Off", message: "Please turn on cellular data or use  Wi-Fi to access data.")
-
+            
         }
         else {
             
             checkLocationServices() // checks if location is authorized
-            
             //start the AR view
+            
             sceneLocationView.run()
             sceneLocationView.moveSceneHeadingClockwise()
             sceneLocationView.moveSceneHeadingAntiClockwise()
             
+            self.sceneLocationView.locationNodeTouchDelegate = self
             
             view.addSubview(sceneLocationView)
             db = Firestore.firestore()
@@ -69,47 +71,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             })
             //--------------------------------CREATING AR OBJECTS----------------------------------------------------------
             
-            print("UID",UserDefaults.standard.string(forKey: "uid"))
+            print("UID",UserDefaults.standard.string(forKey: "uid") as Any)
             
             //iterate through all poi's in DB
             self.getPOI()
             self.getNotiPOI()
-
-            //handling when an AR object is tapped
-            let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
-            sceneLocationView.addGestureRecognizer(tap)
+            
             
         }// end of else
-
         
         coreMotion.startUpdates { (activityType) in
             HomeViewController.activity = activityType
         } //To get the user's motion when first started
-
-    } //end viewDidLoad
-    
-
-    
-    //Method called when tap on AR object
-    @objc func handleTap(rec: UITapGestureRecognizer){
         
-        if rec.state == .ended {
-            let location: CGPoint = rec.location(in: sceneLocationView)
-            let hits = self.sceneLocationView.hitTest(location, options: nil)
-            if !hits.isEmpty{
-                let tappedNode = hits.first?.node
-                print("yes")
-                let locationNode = getLocationNode(node: tappedNode!)
-                //try
-                //its adding them on top of each other
-                print("ID:", locationNode!.name!)
-                let ID = locationNode?.name
-                
-                let poiView = setPOIView(ID: ID!)
-                
-            }
-        }
-    }
+    } //end viewDidLoad
     
     //---------------------------------------------------------------------------------------------------------------
     
@@ -140,7 +115,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                         self.poiview.notinterested = false
                         
                         self.poiview.setContent() //prepare content
-
+                        
                         print("here insiddee")
                         //self.sceneLocationView.addSubview(poiView)
                         self.poiview.contentView.alpha = 0.95
@@ -181,6 +156,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     let imageData = document.get("image")
                     let ID = document.get("ID")
                     let hasChallenge = document.get("hasChallenge") as! String
+                    let has3D = document.get("has3D") as! Bool
                     //any additional data... maybe the get the describtion then pass it on to a method to display the additional info
                     
                     let coordinate = CLLocationCoordinate2D(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees)
@@ -195,10 +171,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     print("distance: ", distance)
                     
                     if distance <= 150 { //sample distance
-                        self.displayPOIobjects(latitude: latitude as! Double, longitude: longitude as! Double, img: imageData as! String, ID: ID as! String)
+                        self.displayPOIobjects(latitude: latitude as! Double, longitude: longitude as! Double, img: imageData as! String, ID: ID as! String, name: document.get("name") as! String, has3D: has3D)
                         if (hasChallenge != ""){
                             print("theres a challenge")
-
+                            
                             ChallengeViewController.chid = hasChallenge
                             //CHECK IF USER HAS PLAYED THE CHALLENGE!!!!!!!!!!!
                             
@@ -226,7 +202,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
     } //end func getPOI
     
-  
+    
     func displayChallenge(chid: String) {
         let uid = Auth.auth().currentUser?.uid
         
@@ -238,9 +214,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 if (!docSnapshot!.exists) {
                     
                     let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChallengePopUpVC") as! ChallengePopUpVC
-
+                    
                     self.addChild(popOverVC)
-
+                    
                     popOverVC.view.frame = self.view.frame
                     self.view.addSubview(popOverVC.view)
                     popOverVC.didMove(toParent: self)
@@ -250,28 +226,70 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         
     }
-
+    
     //---------------------------------------------------------------------------------------------------------------
     
     
-    func displayPOIobjects(latitude: Double, longitude: Double, img: String, ID: String){
+    func displayPOIobjects(latitude: Double, longitude: Double, img: String, ID: String, name: String, has3D: Bool){
         //set up for the image
         let url = URL(string: img)
         let data = try? Data(contentsOf: url!)
         let image = UIImage(data: data!)
         
-        //create the object
+        if has3D {
+            display3DObject(latitude: latitude, longitude: longitude, img: img, ID: ID, name: name)
+        }
+            // if 2D
+        else {
+            // create the object
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let location = CLLocation(coordinate: coordinate, altitude: 620)
+            
+            let annotationNode = LocationAnnotationNode(location: location, image: image!)
+            annotationNode.name = ID
+            annotationNode.scaleRelativeToDistance = false
+            annotationNode.ignoreAltitude = false
+            sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+        }
+    }
+    
+    
+    func display3DObject(latitude: Double, longitude: Double, img: String, ID: String, name: String) {
+        guard let location = sceneLocationView.sceneLocationManager.currentLocation, location.horizontalAccuracy < 25 else {
+            print("Location fix not established yet, trying again shortly")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.display3DObject(latitude: latitude, longitude: longitude, img: img, ID: ID, name: name)
+                
+            }
+            return
+        }
+        print("done")
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let location = CLLocation(coordinate: coordinate, altitude: 620)
+        let location1 = CLLocation(coordinate: coordinate, altitude: 620)
         
-        let annotationNode = LocationAnnotationNode(location: location, image: image!)
-        annotationNode.name = ID
-        annotationNode.scaleRelativeToDistance = false
-        annotationNode.ignoreAltitude = false
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+        let locationNode = LocationNode(location: location1)
+        locationNode.scaleRelativeToDistance = false
+        locationNode.ignoreAltitude = true
+        let scene = SCNScene(named: name)
+        let node = scene!.rootNode.childNode(withName: "model", recursively: true)
+        node?.position = SCNVector3(0, 0, -1)
+        
+        locationNode.addChildNode(node!)
+        locationNode.name = ID
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: locationNode)
         
     }
     
+    func annotationNodeTouched(node: AnnotationNode) {
+        let locationNode = getLocationNode(node: node)
+        let id = locationNode?.name
+        _ = setPOIView(ID: id!)
+    }
+    
+    func locationNodeTouched(node: LocationNode) {
+        let id = node.name
+        _ = setPOIView(ID: id!)
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -344,16 +362,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             self.view.addSubview(self.drivingPopup.contentView)
             drivingPopup.contentView.alpha = 0.85
             
-//Alert.showBasicAlert(on: self, with: "Seems like you're currently driving 🚗", message: "For a better experience start walking to enjoy AR!")
+            //Alert.showBasicAlert(on: self, with: "Seems like you're currently driving 🚗", message: "For a better experience start walking to enjoy AR!")
             let distance = self.userLoc.distance(from: userLocation!)
-           
+            
             if distance >= 10 { // if diff more than 100 fire the notification search and look for AR....? I suggest distance to be 50?
-               
+                
                 let FQnotification = LBNotification(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
                 FQnotification.searchVenues()
                 
                 userLoc = locations.last! //previous location
-               
+                
                 print("inside")
                 
             }//end if distance
@@ -368,16 +386,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         //just for testing purposes
         if (HomeViewController.activity == "walking" || HomeViewController.activity == "stationary"){
             
-    //        self.view.addSubview(self.drivingPopup.contentView)
-    //        drivingPopup.contentView.alpha = 0.85
-         //   Alert.showBasicAlert(on: self, with: "I bet you're currently walking huh?🚶🏻", message: "For a better experience continue walking and explore Riyadh!") //THIS WILL BE DELETED LATER *FOR TESTING PURPOSES*
+            //        self.view.addSubview(self.drivingPopup.contentView)
+            //        drivingPopup.contentView.alpha = 0.85
+            //   Alert.showBasicAlert(on: self, with: "I bet you're currently walking huh?🚶🏻", message: "For a better experience continue walking and explore Riyadh!") //THIS WILL BE DELETED LATER *FOR TESTING PURPOSES*
             let distance = self.userLoc.distance(from: userLocation!)
             
             if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
-               
+                
                 let FQnotification = LBNotification(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
                 FQnotification.searchVenues()
-              
+                
                 userLoc = locations.last! //previous location
                 print("inside")
                 
@@ -392,21 +410,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     }
     
     func getNotiPOI(){
-          
-          //iterate through POIs
-          db.collection("NotificationsPOIs").getDocuments() { (querySnapshot, err) in
-              if let err = err {
-                  print("Error getting documents: \(err)")
-              } else {
-                  for document in querySnapshot!.documents {
-
+        
+        //iterate through POIs
+        db.collection("NotificationsPOIs").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
                     globalPOIList.append(POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String, fullimg: document.get("image") as! String))
-                     
-                 }//end for
-              }
-          }
-          
-      } //end func getPOI
+                    
+                }//end for
+            }
+        }
+        
+    } //end func getPOI
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
@@ -414,19 +432,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     
     
-//    //  LOCK ORIENTATION TO PORTRAIT
+    //    //  LOCK ORIENTATION TO PORTRAIT
     override var shouldAutorotate: Bool {
         return false
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.portrait
-   }
-
-   override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-      return UIInterfaceOrientation.portrait
     }
-
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return UIInterfaceOrientation.portrait
+    }
+    
     
     
 }
