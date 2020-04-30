@@ -2,9 +2,8 @@
 //  NotificationCell.swift
 //  Sights
 //
-//  Created by HARSHIT on 23/02/20.
-//  Copyright © 2020 HARSHIT. All rights reserved.
-//
+//  Created by Shahad Nasser on 02/04/2020.
+//  Copyright © 2020 Lina Alkhodair. All rights reserved.
 
 import UIKit
 

@@ -2,9 +2,8 @@
 //  SwiftExtensionClass.swift
 //  ItemBI
 //
-//  Created by HARSHIT on 07/04/18.
-//  Copyright © 2018 Vivek. All rights reserved.
-//
+//  Created by Shahad Nasser on 02/04/2020.
+//  Copyright © 2020 Lina Alkhodair. All rights reserved.
 
 import UIKit
 import Foundation

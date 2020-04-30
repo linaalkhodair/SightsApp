@@ -2,9 +2,8 @@
 //  PopUpDetailViewController.swift
 //  Sights
 //
-//  Created by HARSHIT on 23/02/20.
-//  Copyright © 2020 HARSHIT. All rights reserved.
-//
+//  Created by Shahad Nasser on 02/04/2020.
+//  Copyright © 2020 Lina Alkhodair. All rights reserved.
 
 import UIKit
 import Cosmos
@@ -178,23 +177,17 @@ class PopUpDetailViewController: UIViewController {
                         if let err = err {
                             print("Error writing document: \(err)")
                         } else {
-                            print("Document successfully written!")
+                            print("PopupDetail Controller: Mark is added")
                         }
                     }
                 }
-                print("!!!!!!!!!!!!Error updating document: \(err.localizedDescription)")
+                print("Error Updating document: \(err.localizedDescription)")
             } else {
-                print("!!!!!!!!!!!!Document successfully updated")
+                print("PopupDetail Controller: Mark is Updated")
             }
         }
         
     }
-    
-    //this method mark a POI as not interested
-    func markAsNotInterested(poi: POI){
-        poi.notinterested.toggle()
-
-    }//end markAsNotInterested
     
     
 }
