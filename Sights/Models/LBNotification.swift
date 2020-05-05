@@ -28,7 +28,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
     
     func searchVenues() {
         let parameter: [String: String] = [
-            "ll": "24.754808, 46.738183",
+            "ll": "24.680544, 46.736963",
             "radius": "600",
             "limit": "10",
             "intent": "browse",
@@ -115,11 +115,11 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
                 }
                 var days = json["response"]["venue"]["hours"]["timeframes"][0]["days"].stringValue //?
                 var hours = json["response"]["venue"]["hours"]["timeframes"][0]["open"][0]["renderedTime"].stringValue //?
-                if hours == nil {
+                if hours == "" {
                     hours = "8:00 AM - 10:00 PM"
                 }
-                if days == nil {
-                    hours = "Sun-Thurs"
+                if days == "" {
+                    days = "Sun-Thurs"
                 }
                 let time = days + ", " + hours //???????
                 //PHOTO -> BEST PHOTO

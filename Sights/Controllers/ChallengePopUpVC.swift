@@ -22,7 +22,6 @@ class ChallengePopUpVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         
-
         contentView.layer.cornerRadius = 30.0
         contentView.clipsToBounds = true
         
@@ -35,7 +34,6 @@ class ChallengePopUpVC: UIViewController {
     }
     
     func setInstructions(){
-        
         var chid = ChallengeViewController.chid
         chid = chid?.trimmingCharacters(in: .whitespacesAndNewlines)
         db.collection("Challenges").document(chid!).getDocument { (documentSnapshot, err) in

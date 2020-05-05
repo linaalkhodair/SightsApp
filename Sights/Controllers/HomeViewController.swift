@@ -48,8 +48,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         else {
             
             checkLocationServices() // checks if location is authorized
-            //start the AR view
             
+            //start the AR view
             sceneLocationView.run()
             sceneLocationView.moveSceneHeadingClockwise()
             sceneLocationView.moveSceneHeadingAntiClockwise()
@@ -69,7 +69,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in
                 
             })
-            //--------------------------------CREATING AR OBJECTS----------------------------------------------------------
+            //--------------------------------------------CREATING AR OBJECTS----------------------------------------------------------
             
             print("UID",UserDefaults.standard.string(forKey: "uid") as Any)
             
@@ -107,8 +107,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                         self.poiview.nameString = document.get("name") as! String
                         self.poiview.descString = document.get("briefInfo") as! String
                         self.poiview.hoursString = document.get("openingHours") as! String
-                        var rating = document.get("rating") as! Double
-                        self.poiview.rating.text = "rating \(rating)" //WE'LL SEE
+                        let rating = document.get("rating") as! Double
+                        self.poiview.rating.text = "Rating \(rating)"
                         self.poiview.locString = document.get("location") as! String
                         self.poiview.wanttovisit = false
                         self.poiview.visited = false
@@ -157,7 +157,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                     let ID = document.get("ID")
                     let hasChallenge = document.get("hasChallenge") as! String
                     let has3D = document.get("has3D") as! Bool
-                    //any additional data... maybe the get the describtion then pass it on to a method to display the additional info
                     
                     let coordinate = CLLocationCoordinate2D(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees)
                     let location = CLLocation(coordinate: coordinate, altitude: 620)
@@ -176,7 +175,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                             print("theres a challenge")
                             
                             ChallengeViewController.chid = hasChallenge
-                            //CHECK IF USER HAS PLAYED THE CHALLENGE!!!!!!!!!!!
                             
                             //CHECK IF REGISTERED USER
                             let user = Auth.auth().currentUser
@@ -184,7 +182,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                             
                             if !isAnon! {
                                 //display challenge after some time..
-                                //I think time better 120 .. later onx
                                 self.timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: false, block: { (_) in
                                     print("timer works")
                                     self.displayChallenge(chid: hasChallenge)
@@ -205,7 +202,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     func displayChallenge(chid: String) {
         let uid = Auth.auth().currentUser?.uid
-        
+        //CHECK IF USER HAS PLAYED THE CHALLENGE!
         db.collection("users/\(uid!)/playedChallenges").document(chid).getDocument { (docSnapshot, err) in
             if let err = err {
                 print("Document doesn't exist \(err)")
@@ -223,7 +220,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
                 }
             }
         }
-        
         
     }
     
@@ -323,7 +319,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             checkLocationAuthorization()
         } else {
             // Show alert letting the user know they have to turn this on.
-            //                    Alert.showBasicAlert(on: self, with: "Enhance your experience!", message: "Please make sure to turn on location permissions for Sights App.")
+            //Alert.showBasicAlert(on: self, with: "Enhance your experience!", message: "Please make sure to turn on location permissions for Sights App.")
         }
     }
     
@@ -342,7 +338,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             Alert.showBasicAlert(on: self, with: "Cannot access location!", message: "To get better experience, please allow location access.")
             break
         case .authorizedAlways:
-            locationManager.startUpdatingLocation() //??????/mdry
+            locationManager.startUpdatingLocation()
             break
         }
     }
@@ -355,7 +351,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         let userLocation = locations.last //new location
         
-        // ********* we need to also check every a certain distance to check for other POI object *********
+        // ********* check every a certain distance to check for other POI object *********
         
         if (HomeViewController.activity == "driving") {
             
@@ -365,13 +361,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
             //Alert.showBasicAlert(on: self, with: "Seems like you're currently driving 🚗", message: "For a better experience start walking to enjoy AR!")
             let distance = self.userLoc.distance(from: userLocation!)
             
-            if distance >= 10 { // if diff more than 100 fire the notification search and look for AR....? I suggest distance to be 50?
+            if distance >= 10 { // if diff more than 100 fire the notification search and look for AR
                 
                 let FQnotification = LBNotification(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
                 FQnotification.searchVenues()
                 
                 userLoc = locations.last! //previous location
-                
                 print("inside")
                 
             }//end if distance
@@ -385,13 +380,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
         
         //just for testing purposes
         if (HomeViewController.activity == "walking" || HomeViewController.activity == "stationary"){
-            
-            //        self.view.addSubview(self.drivingPopup.contentView)
-            //        drivingPopup.contentView.alpha = 0.85
-            //   Alert.showBasicAlert(on: self, with: "I bet you're currently walking huh?🚶🏻", message: "For a better experience continue walking and explore Riyadh!") //THIS WILL BE DELETED LATER *FOR TESTING PURPOSES*
             let distance = self.userLoc.distance(from: userLocation!)
             
-            if distance >= 10 { // if diff more than 100 fire the notification search....? //change to desired distance ..?
+            if distance >= 10 { // if diff more than 100 fire the notification search and look for AR
                 
                 let FQnotification = LBNotification(lat: (userLocation?.coordinate.latitude)!, lng: (userLocation?.coordinate.longitude)!)
                 FQnotification.searchVenues()
@@ -432,7 +423,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     
     
     
-    //    //  LOCK ORIENTATION TO PORTRAIT
+    //  LOCK ORIENTATION TO PORTRAIT
     override var shouldAutorotate: Bool {
         return false
     }
@@ -444,7 +435,5 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UNUserNot
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return UIInterfaceOrientation.portrait
     }
-    
-    
     
 }

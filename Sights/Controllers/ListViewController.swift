@@ -41,7 +41,7 @@ class ListViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UIApplication.shared.applicationIconBadgeNumber = 0 //remove notification badge.. 
         //notiList.append(POI1)
         //notiList.append(POI2)
 
