@@ -37,10 +37,8 @@ class ProfileViewController: UIViewController {
         //rewardList.append(reward1)
         //rewardList.append(reward2)
         
-        print("HERE PROFILEEEE")
+        print("Inside ProfileView Controller")
         
-        var POI1: POI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1",fullimg: "")
-        var POI2: POI = POI(ID: "2", name:  "2name", rate:  2.0, long:  222, lat: 222, visited: false, notinterested: false, wanttovisit: false , description:  "2desc", openingHours: "2open",locationName:  "2locname", imgUrl:  "2url", category: "cat2",fullimg: "")
         
         let monthName = DateFormatter().monthSymbols[Date().month - 1]
         
@@ -88,7 +86,7 @@ class ProfileViewController: UIViewController {
         wantToVisit=[POI]()
         var db = Firestore.firestore()
         let userID = Auth.auth().currentUser!.uid
-        print("this is user ID !$%^%$#$%^$#@%^$#@!#$#%^&&$#@#%$^&*%&$#@  "+userID)
+        print("ProfileView Controller: USER ID "+userID)
         db.collection("users").document(userID).collection("markedList").getDocuments(){ (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -103,7 +101,7 @@ class ProfileViewController: UIViewController {
                             
                             self.wantToVisit.append(i)
                             self.VisitListView?.reloadData()
-                            print("appended in list pool "+i.name)
+                            print("ProfileView Controller: appended in wantToVisit List "+i.name)
                             
                         }
                         
@@ -225,7 +223,6 @@ extension ProfileViewController:UICollectionViewDelegate,UICollectionViewDataSou
         case RewardsView:
             let pinPopup = RewardDetailsViewController()
             pinPopup.setContent(Code: rewardList[indexPath.row].code, Place: rewardList[indexPath.row].title)
-            //            pinPopup.setContent(id: notiList[indexPath.row].ID,name: notiList[indexPath.row].name, loc: notiList[indexPath.row].locationName, stars: notiList[indexPath.row].rate , hours: notiList[indexPath.row].openingHours, desc: notiList[indexPath.row].description, img: "https://static01.nyt.com/images/2019/12/03/world/03xp-lilbub/merlin_165345945_7a6f87a8-cdf3-4d00-b389-282ad7630953-articleLarge.jpg?quality=75&auto=webp&disable=upscale", want: notiList[indexPath.row].wanttovisit, visit:  notiList[indexPath.row].visited, not: notiList[indexPath.row].notinterested)
             presentPopup(pinPopup,
                          animated: true,
                          backgroundStyle: .blur(.light), // present the popup with a blur effect has background
@@ -253,14 +250,6 @@ extension ProfileViewController:UICollectionViewDelegate,UICollectionViewDataSou
         default:
             return
         }
-        //        let pinPopup = PopUpDetailViewController()
-        //        presentPopup(pinPopup,
-        //                     animated: true,
-        //                     backgroundStyle: .blur(.light), // present the popup with a blur effect has background
-        //            constraints: [.leading(20), .trailing(20)], // fix leading edge and the width
-        //            transitioning: .zoom, // the popup come and goes from the left side of the screen
-        //            autoDismiss: true, // when touching outside the popup bound it is not dismissed
-        //            completion: nil)
     }
 }
 

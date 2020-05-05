@@ -20,17 +20,6 @@ class GuestListViewController: UIViewController {
         var recommend = Recommend(rewardList: [POI](), markedList: [POI](), recommendationCategories: [category](), visitedList: [POI](), wanttovisitList: [POI](), notInterestedList: [POI](), notiList: [POI](), recommendList: [POI]())
         
         var POI1: POI = POI(ID: "aaaa", name: "sssss", rate: 2, long: 222, lat: 222, description: "String", openingHours: "String", locationName: "String", imgUrl: "String", category: "String", fullimg: "String")
-    //    var POI2: POI = POI(ID: "2", name:  "2name", rate:  2.0, long:  222, lat: 222, visited: false, notinterested: false, wanttovisit: false , description:  "2desc", openingHours: "2open",locationName:  "2locname", imgUrl:  "2url", category: "cat2")
-    //    var POI3: POI = POI(ID: "3", name:  "3name", rate:  3.0, long:  333, lat: 333, visited: false, notinterested: false, wanttovisit: true , description:  "3desc", openingHours: "3open",locationName:  "3locname", imgUrl:  "3url", category: "cat3")
-    //    var POI4: POI = POI(ID: "4", name:  "4name", rate:  4.0, long:  444, lat: 444, visited: true, notinterested: true, wanttovisit: false , description:  "4desc", openingHours: "4open",locationName:  "4locname", imgUrl:  "4url", category: "cat4")
-    //    var POI5: POI = POI(ID: "5", name:  "5name", rate:  5.0, long:  555, lat: 555, visited: false, notinterested: false, wanttovisit: false , description:  "5desc", openingHours: "5open",locationName:  "5locname", imgUrl:  "5url", category: "cat2")
-        
-        
-        //    var visitedList = [POI]()
-        //    var wanttovisitList = [POI]()
-        //    var notInterestedList = [POI]()
-        //    var rewardlist = [POI]()
-        //    var recommendationlist = [category]()
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -51,7 +40,7 @@ class GuestListViewController: UIViewController {
             
             //notiList.append(POI1)
             
-          
+            print("ptinting globalPOIList")
             print("--------------------------------------")
             for i in globalPOIList{
                 print("---------------" + i.name)

@@ -2,9 +2,8 @@
 //  POI.swift
 //  Sights
 //
-//  Created by Shahad Nasser on 04/03/2020.
-//  Copyright © 2020 HARSHIT. All rights reserved.
-//
+//  Created by Shahad Nasser on 02/04/2020.
+//  Copyright © 2020 Lina Alkhodair. All rights reserved.
 
 import Foundation
 

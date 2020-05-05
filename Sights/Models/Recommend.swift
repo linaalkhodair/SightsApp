@@ -34,11 +34,11 @@ class Recommend {
     
     func getRecommendationList(list: [POI])->[POI]{
         
-        print("im indide get recommendation list")
+        print("Inside getRecommendationList")
         sort(poiList: list)
         recommendationCategories.sort(by: { $0.count > $1.count })
         
-        
+        print("Inside getRecommendationList now will return the list")
         return recommend(matchedList: match())
     }
     
@@ -249,6 +249,7 @@ class Recommend {
     
     //this method print all lists
     func printdisplay(){
+        print("============ Printing Lists ===========")
         for p in notiList{
             print("notif: " + p.name)
         }
@@ -262,7 +263,7 @@ class Recommend {
             print("not: " + p.name)
         }
         if(recommendationCategories.isEmpty){
-            print("dead")
+            print("recommendation categories is empty")
         }
         for p in recommendationCategories{
             print("cat: " + p.name + " count :" + String(p.count))
@@ -280,14 +281,15 @@ class Recommend {
     func match()->[POI]{
         var matchedList = [POI]()
         
+        //printing recommendation categories
         print("----XXX XX XXX XX XXX XX XXX XX ----")
         for i in recommendationCategories{
-            print(i.name+"    "+String(i.count))
+            print("inside match: "+i.name+"    "+String(i.count))
         }
         print("----XXX XX XXX XX XXX XX XXX XX ----")
 
         if(recommendationCategories.isEmpty){
-            print("----XXX XX XXX XX XXX XX XXX XX ---- YES I'm empty match()")
+            print("inside match: "+"recommendationCategories is empty ")
             return matchedList
         }//end empty
         
@@ -341,19 +343,19 @@ class Recommend {
     }//end match
     
     func recommend(matchedList: [POI]) -> [POI]{
-        print("im inside recommend ")
+        print("insdie recommed")
         
         recommendList = [POI]()
         
         if(matchedList.isEmpty){
-            print("----XXX XX XXX XX XXX XX XXX XX ---- YES I'm empty recommend()")
+            print("inside recommend: "+"matchedList is empty ")
             for i in 0...3{
                 var randomPOI = globalPOIList.randomElement()!
                 while(isExist(theList: recommendList, poi: randomPOI) || randomPOI.notinterested == true || randomPOI.visited == true){
                     randomPOI = globalPOIList.randomElement()!
                 }
                 recommendList.append(randomPOI)
-                print("i'm recommending " + randomPOI.name)
+                print("insdie recommend: appended" + randomPOI.name)
             }//end for
             return recommendList
         }//end empty
@@ -400,96 +402,5 @@ class Recommend {
 
     }//end recommend
     
-    
-    //this method sould recommend to user
-    func recommendOld(){
-        print("im inside recommend ")
-        var localCategories = [POI]()
-        
-        if(recommendationCategories.isEmpty){
-            print("yes im, empty")
-            //static list when user has no marks
-            return
-        }
-        var size = recommendationCategories.count
-        var TheCategory: category = recommendationCategories[0]
-        if(size > 0 && size < 4){
-            print("im 0 and 4")
-            if(TheCategory.count>=1){
-                
-                var db = Firestore.firestore()
-                print("inside dp hhhhhhhhhhhhhhhhhhhhhhh")
-//                db.collection("POIs").whereField("category", isEqualTo: TheCategory.name).getDocuments(){ (querySnapshot, err) in
-//                    if let err = err {
-//                        print("Error getting documents: \(err)")
-//                    } else {
-//                        print("inside dp hhhhhhhhhhhhhhhhhhhhhhh")
-//                         for document in querySnapshot!.documents {
-//                        let poi = POI(ID: document.documentID, name: document.get("name") as! String, rate: document.get("rating") as! Double, long: document.get("longitude") as! Double, lat:document.get("latitude") as! Double, description: document.get("briefInfo") as! String, openingHours: document.get("openingHours") as! String, locationName: document.get("location") as! String, imgUrl: document.get("image") as! String, category: document.get("category") as! String)
-//
-//                        localCategories.append(poi)
-//                            print("inside dp hhhhhhhhhhhhhhhhhhhhhhh"+poi.categorey)
-//                            print("inside db  hhhhhhhhhhhhhhhhhhhhhhh"+String(localCategories.count))
-//                        }
-//
-//                    }//end else
-//                }//end getDoc
-                var numOfRec = 0
-                print("hhhhhhhhhhhhhhhhhhhhhhh"+String(localCategories.count))
-                if(localCategories.count < 5){
-                    numOfRec = localCategories.count
-                } else if (localCategories.count > 5){
-                    numOfRec = 4
-                }
-                for i in 0...numOfRec{ //recommend 1st item 4 times
-                    //match with databse and check if it not marked then recommend
-                    print("hhhhhhhhhhhhhhhhhhhhhhh"+localCategories[i].name)
-                    recommendList.append(localCategories[i])
-                    
-                }//end for
-            }else{
-                for j in 0...3{
-                    //static recmmendation list to show in case user has zero or negative marks
-                }
-            }
-            
-            return
-        }
-        
-        if(size > 3 && size < 6){
-            for c in 0...1{
-                var TheCategory: category = recommendationCategories[c]
-                if(TheCategory.count>1){
-                    for i in 0...2-c{ //recommend 1st category 3 times and 2nd category 2 times
-                        //
-                    }
-                }else{
-                    for j in 0...2-c{
-                        //reccomend the remaining items
-                    }
-                }
-            }
-            return
-        }
-        
-        if(size >= 6){
-            for c in 0...2{
-                var TheCategory: category = recommendationCategories[c]
-                if(TheCategory.count>1){
-                    for i in 0...2-c{ //reccomne 1st category 3 times, 2nd category 2 timws and 3rd category 1 time
-                        
-                        
-                    }
-                }else{
-                    for j in 0...2-c{
-                        //recommend missing
-                    }
-                }
-            }
-            return
-        }
-    }//end recommend method
-    
-    //==============================================================================================//
     
 }//end recommend

@@ -2,9 +2,9 @@
 //  ListViewController.swift
 //  Sights
 //
-//  Created by HARSHIT on 23/02/20.
-//  Copyright © 2020 HARSHIT. All rights reserved.
-//
+//  Created by Shahad Nasser on 02/04/2020.
+//  Copyright © 2020 Lina Alkhodair. All rights reserved.
+
 import UIKit
 import PopItUp
 import Firebase
@@ -22,22 +22,6 @@ class ListViewController: UIViewController
     var recommendationList = [POI]()
     
     var recommend = Recommend(rewardList: [POI](), markedList: [POI](), recommendationCategories: [category](), visitedList: [POI](), wanttovisitList: [POI](), notInterestedList: [POI](), notiList: [POI](), recommendList: [POI]())
-    
-
-//
-//    var POI1: POI = POI(ID: "1", name:  "1name", rate:  1.0, long:  111, lat: 111, visited: true, notinterested: false, wanttovisit: false , description:  "1desc", openingHours: "1open",locationName:  "1locname", imgUrl:  "1url", category: "cat1")
-//    var POI2: POI = POI(ID: "2", name:  "2name", rate:  2.0, long:  222, lat: 222, visited: false, notinterested: false, wanttovisit: false , description:  "2desc", openingHours: "2open",locationName:  "2locname", imgUrl:  "2url", category: "cat2")
-//    var POI3: POI = POI(ID: "3", name:  "3name", rate:  3.0, long:  333, lat: 333, visited: false, notinterested: false, wanttovisit: true , description:  "3desc", openingHours: "3open",locationName:  "3locname", imgUrl:  "3url", category: "cat3")
-//    var POI4: POI = POI(ID: "4", name:  "4name", rate:  4.0, long:  444, lat: 444, visited: true, notinterested: true, wanttovisit: false , description:  "4desc", openingHours: "4open",locationName:  "4locname", imgUrl:  "4url", category: "cat4")
-//    var POI5: POI = POI(ID: "5", name:  "5name", rate:  5.0, long:  555, lat: 555, visited: false, notinterested: false, wanttovisit: false , description:  "5desc", openingHours: "5open",locationName:  "5locname", imgUrl:  "5url", category: "cat2")
-    
-    
-    //    var visitedList = [POI]()
-    //    var wanttovisitList = [POI]()
-    //    var notInterestedList = [POI]()
-    
-    //    var rewardlist = [POI]()
-    //    var recommendationlist = [category]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +41,7 @@ class ListViewController: UIViewController
         
         var db = Firestore.firestore()
         let userID = Auth.auth().currentUser!.uid
-        //let userID = UserDefaults.standard.string(forKey: "uid")!
-        print("this is user ID !$%^%$#$%^$#@%^$#@!#$#%^&&$#@#%$^&*%&$#@  "+userID)
+        print("ListView Controller: USER ID "+userID)
         db.collection("users").document(userID).collection("markedList").getDocuments(){ (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -74,7 +57,7 @@ class ListViewController: UIViewController
                                 self.poolList.append(i)
                             }
                             for j in self.poolList {
-                                print(">>>>>>>>>>>>>>> &&&& &&& && & this is in pool (marked loop) " + j.name)
+                                print("ListView Controller: in marked loop appended into poolList: " + j.name)
                             }
 
                             self.RecommendationView?.reloadData()
@@ -82,8 +65,8 @@ class ListViewController: UIViewController
                                 self.recommend.markedList.append(i)
                             }
                             self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
-                            print("appended in list pool "+i.name)
-                            
+                            print("ListView Controller: in marked loop appended into poolList: " + i.name)
+
                         }//end if
                        
                     }//end for i
@@ -107,9 +90,6 @@ class ListViewController: UIViewController
 
                     for i in globalPOIList{
                         if(i.ID == userdocument.documentID){
-                            //i.wanttovisit = false
-                            //i.visited = false
-                            //i.notinterested = false
                             if(!self.isExist(theList: self.notiList, poi: i)){
                                 self.notiList.append(i)
                             }
@@ -118,8 +98,8 @@ class ListViewController: UIViewController
                             }
                             self.NotificationView?.reloadData()
                             self.recommend.markedList.append(i)
-                            print("appended in list noti "+i.name)
-                            
+                            print("ListView Controller: in marked loop appended into notiList: " + i.name)
+
                         }//end if
                        
                     }//end for i
@@ -129,9 +109,8 @@ class ListViewController: UIViewController
                 
 
             }//end else
-            //self.recommendationList = self.recommend.getRecommendationList(list: self.poolList)
             for i in self.recommendationList {
-                print("this is in List" + i.name)
+                print("Listview controller: in recommendationList:" + i.name)
             }
             self.NotificationView?.reloadData()
         }
@@ -140,6 +119,7 @@ class ListViewController: UIViewController
         self.NotificationView?.reloadData()
         self.RecommendationView?.reloadData()
         
+        print("printing globalPOIList")
         print("--------------------------------------")
         for i in globalPOIList{
             print("---------------" + i.name)
@@ -239,16 +219,6 @@ extension ListViewController:UICollectionViewDelegate,UICollectionViewDataSource
                 transitioning: .zoom, // the popup come and goes from the left side of the screen
                 autoDismiss: false, // when touching outside the popup bound it is not dismissed
                 completion: nil)
-            //            let userID = Auth.auth().currentUser!.uid
-            //            var db = Firestore.firestore()
-            //            db.collection("users").document(userID).collection("markedList").document(poolList[indexPath.row].ID).addSnapshotListener { documentSnapshot, error in
-            //                guard let document = documentSnapshot else {
-            //                    print("Error fetching document: \(error!)")
-            //                    return
-            //                }
-            //                let source = document.metadata.hasPendingWrites ? "Local" : "Server"
-            //                print("\(source) data: \(document.data() ?? [:])")
-            // }
             
             return
         default:
