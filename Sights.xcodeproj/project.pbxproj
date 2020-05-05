@@ -13,6 +13,7 @@
 		5D842815243CA9230097ABC9 /* clapping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5D842814243CA9230097ABC9 /* clapping.mp3 */; };
 		7499F9E0FA1A96F6FFE58FF2 /* libPods-Sights-SightsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6B3C5BE8CA86A58F5FF78B /* libPods-Sights-SightsUITests.a */; };
 		C5A09D5DDC4625F16F26A304 /* libPods-Sights.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 843CDF09A3AC5161CF2F8F86 /* libPods-Sights.a */; };
+		E905A7642462142D00B7B9ED /* Reward.gif in Resources */ = {isa = PBXBuildFile; fileRef = E905A7632462142C00B7B9ED /* Reward.gif */; };
 		E94C7D71245740D7002AD0DF /* tower.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D69245740D7002AD0DF /* tower.dae */; };
 		E94C7D72245740D7002AD0DF /* fish.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D6A245740D7002AD0DF /* fish.dae */; };
 		E94C7D73245740D7002AD0DF /* fort.dae in Resources */ = {isa = PBXBuildFile; fileRef = E94C7D6B245740D7002AD0DF /* fort.dae */; };
@@ -105,6 +106,7 @@
 		99F54F37B7C2DD2D96D01514 /* libPods-SightsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SightsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB903413DAF400D9B9C0A7D6 /* Pods-Sights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sights.release.xcconfig"; path = "Target Support Files/Pods-Sights/Pods-Sights.release.xcconfig"; sourceTree = "<group>"; };
 		E52A5DEC87F31DF609B32AEF /* Pods-SightsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SightsTests.release.xcconfig"; path = "Target Support Files/Pods-SightsTests/Pods-SightsTests.release.xcconfig"; sourceTree = "<group>"; };
+		E905A7632462142C00B7B9ED /* Reward.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Reward.gif; sourceTree = "<group>"; };
 		E94C7D69245740D7002AD0DF /* tower.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = tower.dae; sourceTree = "<group>"; };
 		E94C7D6A245740D7002AD0DF /* fish.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = fish.dae; sourceTree = "<group>"; };
 		E94C7D6B245740D7002AD0DF /* fort.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = fort.dae; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 		E9CCED0B2441063800B887A5 /* PDFs */ = {
 			isa = PBXGroup;
 			children = (
+				E905A7632462142C00B7B9ED /* Reward.gif */,
 				E9CCED07243DBE0600B887A5 /* Rewards.pdf */,
 				E9A8447723F40CBB00E3124B /* sightsGif.gif */,
 			);
@@ -518,6 +521,7 @@
 				E94C7D802458B095002AD0DF /* BubingaTree_BaseColor.png in Resources */,
 				E94C7D76245740D7002AD0DF /* airplane.dae in Resources */,
 				E94C7D71245740D7002AD0DF /* tower.dae in Resources */,
+				E905A7642462142D00B7B9ED /* Reward.gif in Resources */,
 				E94C7D78245740D7002AD0DF /* 1405 Plane.png in Resources */,
 				E9A8444A23F4061900E3124B /* LaunchScreen.storyboard in Resources */,
 				E94C7D7C245742AB002AD0DF /* FarmHouse_BaseColor.png in Resources */,

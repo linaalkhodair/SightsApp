@@ -75,14 +75,14 @@ class RewardViewController: UIViewController {
                    composer.mailComposeDelegate = self
                    composer.setToRecipients([email])
                    composer.setSubject("Reward from Sights!")
-                   composer.setMessageBody("", isHTML: false)
-                   guard let filePath = Bundle.main.path(forResource: "Rewards", ofType: "pdf") else {
+                   composer.setMessageBody("Coupon code: \(self.reward)", isHTML: false)
+                   guard let filePath = Bundle.main.path(forResource: "Reward", ofType: "gif") else {
                        return }
         
                 let url = URL(fileURLWithPath: filePath)
                   do {
                  let attachmentData = try Data(contentsOf: url)
-                      composer.addAttachmentData(attachmentData, mimeType: "application/pdf", fileName: "Rewards")
+                      composer.addAttachmentData(attachmentData, mimeType: "image/gif", fileName: "Reward")
                     composer.mailComposeDelegate = self
                   self.present(composer, animated: true, completion: nil)
                  } catch let error {
