@@ -28,7 +28,7 @@ class LBNotification: NSObject, UNUserNotificationCenterDelegate {
     
     func searchVenues() {
         let parameter: [String: String] = [
-            "ll": "24.680544, 46.736963",
+            "ll": "24.631465, 46.713428",
             "radius": "600",
             "limit": "10",
             "intent": "browse",
