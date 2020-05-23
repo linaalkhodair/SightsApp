@@ -14,3 +14,8 @@ Sights is an iOS application, developed to help tourists coming to Riyadh, Saudi
 
 
 The application uses cocoapods to integrate thrid party libraries, and it uses a NoSql database. 
+
+# Installation
+- Must have Pods installed
+- Xcode IDE
+- To run on device must have iOS >= 12
